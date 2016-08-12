@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CompletedScripts : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class CompletedScripts : MonoBehaviour {
     public void replay()
     {
         CompletedScreen.getInstanse().SetActive(false);
-        Application.LoadLevel(3);
+        SceneManager.LoadScene(3);
     }
 
     public void continueGame()
@@ -26,7 +27,7 @@ public class CompletedScripts : MonoBehaviour {
         {
             ScenesParameters.CurrentLevel++;
         }
-        Application.LoadLevel(3);
+        SceneManager.LoadScene(3);
     }
     
 }

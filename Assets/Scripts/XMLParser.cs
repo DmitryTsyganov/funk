@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class XMLParser {
 
-    XmlSerializer serializer = new XmlSerializer(typeof(Level));
+    XmlSerializer serializer = new XmlSerializer(typeof(FullLevel));
 
 
 
@@ -20,10 +20,10 @@ public class XMLParser {
         System.IO.StringReader stringReader = new System.IO.StringReader(textAsset.text);
         System.Xml.XmlReader reader = System.Xml.XmlReader.Create(stringReader);
 
-        return (Level)serializer.Deserialize(reader);
+        return (FullLevel)serializer.Deserialize(reader);
     }
 
-    public void makeLevel(Level level)
+    public void makeLevel(object level)
     {
         var serializationFile = Path.Combine(Directory.GetCurrentDirectory(),
                                             "Assets"
@@ -44,15 +44,9 @@ public class XMLParser {
     {
         var balls = GameObject.FindGameObjectsWithTag("Ball");
 
-		Camera cam = Camera.main;
+		var baskets = GameObject.FindGameObjectsWithTag("Basket");
 
-		//Ball ball = new Ball (cam.WorldToScreenPoint (balls [0].transform.position).x, cam.WorldToScreenPoint (balls [0].transform.position).y, balls [0].transform.localScale.x,null);
-
-        var baskets = GameObject.FindGameObjectsWithTag("Basket");
-
-        //Basket basket = new Basket(cam.WorldToScreenPoint(baskets[0].transform.position).x, cam.WorldToScreenPoint(baskets[0].transform.position).y, baskets[0].transform.localScale.x, baskets[0].transform.eulerAngles.x);
-
-        var triangleObsticles = GameObject.FindGameObjectsWithTag("TriangleObsticle");
+         var triangleObsticles = GameObject.FindGameObjectsWithTag("TriangleObsticle");
 
 
         GameObject inputFieldGo = GameObject.Find("RequiredInputField");
@@ -78,9 +72,8 @@ public class XMLParser {
         if (balls.Length > 0 && baskets.Length > 0)
         {
             ++ScenesParameters.LevelsNumber;
-            //var triangleObsticle = triangleObsticles.Length > 0 ? new ObsticleBrick(triangleObsticles[0].transform.position.x,triangleObsticles[0].transform.position.y,triangleObsticles[0].transform.localScale.x,triangleObsticles[0].transform.rotation.eulerAngles.z) : null;
-            var triangleObsticle = triangleObsticles.Length > 0 ? triangleObsticles[0] : null;
-            Level level = new Level(balls[0],baskets[0],triangleObsticle, inputFieldCo.text, inputFieldDefCo.text,hintString);
+
+            FullLevel level = new FullLevel(balls,baskets,triangleObsticles, inputFieldCo.text, inputFieldDefCo.text,hintString);
             makeLevel(level);
 
             var configPass = Path.Combine(Directory.GetCurrentDirectory(),
@@ -97,6 +90,7 @@ public class XMLParser {
             stream.WriteLine(ScenesParameters.LevelsNumber);
             stream.Close();
             fcreate.Close();
+            Debug.Log("Level " + ScenesParameters.LevelsNumber + " created successfully.\n");
         } else
         {
             Debug.Log("Ball and Basket are required");

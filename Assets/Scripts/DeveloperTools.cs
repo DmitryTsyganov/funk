@@ -9,22 +9,25 @@ public class DeveloperTools : MonoBehaviour {
     {
         var balls = GameObject.FindGameObjectsWithTag("Ball");
 
-        if (balls[0] != null)
-        {
-            var ball = balls[0];
-
-            var rigidbody = ball.GetComponent<Rigidbody2D>();
-
-            if (ballIsFreezed)
+	    for (int i = 0; i < balls.Length; i++)
+	    {
+            if (balls[i] != null)
             {
-                rigidbody.constraints = RigidbodyConstraints2D.None;
-            }
-            else
-            {
-                rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-            }
+                var ball = balls[i];
 
-            ballIsFreezed = !ballIsFreezed;
+                var rigidbody = ball.GetComponent<Rigidbody2D>();
+
+                if (ballIsFreezed)
+                {
+                    rigidbody.constraints = RigidbodyConstraints2D.None;
+                }
+                else
+                {
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+            }
         }
+
+        ballIsFreezed = !ballIsFreezed;
     }
 }

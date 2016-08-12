@@ -5,6 +5,13 @@ using UnityEngine.UI;
 public class CollisionHandler : MonoBehaviour
 
 {
+    private LevelCreator level;
+
+    void Start()
+    {
+        level = GameObject.Find("Level").GetComponent<LevelCreator>();
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         var x = col.transform.position.x - gameObject.transform.position.x;
@@ -23,21 +30,25 @@ public class CollisionHandler : MonoBehaviour
         if (localBallPosition.y > 0)
         {
             //print("Level complete");
-
-            var completed = CompletedScreen.getInstanse();
-
-            completed.SetActive(true);
-
-            if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel))
+            
+            level.hitBasket(gameObject.transform.parent.gameObject);
+            if (level.IsCompleted())
             {
-                Shop.AddStar(Shop.levelAward);
-                Saver.levelComplete();
-                var gotStars = completed.transform.FindChild("Canvas_Completed").FindChild(
-                                "Image_Completed").FindChild("GotStars").gameObject;
+                var completed = CompletedScreen.getInstanse();
 
-                gotStars.SetActive(true);
-                gotStars.transform.FindChild("StarCountText").GetComponent<Text>().text = 
-                                    "+ " + Shop.levelAward + " stars";
+                completed.SetActive(true);
+
+                if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel))
+                {
+                    Shop.AddStar(Shop.levelAward);
+                    Saver.levelComplete();
+                    var gotStars = completed.transform.FindChild("Canvas_Completed").FindChild(
+                                    "Image_Completed").FindChild("GotStars").gameObject;
+
+                    gotStars.SetActive(true);
+                    gotStars.transform.FindChild("StarCountText").GetComponent<Text>().text =
+                                        "+ " + Shop.levelAward + " stars";
+                }
             }
         }
     }

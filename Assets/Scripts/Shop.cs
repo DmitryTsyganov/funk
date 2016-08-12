@@ -5,7 +5,7 @@ class Shop
 {
 
     public static int levelAward = 5;
-    public static int ballPrice = 20;
+    public static int ballPrice = 50;
     public static int hintPrice = 10;
 
 	private static int starScore{ get; set; }

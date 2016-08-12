@@ -8,6 +8,12 @@ public class LevelsSetUp : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        LanguageManager.setText("BottomMenuButtonText", LanguageManager.getLanguage().sections_menu);
+        setLanguage();;
+    }
+
+    void setLanguage()
+    {
+        LanguageManager.setLanguageIfNotAlready();
+        LanguageManager.setText(BottomMenuButtonText, LanguageManager.getLanguage().sections_menu);
     }
 }

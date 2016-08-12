@@ -11,6 +11,7 @@ public class StarScoreText : MonoBehaviour {
 
     void Start()
     {
+        LanguageManager.setLanguageIfNotAlready();
         LanguageManager.setText("ThanksText", LanguageManager.getLanguage().thanks);
     }
 

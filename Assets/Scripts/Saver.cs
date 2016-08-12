@@ -3,7 +3,10 @@ using System.Collections;
 
 public class Saver : MonoBehaviour
 {
-
+    private static string preferedLanguage = "pref_language";
+    public static int russian = 0;
+    public static int english = 0;
+    
     private static string sawTraining = "saw_training";
     private static string hintSave = "hint_";
 
@@ -29,7 +32,7 @@ public class Saver : MonoBehaviour
     {
         return "section_" + ScenesParameters.Section;
     }
-    private static int getSectionLevelsComplete()
+    public static int getSectionLevelsComplete()
     {
         return PlayerPrefs.GetInt(getSectionName(), 0);
     }
@@ -53,6 +56,25 @@ public class Saver : MonoBehaviour
     public static bool isLevelPlayable(int num)
     {
         return num == 1 || getLevelComplete(num - 1);
+    }
+
+    public static void savePreferedLanguage(int langugeNumber)
+    {
+        PlayerPrefs.SetInt(preferedLanguage, langugeNumber);
+    }
+
+    public static string getPreferedLanguage()
+    {
+        int langugeNumber = PlayerPrefs.GetInt(preferedLanguage, -1);
+
+        switch (@langugeNumber)
+        {
+            case 0:
+                return "Rus";
+            case 1:
+                return "Eng";
+        }
+        return null;
     }
 
     public static void dontShowTraining()

@@ -1,7 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
-using System.Text;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text.RegularExpressions;
@@ -234,7 +232,7 @@ public class InputVerifyer : MonoBehaviour {
         Regex regex = new Regex("[ ]{2,}", options);
         function = regex.Replace(function, " ");
 
-        Debug.Log("allowed string" + function + "1\n");
+        //Debug.Log("allowed string " + function + "1\n");
 
         var temp = function.Split(' ');
 
@@ -242,20 +240,20 @@ public class InputVerifyer : MonoBehaviour {
 
         foreach (var VARIABLE in temp)
         {
-            if (VARIABLE != String.Empty) ++allowedLength;
+            if (VARIABLE != string.Empty) ++allowedLength;
         }
 
-        allowedFunctions = new String[allowedLength];
+        allowedFunctions = new string[allowedLength];
         int i = 0;
 
-        Debug.Log("\nAllowed functions are "  + '\n');
+        //Debug.Log("\nAllowed functions are "  + '\n');
         foreach (var VARIABLE in temp)
         {
-            if (VARIABLE != String.Empty)
+            if (VARIABLE != string.Empty)
             {
                 allowedFunctions[i] = VARIABLE;
                 ++i;
-                Debug.Log(VARIABLE + "\n");
+                //Debug.Log(VARIABLE + "\n");
             }
             
         }
@@ -297,7 +295,7 @@ public class InputVerifyer : MonoBehaviour {
 
             foreach (string VARIABLE in allowedFunctions)
             {
-                clearString = clearString.Replace(VARIABLE, String.Empty);
+                clearString = clearString.Replace(VARIABLE, string.Empty);
             }
 
             if (clearString.Length != 0)

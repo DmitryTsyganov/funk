@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class LevelCreator : MonoBehaviour {
 
-    public GameObject MyBall;
-    public GameObject MyBasket;
-    public GameObject MyTriangle;
+    public GameObject BallPrefab;
+    public GameObject BasketPrefab;
+    public GameObject BrickPrefab;
     public GameObject ErrorText;
     public GameObject Tips;
 
@@ -16,32 +16,33 @@ public class LevelCreator : MonoBehaviour {
 	[SerializeField]
 	private GameObject tips;
 
-    public float xDef;
-    public float yDef;
-
     public GameObject devInterface;
 
-    private GameObject ballClone;
-    private GameObject basketClone;
-    private GameObject brickClone;
+    private GameObject[] ballClones;
+    private GameObject[] basketClones;
+    private bool[] wasHit;
+    private int basketsHitsLeft;
+    private GameObject[] brickClones;
 	private string funk;
     private string defaultFunk;
 
+    private FullLevel level;
 
 	private int levelsNumber;
 
     // Use this for initialization
     void Start () {
 
-        ScenesParameters.isValid = true;
-
         setLanguage();
+
+        ScenesParameters.isValid = true;
 
         if (!ScenesParameters.Devmode)
         {
             createLevelFromXml(ScenesParameters.LevelName + ScenesParameters.CurrentLevel);
 
-            if (Saver.hasShownTraining() != 1)
+            if (Saver.hasShownTraining() != 1 && ScenesParameters.Section == "linear" && 
+                ScenesParameters.CurrentLevel == 1)
             {
                 Tips.SetActive(true);
             }
@@ -51,13 +52,15 @@ public class LevelCreator : MonoBehaviour {
             devInterface.SetActive(true);
             if (ScenesParameters.Section == null)
             {
-                throw new Exception("Entering devmode through GameScreen is obsolete, use SectionsMenu Instead.");
+                throw new Exception("Entering devmode through GameScreen is obsolete, " +
+                                    "use SectionsMenu Instead.");
             }
         }
     }
 
     private void setLanguage()
     {
+        LanguageManager.setLanguageIfNotAlready();
         //main elements
         LanguageManager.setText("BottomMenuButtonText", LanguageManager.getLanguage().sections_menu);
         LanguageManager.setText("RunButtonText", LanguageManager.getLanguage().run);
@@ -70,46 +73,56 @@ public class LevelCreator : MonoBehaviour {
 
     private void createLevelFromXml(string filename)
     {		
-        Camera cam = Camera.main;
-
         var parser = new XMLParser();
 
-        var level = (Level)parser.parse(filename);
+        level = (FullLevel)parser.parse(filename);
 
-        if (level.ball != null)
+        if (level.balls != null)
         {
+            ballClones = new GameObject[level.balls.Length];
 
-            var ballPosition = new Vector3( level.ball.x, level.ball.y, 0f);
+            for (int i = 0; i < level.balls.Length; ++i)
+            {
 
-            
-            
-            ballClone = (GameObject)Instantiate(MyBall, ballPosition, Quaternion.Euler(0, 0, 0));
+                var ballPosition = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
+                ballClones[i] = (GameObject) Instantiate(BallPrefab, ballPosition, Quaternion.Euler(0, 0, 0));
 
-            ballClone.transform.localScale = new Vector3(level.ball.scale, level.ball.scale, 1f);
-
-            xDef = ballPosition.x;
-            yDef = ballPosition.y;
+                ballClones[i].transform.localScale = new Vector3(level.balls[i].scale, level.balls[i].scale, 1f);
+            }
         }
 
-        if (level.basket != null)
+        if (level.baskets != null)
         {
-            var basketPosition = new Vector3(level.basket.x, level.basket.y, 0f);
-            
-            basketClone = (GameObject)Instantiate(MyBasket, basketPosition, 
-                        Quaternion.AngleAxis(level.basket.angle, Vector3.forward));
+            basketClones = new GameObject[level.baskets.Length];
+            wasHit = new bool[level.baskets.Length];
+            Array.Clear(wasHit, 0, wasHit.Length);
+            basketsHitsLeft = level.baskets.Length;
 
-            basketClone.transform.localScale = new Vector3(level.basket.scale, level.basket.scale, 1f);
+            for (int i = 0; i < level.baskets.Length; i++)
+            {
+                var basketPosition = new Vector3(level.baskets[i].x, level.baskets[i].y, 0f);
+
+                basketClones[i] = (GameObject)Instantiate(BasketPrefab, basketPosition,
+                            Quaternion.AngleAxis(level.baskets[i].angle, Vector3.forward));
+
+                basketClones[i].transform.localScale = new Vector3(level.baskets[i].scale, level.baskets[i].scale, 1f);
+            }
         }
 
-        if (level.ObsticleBrick != null)
+        if (level.obsticleBricks != null)
         {
-            var brickPosition = 
-                new Vector2(level.ObsticleBrick.x, level.ObsticleBrick.y);
+            brickClones = new GameObject[level.obsticleBricks.Length];
 
-            brickClone = (GameObject)Instantiate(MyTriangle, brickPosition,
-                            Quaternion.AngleAxis(level.ObsticleBrick.angle, Vector3.forward));
+            for (int i = 0; i < level.obsticleBricks.Length; i++)
+            {
+                var brickPosition =
+                new Vector2(level.obsticleBricks[i].x, level.obsticleBricks[i].y);
 
-            brickClone.transform.localScale = new Vector3(level.ObsticleBrick.scale, level.ObsticleBrick.scale, 1f);
+                brickClones[i] = (GameObject)Instantiate(BrickPrefab, brickPosition,
+                                Quaternion.AngleAxis(level.obsticleBricks[i].angle, Vector3.forward));
+
+                brickClones[i].transform.localScale = new Vector3(level.obsticleBricks[i].scale, level.obsticleBricks[i].scale, 1f);
+            }
         }
 
         funk = level.Funk;
@@ -132,7 +145,7 @@ public class LevelCreator : MonoBehaviour {
         //inputFieldCo.text = level.DefaultFunk;
 
         var coloredText = level.DefaultFunk.Replace(funk, funk);
-        Debug.Log(coloredText);
+        //Debug.Log(coloredText);
 
         inputVerifyer.setPrevInput(coloredText);
 
@@ -177,19 +190,32 @@ public class LevelCreator : MonoBehaviour {
         }
     }
 
-public void setPosition()
+    public void setBallPosition()
     {
-        if (ScenesParameters.isValid && ballClone != null) {
-            ballClone.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            ballClone.GetComponent<Rigidbody2D>().angularVelocity = 0;
-            ballClone.GetComponent<Transform>().position = new Vector3(xDef, yDef, 0f);
+        for (int i = 0; i < ballClones.Length; ++i)
+        {
+            if (ScenesParameters.isValid)
+            {
+                ballClones[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                ballClones[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
+                ballClones[i].GetComponent<Transform>().position = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
+            }
+        }
+        
+    }
+
+    public void hitBasket(GameObject basket)
+    {
+        int index = Array.IndexOf(basketClones, basket);
+        if (index != -1 && !wasHit[index])
+        {
+            wasHit[index] = true;
+            --basketsHitsLeft;
         }
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-
-	}
-
+    public bool IsCompleted()
+    {
+        return basketsHitsLeft == 0;
+    }
 }

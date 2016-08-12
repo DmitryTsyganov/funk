@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public class BasketConstructor : MonoBehaviour {
 
@@ -36,8 +35,8 @@ public class BasketConstructor : MonoBehaviour {
         leftCollider.offset = new Vector2(-halfMiddleLine, standartWallThickness);
         rightCollider.offset = new Vector2(halfMiddleLine, standartWallThickness);
 
-        leftWall.transform.Rotate(new Vector3(0f, 0f, (float)(sidesAngle / 2 / Math.PI * 180)));
-        rightWall.transform.Rotate(new Vector3(0f, 0f, -(float)(sidesAngle / 2 / Math.PI * 180)));
+        leftWall.transform.Rotate(new Vector3(0f, 0f, (float)(sidesAngle / 2 / Mathf.PI * 180)));
+        rightWall.transform.Rotate(new Vector3(0f, 0f, -(float)(sidesAngle / 2 / Mathf.PI * 180)));
     }
 
 	// Update is called once per frame

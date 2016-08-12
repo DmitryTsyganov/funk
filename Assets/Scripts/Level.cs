@@ -4,8 +4,27 @@ using System.Xml.Serialization;
 using System;
 
 [XmlRoot("Level")]
-public class Level {
-    
+public class Level
+{
+
+    [XmlElement("Funk")]
+    public string Funk { get; set; }
+
+    [XmlElement("DefaultFunk")]
+    public string DefaultFunk { get; set; }
+
+    [XmlElement("Hint")]
+    public string HintText { get; set; }
+
+    [XmlElement("Ball")]
+    public Ball ball { get; set; }
+
+    [XmlElement("Basket")]
+    public Basket basket { get; set; }
+
+    [XmlElement("TriangleObsticle")]
+    public ObsticleBrick ObsticleBrick { get; set; }
+
     public Level() {}
 
 	public Level(GameObject _ball, GameObject _basket, GameObject _obsticle, string funk, string defFunk,string hint)
@@ -43,24 +62,6 @@ public class Level {
         this.DefaultFunk = defFunk;
 		this.HintText = hint;
     }
-
-    [XmlElement("Funk")]
-    public string Funk { get; set; }
-
-    [XmlElement("DefaultFunk")]
-    public string DefaultFunk { get; set; }
-
-	[XmlElement("Hint")]
-	public string HintText{ get; set;}
-
-    [XmlElement("Ball")]
-    public Ball ball { get; set; }
-
-    [XmlElement("Basket")]
-    public Basket basket { get; set; }
-
-    [XmlElement("TriangleObsticle")]
-    public ObsticleBrick ObsticleBrick { get; set; }
 
 
 

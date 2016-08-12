@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using ExpressionParser;
 using System.Collections.Generic;
-using System;
 
 public class DrawGraph : MonoBehaviour
 {
