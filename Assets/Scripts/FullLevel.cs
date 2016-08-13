@@ -23,6 +23,9 @@ public class FullLevel {
     [XmlArray("BrickObsticles")]
     public ObsticleBrick[] obsticleBricks { get; set; }
 
+    [XmlArray("Stars")]
+    public Star[] stars { get; set; }
+
     public FullLevel()
     {
         
@@ -39,7 +42,7 @@ public class FullLevel {
         this.HintText = hint;
     }
 
-    public FullLevel(GameObject[] balls, GameObject[] baskets, GameObject[] obsticles, string funk, string defFunk, string hint)
+    public FullLevel(GameObject[] balls, GameObject[] baskets, GameObject[] obsticles, GameObject[] stars, string funk, string defFunk, string hint)
     {
         this.balls = new Ball[balls.Length];
 
@@ -61,16 +64,30 @@ public class FullLevel {
                             baskets[i].transform.eulerAngles.z);
         }
 
+        if (stars.Length > 0)
+        {
+            this.stars = new Star[stars.Length];
+
+            for (int i = 0; i < stars.Length; i++)
+            {
+                this.stars[i] = new Star(stars[i].transform.position.x,
+                            stars[i].transform.position.y,
+                            stars[i].transform.localScale.x,
+                            stars[i].transform.eulerAngles.z);
+            }
+        }
+
         if (obsticles.Length > 0)
         {
             this.obsticleBricks = new ObsticleBrick[obsticles.Length];
 
             for (int i = 0; i < obsticles.Length; ++i)
-
-            this.obsticleBricks[i] = new ObsticleBrick(obsticles[i].transform.position.x,
-                                                obsticles[i].transform.position.y,
-                                                obsticles[i].transform.localScale.x,
-                                                obsticles[i].transform.eulerAngles.z);
+            {
+                this.obsticleBricks[i] = new ObsticleBrick(obsticles[i].transform.position.x,
+                    obsticles[i].transform.position.y,
+                    obsticles[i].transform.localScale.x,
+                    obsticles[i].transform.eulerAngles.z);
+            }
         }
 
         this.Funk = funk;

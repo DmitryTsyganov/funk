@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System;
+using System.Globalization;
 using UnityEngine.UI;
 
 public class LevelCreator : MonoBehaviour {
@@ -10,6 +11,7 @@ public class LevelCreator : MonoBehaviour {
     public GameObject BasketPrefab;
     public GameObject BrickPrefab;
     public GameObject ErrorText;
+    public GameObject StarPrefab;
     public GameObject Tips;
 
     public InputVerifyer inputVerifyer;
@@ -23,6 +25,7 @@ public class LevelCreator : MonoBehaviour {
     private bool[] wasHit;
     private int basketsHitsLeft;
     private GameObject[] brickClones;
+    private GameObject[] starClones;
 	private string funk;
     private string defaultFunk;
 
@@ -125,6 +128,22 @@ public class LevelCreator : MonoBehaviour {
             }
         }
 
+        if (level.stars != null)
+        {
+            starClones = new GameObject[level.stars.Length];
+
+            for (int i = 0; i < level.stars.Length; i++)
+            {
+                var starPosition =
+                new Vector2(level.stars[i].x, level.stars[i].y);
+
+                starClones[i] = (GameObject)Instantiate(StarPrefab, starPosition,
+                                Quaternion.AngleAxis(level.stars[i].angle, Vector3.forward));
+
+                starClones[i].transform.localScale = new Vector3(level.stars[i].scale, level.stars[i].scale, 1f);
+            }
+        }
+
         funk = level.Funk;
         defaultFunk = level.DefaultFunk;
 
@@ -192,6 +211,16 @@ public class LevelCreator : MonoBehaviour {
 
     public void setBallPosition()
     {
+        if (starClones != null)
+        {
+            for (int i = 0; i < starClones.Length; ++i)
+            {
+                starClones[i].SetActive(true);
+            }
+        }
+
+        if (ScenesParameters.Devmode) return;
+
         for (int i = 0; i < ballClones.Length; ++i)
         {
             if (ScenesParameters.isValid)
@@ -201,11 +230,11 @@ public class LevelCreator : MonoBehaviour {
                 ballClones[i].GetComponent<Transform>().position = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
             }
         }
-        
     }
 
     public void hitBasket(GameObject basket)
     {
+        if (ScenesParameters.Devmode) ballClones = GameObject.FindGameObjectsWithTag("Basket");
         int index = Array.IndexOf(basketClones, basket);
         if (index != -1 && !wasHit[index])
         {
@@ -217,5 +246,26 @@ public class LevelCreator : MonoBehaviour {
     public bool IsCompleted()
     {
         return basketsHitsLeft == 0;
+    }
+
+    public int getHitStarsCount()
+    {
+        if (level.stars == null || level.stars.Length == 0)
+        {
+            return -1;
+        }
+    
+        int starsCount = 0;
+
+        for (int i = 0; i < starClones.Length; ++i)
+        {
+            if (!starClones[i].activeSelf)
+            {
+                ++starsCount;
+            }
+        }
+
+        return starsCount;
+        
     }
 }

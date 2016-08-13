@@ -46,8 +46,9 @@ public class XMLParser {
 
 		var baskets = GameObject.FindGameObjectsWithTag("Basket");
 
-         var triangleObsticles = GameObject.FindGameObjectsWithTag("TriangleObsticle");
+        var triangleObsticles = GameObject.FindGameObjectsWithTag("TriangleObsticle");
 
+        var stars = GameObject.FindGameObjectsWithTag("Star");
 
         GameObject inputFieldGo = GameObject.Find("RequiredInputField");
         var inputFieldCo = inputFieldGo.GetComponent<InputField>();
@@ -73,7 +74,7 @@ public class XMLParser {
         {
             ++ScenesParameters.LevelsNumber;
 
-            FullLevel level = new FullLevel(balls,baskets,triangleObsticles, inputFieldCo.text, inputFieldDefCo.text,hintString);
+            FullLevel level = new FullLevel(balls,baskets,triangleObsticles, stars, inputFieldCo.text, inputFieldDefCo.text, hintString);
             makeLevel(level);
 
             var configPass = Path.Combine(Directory.GetCurrentDirectory(),

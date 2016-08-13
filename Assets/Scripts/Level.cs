@@ -121,8 +121,15 @@ public class Ball : BasicLevelItem
         image = _image;
     }
 
-    
     public string image { get; set; }
+}
+
+public class Star : LevelItemWithAngle
+{
+    public Star() { }
+
+    public Star(float x, float y, float scale, float angle) :
+        base(x, y, scale, angle) { }
 }
 
 public class ObsticleBrick : LevelItemWithAngle

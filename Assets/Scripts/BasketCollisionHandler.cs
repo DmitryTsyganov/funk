@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CollisionHandler : MonoBehaviour
+public class BasketCollisionHandler : MonoBehaviour
 
 {
     private LevelCreator level;
@@ -37,17 +37,20 @@ public class CollisionHandler : MonoBehaviour
                 var completed = CompletedScreen.getInstanse();
 
                 completed.SetActive(true);
-
+               
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel))
                 {
-                    Shop.AddStar(Shop.levelAward);
+                    int award = level.getHitStarsCount() != -1 ? level.getHitStarsCount() : Shop.levelAward;
+
+                    Shop.AddStar(award);
                     Saver.levelComplete();
                     var gotStars = completed.transform.FindChild("Canvas_Completed").FindChild(
                                     "Image_Completed").FindChild("GotStars").gameObject;
 
                     gotStars.SetActive(true);
-                    gotStars.transform.FindChild("StarCountText").GetComponent<Text>().text =
-                                        "+ " + Shop.levelAward + " stars";
+                    GameObject.Find("StarCountText").GetComponent<Text>().text =
+                                        "+ " + award + " " + LanguageManager.getLanguage().stars;
+                    
                 }
             }
         }
