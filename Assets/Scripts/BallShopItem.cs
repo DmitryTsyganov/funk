@@ -8,7 +8,7 @@ public class BallShopItem : MonoBehaviour {
 
     public void Start()
     {  
-        image.sprite = isBought() ? Resources.Load<Sprite>("BallTexture/" + Name) : Resources.Load<Sprite>("BallTexture/" + "closeBall");
+        image.sprite = isBought() ? Resources.Load<Sprite>("BallTexture/" + Name + "Icon") : Resources.Load<Sprite>("BallTexture/" + "closeBall");
     }
 
 	void Update () {
@@ -18,13 +18,21 @@ public class BallShopItem : MonoBehaviour {
     public void Click() {
         if (isBought())
         {
-            BallParametrs.ballSprite = image.sprite;
+            //BallParametrs.ballSprite = image.sprite;
+            GameObject ballSprite = Resources.Load<GameObject>("BallTexture/" + Name);
+            BallParametrs.Renderer = ballSprite.GetComponent<SpriteRenderer>();
+            BallParametrs.Controller = ballSprite.GetComponent<Animator>().runtimeAnimatorController;
         }
         else {
             if (Shop.Buy(Name))
             {
-                image.sprite = Resources.Load<Sprite>("BallTexture/" + Name);           
-                BallParametrs.ballSprite = image.sprite;
+                image.sprite = Resources.Load<Sprite>("BallTexture/" + Name + "Icon");
+                
+                print(Name);
+                //BallParametrs.ballSprite = image.sprite;
+                GameObject ballSprite = Resources.Load<GameObject>("BallTexture/" + Name);
+                BallParametrs.Renderer = ballSprite.GetComponent<SpriteRenderer>();
+                BallParametrs.Controller = ballSprite.GetComponent<Animator>().runtimeAnimatorController;
             }
         }
     }
@@ -36,6 +44,12 @@ public class BallShopItem : MonoBehaviour {
 
     private bool isSelected()
     {
-        return BallParametrs.ballSprite == image.sprite;
+        //return BallParametrs.ballSprite == image.sprite;
+
+        if (BallParametrs.Renderer != null && image.sprite != null)
+        {
+            return BallParametrs.Renderer.name + "Icon" == image.sprite.name;
+        }
+        return false;
     }
 }

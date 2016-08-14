@@ -263,7 +263,12 @@ public class InputVerifyer : MonoBehaviour {
     {
         if (mainInput != null && !ScenesParameters.Devmode)
         {
-            var text = mainInput.text;
+            string text = mainInput.text;
+
+            while (text.Contains("#"))
+            {
+                text = text.Replace("#", "/");
+            }
 
             bool isValid = true;
 

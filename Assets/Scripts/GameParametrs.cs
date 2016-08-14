@@ -24,7 +24,7 @@ public static class BallParametrs{
 
 	private static Sprite BallSprite{ get; set;}
 
-	public static Sprite ballSprite{
+	public static Sprite ballSprite {
 		get{ 
 			return BallSprite;
 		}
@@ -34,4 +34,23 @@ public static class BallParametrs{
 		}
 	}
 
+    private static SpriteRenderer renderer { get; set; }
+    public static SpriteRenderer Renderer
+    {
+        get { return renderer; }
+        set
+        {
+            renderer = value;
+            PlayerPrefs.SetString("BallSpriteName", renderer.name);
+        }
+    }
+
+    public static void setDefaultBall()
+    {
+        var defaultBall = Resources.Load<GameObject>("BallTexture/" + "Default");
+        Renderer = defaultBall.GetComponent<SpriteRenderer>();
+        Controller = defaultBall.GetComponent<Animator>().runtimeAnimatorController;
+    }
+
+    public static RuntimeAnimatorController Controller;
 }

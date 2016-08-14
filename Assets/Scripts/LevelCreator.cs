@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class LevelCreator : MonoBehaviour {
 
     public GameObject BallPrefab;
+    public GameObject BallStartPrefab;
     public GameObject BasketPrefab;
     public GameObject BrickPrefab;
     public GameObject ErrorText;
@@ -90,7 +91,19 @@ public class LevelCreator : MonoBehaviour {
                 var ballPosition = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
                 ballClones[i] = (GameObject) Instantiate(BallPrefab, ballPosition, Quaternion.Euler(0, 0, 0));
 
-                ballClones[i].transform.localScale = new Vector3(level.balls[i].scale, level.balls[i].scale, 1f);
+                var ballScale = new Vector3(level.balls[i].scale, level.balls[i].scale, 1f);
+
+                ballClones[i].transform.localScale = ballScale; 
+
+                GameObject ballStart = (GameObject)Instantiate(BallStartPrefab, ballPosition, Quaternion.Euler(0, 0, 0));
+                ballStart.transform.localScale = ballScale;
+
+                //фуфло
+                /*ballClones[i].GetComponent<SpriteRenderer>().sprite = ballStart.GetComponent<SpriteRenderer>().sprite;
+                ballClones[i].GetComponent<Animator>().runtimeAnimatorController =
+                ballStart.GetComponent<Animator>().runtimeAnimatorController;*/
+                //фуфло
+
             }
         }
 
