@@ -111,15 +111,45 @@ public class DrawGraph : MonoBehaviour
 
         if (fun != null)
         {
-            double PrevX = -6;
-            double PrevY = fun(-6);
-            bool In = false;
+            float firstX = -7;
+            float lastX = 7;
 
-            for (int i = -35; i <= 36; i++)
+            double firstY = fun(firstX);
+
+            while ((firstY > 6 || firstY < -6) && firstX < 0)
             {
-                double x = (float)i / 5;
-                double y = fun(x);
-                if (y < 6 && y > -6 && PrevY < 6&&PrevY>-6) buildSegment(x, y, PrevX,PrevY);
+                firstX += 0.005f;
+                firstY = fun(firstX);
+            }
+
+            double lastY = fun(lastX);
+
+            while ((lastY > 6 || lastY < -6) && lastX > 0)
+            {
+                lastX -= 0.005f;
+                lastY = fun(lastX);
+            }
+
+            double PrevX = firstX;
+            double PrevY = fun(PrevX);
+            double x;
+            double y;
+
+            //print("first x " + firstX);
+            //print("last x " + lastX);
+
+            int stepsTotal = 260;
+
+            double stepLength = (-firstX + lastX) / stepsTotal;
+
+            for (double i = 0; i <= stepsTotal; ++i)
+            {
+                x = firstX + i * stepLength;
+                y = fun(x);
+                if (y < 6 && y > -6 && PrevY < 6 && PrevY > -6)
+                {
+                    buildSegment(x, y, PrevX, PrevY);
+                }
 
                 PrevX = x;
                 PrevY = y;
