@@ -111,8 +111,8 @@ public class DrawGraph : MonoBehaviour
 
         if (fun != null)
         {
-            float firstX = -7;
-            float lastX = 7;
+            float firstX = -5.65f;
+            float lastX = 5.65f;
 
             double firstY = fun(firstX);
 
