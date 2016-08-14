@@ -90,7 +90,10 @@ public class DrawGraph : MonoBehaviour
         colliderKeeper.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 
         BoxCollider2D bc = colliderKeeper.AddComponent<BoxCollider2D>();
-        bc.size = new Vector2(0.06f,Mathf.Abs((float)x - (float)prevX));
+
+        float length = Mathf.Abs(Mathf.Sqrt(Mathf.Pow((float) (x - prevX), 2) + Mathf.Pow((float) (y - prevY), 2)));
+
+        bc.size = new Vector2(0.06f, length);
 
         graphDots.Add(bc);
     }
@@ -105,21 +108,21 @@ public class DrawGraph : MonoBehaviour
             Destroy(dot.gameObject);
         }
         graphDots.Clear();
+
         if (fun != null)
         {
             double PrevX = -6;
             double PrevY = fun(-6);
             bool In = false;
-            
 
             for (int i = -35; i <= 36; i++)
             {
                 double x = (float)i / 5;
                 double y = fun(x);
                 if (y < 6 && y > -6 && PrevY < 6&&PrevY>-6) buildSegment(x, y, PrevX,PrevY);
-                    PrevX = x;
-                    PrevY = y;
-                
+
+                PrevX = x;
+                PrevY = y;
             }
         }
     }
