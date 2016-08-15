@@ -59,11 +59,22 @@ public class LevelsMeta : MonoBehaviour
                 //print(path);
                 if (File.Exists(path))
                 {
+                    bool levelChanged = false;
                     string levelString = File.ReadAllText(path);
                     if (isOldLevel(levelString))
                     {
-                        File.WriteAllText(path, transformToFullLevel(levelString));
+                        levelString = transformToFullLevel(levelString);
+                        levelChanged = true;
+                        
                     }
+
+                    if (hasOldBricks(levelString))
+                    {
+                        levelString = transformOldBricks(levelString);
+                        levelChanged = true;
+                    }
+
+                    if (levelChanged) File.WriteAllText(path, levelString);
                 }
             }
         }
@@ -95,6 +106,17 @@ public class LevelsMeta : MonoBehaviour
         return levelString;
     }
 
+    private string transformOldBricks(string levelString)
+    {
+        string bricksArray = "BrickObsticles";
+        string brick = "ObsticleBrick";
+
+        string oldBrick = "TriangleObsticle";
+
+        return  levelString.Replace(openTag(oldBrick), openTag(bricksArray) + openTag(brick))
+                .Replace(closeTag(oldBrick), closeTag(brick) + closeTag(bricksArray));
+    }
+
     private string closeTag(string name)
     {
         return "</" + name + ">";
@@ -108,5 +130,10 @@ public class LevelsMeta : MonoBehaviour
     private bool isOldLevel(string levelString)
     {
         return !levelString.Contains(openTag("Balls")) && !levelString.Contains(openTag("Baskets"));
+    }
+
+    private bool hasOldBricks(string levelString)
+    {
+        return levelString.Contains("TriangleObsticle");
     }
 }
