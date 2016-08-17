@@ -43,6 +43,7 @@ public class Language
     public string tip2;
     public string tip3;
     public string tip4;
+    public string hint;
 
     //shop
     public string choose_ball;
@@ -131,6 +132,8 @@ public class LanguageXml
     public string tip3;
     [XmlElement("tip4")]
     public string tip4;
+    [XmlElement("hint")]
+    public string hint;
 
     //shop
     [XmlElement("choose_ball")]

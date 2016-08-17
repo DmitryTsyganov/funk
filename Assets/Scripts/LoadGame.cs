@@ -19,4 +19,10 @@ public class LoadGame : MonoBehaviour {
 	public void Continue(){
 		LoadScene (ScenesParameters.PreviousSceneIndex);
 	}
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) LoadScene(ScenesParameters.PreviousSceneIndex);
+    }
+
 }

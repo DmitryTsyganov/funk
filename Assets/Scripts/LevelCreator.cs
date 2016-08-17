@@ -69,6 +69,8 @@ public class LevelCreator : MonoBehaviour {
         LanguageManager.setText("BottomMenuButtonText", LanguageManager.getLanguage().sections_menu);
         LanguageManager.setText("RunButtonText", LanguageManager.getLanguage().run);
         LanguageManager.setText("ResetButtonText", LanguageManager.getLanguage().reset);
+        LanguageManager.setText("ShopText", LanguageManager.getLanguage().shop);
+        LanguageManager.setText("HintButtonText", LanguageManager.getLanguage().hint);
 
         //buy stars
         LanguageManager.setText("ResetButtonText", LanguageManager.getLanguage().reset);
@@ -93,9 +95,12 @@ public class LevelCreator : MonoBehaviour {
 
                 var ballScale = new Vector3(level.balls[i].scale, level.balls[i].scale, 1f);
 
-                ballClones[i].transform.localScale = ballScale; 
+                ballClones[i].transform.localScale = ballScale;
 
-                GameObject ballStart = (GameObject)Instantiate(BallStartPrefab, ballPosition, Quaternion.Euler(0, 0, 0));
+                var startPosition = ballPosition;
+                startPosition.z = 1;
+
+                GameObject ballStart = (GameObject)Instantiate(BallStartPrefab, startPosition, Quaternion.Euler(0, 0, 0));
                 ballStart.transform.localScale = ballScale;
 
                 //фуфло
