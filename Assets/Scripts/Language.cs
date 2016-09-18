@@ -10,6 +10,8 @@ public class Language
     public string shop;
     public string yes;
     public string no;
+    public string buy;
+    public string get_for_free;
     public string thanks;
     public string back;
 
@@ -74,6 +76,10 @@ public class LanguageXml
     public string yes;
     [XmlElement("no")]
     public string no;
+    [XmlElement("buy")]
+    public string buy;
+    [XmlElement("get_for_free")]
+    public string get_for_free;
     [XmlElement("thanks")]
     public string thanks;
     [XmlElement("back")]

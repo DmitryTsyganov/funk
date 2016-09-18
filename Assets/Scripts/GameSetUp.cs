@@ -6,10 +6,10 @@ public class GameSetUp : MonoBehaviour {
 
     public Camera mainCam = new Camera();
 
-    public BoxCollider2D topWall = new BoxCollider2D();
-    public BoxCollider2D bottomWall = new BoxCollider2D();
-    public BoxCollider2D leftWall = new BoxCollider2D();
-    public BoxCollider2D rightWall = new BoxCollider2D();
+    public BoxCollider2D topWall/* = new BoxCollider2D()*/;
+    public BoxCollider2D bottomWall /*= new BoxCollider2D()*/;
+    public BoxCollider2D leftWall /*= new BoxCollider2D()*/;
+    public BoxCollider2D rightWall /*= new BoxCollider2D()*/;
 
     const float wallThickness = 1f;
 

@@ -10,22 +10,18 @@ public class BuyStarsPropmptSetUp : MonoBehaviour {
     // Use this for initialization
     void Start () {
         LanguageManager.setText("PromptText", LanguageManager.getLanguage().buy_stars_prompt);
-        LanguageManager.setText("NoButtonText", LanguageManager.getLanguage().no);
-
+        LanguageManager.setText("BackButtonText", LanguageManager.getLanguage().back);
         if (Shop.CanBuyHint())
         {
             Yes.gameObject.SetActive(true);
-            LanguageManager.setText("YesButtonText", LanguageManager.getLanguage().yes);
+            LanguageManager.setText("BuyButtonText", LanguageManager.getLanguage().buy);
         }
-        else
-        {
-            //AddStar.gameObject.SetActive (true);
-            //LanguageManager.setText("AddStarsButtonText", LanguageManager.getLanguage().add);
-        }
+        
+        LanguageManager.setText("WatchAdButtonText", LanguageManager.getLanguage().get_for_free);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 }

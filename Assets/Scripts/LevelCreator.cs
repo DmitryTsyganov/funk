@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.IO;
 using System;
-using System.Globalization;
 using UnityEngine.UI;
 
 public class LevelCreator : MonoBehaviour {
@@ -29,6 +27,7 @@ public class LevelCreator : MonoBehaviour {
     private GameObject[] starClones;
 	private string funk;
     private string defaultFunk;
+    private InputField inputFieldCo;
 
     private FullLevel level;
 
@@ -40,6 +39,9 @@ public class LevelCreator : MonoBehaviour {
         setLanguage();
 
         ScenesParameters.isValid = true;
+
+        var inputFieldGo = GameObject.Find("InputField");
+        inputFieldCo = inputFieldGo.GetComponent<InputField>();
 
         if (!ScenesParameters.Devmode)
         {
@@ -165,9 +167,6 @@ public class LevelCreator : MonoBehaviour {
         funk = level.Funk;
         defaultFunk = level.DefaultFunk;
 
-        var inputFieldGo = GameObject.Find("InputField");
-        var inputFieldCo = inputFieldGo.GetComponent<InputField>();
-
     
         string[] args = new string[1] { funk};
 
@@ -198,9 +197,6 @@ public class LevelCreator : MonoBehaviour {
 
     public void resetField()
     {
-        var inputFieldGo = GameObject.Find("InputField");
-        var inputFieldCo = inputFieldGo.GetComponent<InputField>();
-
         //inputFieldCo.text = "<color = red>" + level.Funk + "</color>";
 
         //inputFieldCo.text = "<size=30><color=red>" + level.Funk + "</color></size>";
@@ -211,9 +207,6 @@ public class LevelCreator : MonoBehaviour {
 
     public void ValueChangeCheck()
     {
-        var inputFieldGo = GameObject.Find("InputField");
-        var inputFieldCo = inputFieldGo.GetComponent<InputField>();
-
         int index = inputFieldCo.text.IndexOf(funk);
 
         if (index == -1)
@@ -227,7 +220,21 @@ public class LevelCreator : MonoBehaviour {
         }
     }
 
-    public void setBallPosition()
+    public void resetLevelObjects()
+    {
+        resetStars();
+
+        if (ScenesParameters.Devmode)
+        {
+            resetBallsDevmode();
+        }
+        else
+        {
+            resetBalls();
+        }
+    }
+
+    public void resetStars()
     {
         if (starClones != null)
         {
@@ -237,8 +244,10 @@ public class LevelCreator : MonoBehaviour {
             }
         }
 
-        if (ScenesParameters.Devmode) return;
+    }
 
+    public void resetBalls()
+    {
         for (int i = 0; i < ballClones.Length; ++i)
         {
             if (ScenesParameters.isValid)
@@ -247,6 +256,21 @@ public class LevelCreator : MonoBehaviour {
                 ballClones[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
                 ballClones[i].GetComponent<Transform>().position = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
             }
+        }
+    }
+
+    private void resetBallsDevmode()
+    {
+        var ballStarts = GameObject.FindGameObjectsWithTag("BallStart");
+        var balls = GameObject.FindGameObjectsWithTag("Ball");
+
+        int length = balls.Length > ballStarts.Length ? ballStarts.Length : balls.Length;
+
+        for (int i = 0; i < length; ++i)
+        {
+            balls[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            balls[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
+            balls[i].transform.position = ballStarts[i].transform.position;
         }
     }
 

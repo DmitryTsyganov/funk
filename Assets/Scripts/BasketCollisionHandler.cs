@@ -32,6 +32,7 @@ public class BasketCollisionHandler : MonoBehaviour
             //print("Level complete");
             
             level.hitBasket(gameObject.transform.parent.gameObject);
+
             if (level.IsCompleted())
             {
                 var completed = CompletedScreen.getInstanse();

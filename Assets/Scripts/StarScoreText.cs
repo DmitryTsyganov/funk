@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.Globalization;
 using UnityEngine.UI;
 using System.IO;
+using GoogleMobileAds.Api;
 
 public class StarScoreText : MonoBehaviour {
 
@@ -13,6 +16,8 @@ public class StarScoreText : MonoBehaviour {
     {
         LanguageManager.setLanguageIfNotAlready();
         LanguageManager.setText("ThanksText", LanguageManager.getLanguage().thanks);
+        // Get singleton reward based video ad reference.
+        
     }
 
 	void Update () {
@@ -21,11 +26,15 @@ public class StarScoreText : MonoBehaviour {
 
 	public void AddHint(){
 		if (Shop.BuyHint()) {
-            //hintText.text = hintText.text.Replace ("{}", ScenesParameters.trueFunction);
-		    hintText.text = ScenesParameters.trueFunction;
-            hintWindow.SetActive (true);
-            Saver.saveHint();
-            ScoreStartText.text = Shop.StarScore.ToString();
+		    buyHint();
         }
-	}
+    }
+
+    private void buyHint()
+    {
+        hintText.text = ScenesParameters.trueFunction;
+        hintWindow.SetActive(true);
+        Saver.saveHint();
+        ScoreStartText.text = Shop.StarScore.ToString();
+    }
 }
