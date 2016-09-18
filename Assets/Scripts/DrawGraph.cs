@@ -6,7 +6,8 @@ using System.Text.RegularExpressions;
 
 public class DrawGraph : MonoBehaviour
 {
-    public Material material;
+    public Material GraphMaterial;
+    public Material MapMaterial;
     private GameObject inputFieldGo;
     private GameObject setUp;
     private InputField inputFieldCo;
@@ -19,6 +20,9 @@ public class DrawGraph : MonoBehaviour
     private Transform DotPrefab;
     private int mappingQuantity = 5;
     private float mapLenght = 0.3f;
+
+    private Color lineColor = new Color(225, 1, 1);
+    private Color mapColor = new Color(255f, 255f, 255f);
 
     List<BoxCollider2D> graphDots = new List<BoxCollider2D>();
     List<LineRenderer> lines = new List<LineRenderer>();
@@ -39,34 +43,32 @@ public class DrawGraph : MonoBehaviour
     {
         for (int i = -mappingQuantity; i <= mappingQuantity; ++i)
         {
-            var line = createLine();
+            var line = createLine(MapMaterial);
             line.SetPosition(0, new Vector2(i, -mapLenght / 2));
             line.SetPosition(1, new Vector3(i, mapLenght / 2));
+            
+            line.material.SetColor("_Color", mapColor);
 
-            line.material.SetColor("_Color", new Color(255f, 255f, 255f));
-
-            line = createLine();
+            line = createLine(MapMaterial);
             line.SetPosition(0, new Vector2(-mapLenght / 2, i));
             line.SetPosition(1, new Vector3(mapLenght / 2, i));
 
-            line.material.SetColor("_Color", new Color(255f, 255f, 255f));
+            line.material.SetColor("_Color", mapColor);
         }
     }
 
-    private LineRenderer createLine()
+    private LineRenderer createLine(Material material)
     {
-        LineRenderer line;
-
-        line = new GameObject("Line").AddComponent<LineRenderer>();
+        var line = new GameObject("Line").AddComponent<LineRenderer>();
 
         line.SetWidth(0.06f, 0.06f);
        
-        line.material = this.material;
+        line.material = material;
 
-        line.material.SetColor("_Color", new Color(0.8824f, 0.1843f, 0.0413f));
+        line.material.SetColor("_Color", lineColor);
 
         line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        line.SetColors(new Color(0.8824f, 0.1843f, 0.0413f), new Color(0.8824f, 0.1843f, 0.0413f));
+        line.SetColors(lineColor, lineColor);
 
         line.SetVertexCount(2);
 
@@ -98,7 +100,7 @@ public class DrawGraph : MonoBehaviour
 
         var colliderKeeper = new GameObject("collider");
 
-        var line = createLine();
+        var line = createLine(GraphMaterial);
 
         line.SetPosition(0, lastDotPosition);
         line.SetPosition(1, newDotPosition);
