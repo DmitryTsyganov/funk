@@ -17,6 +17,8 @@ public class DrawGraph : MonoBehaviour
     private ExpressionParser.ExpressionParser parser;
     private Camera cam;
     private Transform DotPrefab;
+    private int mappingQuantity = 5;
+    private float mapLenght = 0.3f;
 
     List<BoxCollider2D> graphDots = new List<BoxCollider2D>();
     List<LineRenderer> lines = new List<LineRenderer>();
@@ -29,7 +31,26 @@ public class DrawGraph : MonoBehaviour
         inputFieldCo = inputFieldGo.GetComponent<InputField>();
 
         parser = new ExpressionParser.ExpressionParser();
-       
+
+       createMapping();
+    }
+
+    private void createMapping()
+    {
+        for (int i = -mappingQuantity; i <= mappingQuantity; ++i)
+        {
+            var line = createLine();
+            line.SetPosition(0, new Vector2(i, -mapLenght / 2));
+            line.SetPosition(1, new Vector3(i, mapLenght / 2));
+
+            line.material.SetColor("_Color", new Color(255f, 255f, 255f));
+
+            line = createLine();
+            line.SetPosition(0, new Vector2(-mapLenght / 2, i));
+            line.SetPosition(1, new Vector3(mapLenght / 2, i));
+
+            line.material.SetColor("_Color", new Color(255f, 255f, 255f));
+        }
     }
 
     private LineRenderer createLine()
