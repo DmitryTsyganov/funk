@@ -231,6 +231,7 @@ public class LevelCreator : MonoBehaviour {
         else
         {
             resetBalls();
+            resetBaskets();
         }
     }
 
@@ -271,6 +272,15 @@ public class LevelCreator : MonoBehaviour {
             balls[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             balls[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
             balls[i].transform.position = ballStarts[i].transform.position;
+        }
+    }
+
+    private void resetBaskets()
+    {
+        basketsHitsLeft = wasHit.Length;
+        for (int i = 0; i < wasHit.Length; ++i)
+        {
+            wasHit[i] = false;
         }
     }
 
