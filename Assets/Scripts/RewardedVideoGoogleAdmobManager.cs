@@ -4,14 +4,14 @@ using System.Collections;
 using System.Globalization;
 using GoogleMobileAds.Api;
 
-public class RewardedVideoManager : MonoBehaviour
+public class RewardedVideoGoogleAdmobManager : MonoBehaviour
 {
     private RewardBasedVideoAd rewardBasedVideo;
     private static bool isRewardInitialised = false;
-    private static RewardedVideoManager instance = null;
+    private static RewardedVideoGoogleAdmobManager instance = null;
 
-    // Use this for initialization
-    void Start () {
+    public RewardedVideoGoogleAdmobManager()
+    {
         rewardBasedVideo = RewardBasedVideoAd.Instance;
 
         // RewardBasedVideoAd is a singleton, so handlers should only be registered once.
@@ -37,17 +37,17 @@ public class RewardedVideoManager : MonoBehaviour
 	
 	}
 
-    private void RequestRewardBasedVideo()
+    public void RequestRewardBasedVideo()
     {
-#if UNITY_EDITOR
-                string adUnitId = "unused";
-#elif UNITY_ANDROID
-                        string adUnitId = "ca-app-pub-2267489283715146/7382039118";
-#elif UNITY_IPHONE
-                        string adUnitId = "INSERT_AD_UNIT_HERE";
-#else
-        string adUnitId = "unexpected_platform";
-#endif
+        #if UNITY_EDITOR
+            string adUnitId = "unused";
+        #elif UNITY_ANDROID
+            string adUnitId = "ca-app-pub-2267489283715146/7382039118";
+        #elif UNITY_IPHONE
+            string adUnitId = "INSERT_AD_UNIT_HERE";
+        #else
+            string adUnitId = "unexpected_platform";
+        #endif
 
         rewardBasedVideo = RewardBasedVideoAd.Instance;
 
@@ -74,9 +74,9 @@ public class RewardedVideoManager : MonoBehaviour
         }
     }
 
-    public static RewardedVideoManager GetInstance()
+    public static RewardedVideoGoogleAdmobManager GetInstance()
     {
-        if (instance == null) instance = new RewardedVideoManager();
+        if (instance == null) instance = new RewardedVideoGoogleAdmobManager();
         return instance;
     }
 

@@ -65,7 +65,7 @@ public class DrawGraph : MonoBehaviour
        
         line.material = material;
 
-        line.material.SetColor("_Color", lineColor);
+        //line.material.SetColor("_Color", lineColor);
 
         line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         line.SetColors(lineColor, lineColor);

@@ -4,7 +4,7 @@ using System.Collections;
 class Shop
 {
 
-    public static int levelAward = 5;
+    public static int levelAward = 3;
     public static int ballPrice = 50;
     public static int hintPrice = 10;
 

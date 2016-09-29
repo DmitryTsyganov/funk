@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LoadGame : MonoBehaviour {
 
@@ -10,11 +11,11 @@ public class LoadGame : MonoBehaviour {
 		if(loadingImage)
         loadingImage.SetActive(true);
 
-        if (Application.loadedLevel != 4 && Application.loadedLevel != 5)
+        if (SceneManager.GetActiveScene().buildIndex != 4 && SceneManager.GetActiveScene().buildIndex != 5)
         {
-            ScenesParameters.PreviousSceneIndex = Application.loadedLevel;
+            ScenesParameters.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         }
-        Application.LoadLevel(level);
+        SceneManager.LoadScene(level);
     }
 	public void Continue(){
 		LoadScene (ScenesParameters.PreviousSceneIndex);
