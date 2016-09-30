@@ -318,6 +318,5 @@ public class LevelCreator : MonoBehaviour {
         }
 
         return starsCount;
-        
     }
 }

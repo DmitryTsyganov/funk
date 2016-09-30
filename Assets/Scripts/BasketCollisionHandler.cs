@@ -25,33 +25,43 @@ public class BasketCollisionHandler : MonoBehaviour
         localBallPosition.y = localBallPosition.y - gameObject.GetComponent<Collider2D>().offset.y * 
                                 gameObject.transform.parent.transform.localScale.y;
 
-        //Debug.Log("local position " + localBallPosition);
+        //print("local position " + localBallPosition);
 
         if (localBallPosition.y > 0)
         {
             //print("Level complete");
             
             level.hitBasket(gameObject.transform.parent.gameObject);
+            var starsCount = level.getHitStarsCount();
 
             if (level.IsCompleted())
             {
-                var completed = CompletedScreen.getInstanse();
-
-                completed.SetActive(true);
+                CompletedScreen.getInstanse().SetActive(true);
                
-                if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel))
+                if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && starsCount == -1)
                 {
-                    int award = level.getHitStarsCount() != -1 ? level.getHitStarsCount() : Shop.levelAward;
+                    int award = starsCount != -1 ? starsCount : Shop.levelAward;
 
                     Shop.AddStar(award);
                     Saver.levelComplete();
-                    var gotStars = completed.transform.FindChild("Canvas_Completed").FindChild(
-                                    "Image_Completed").FindChild("GotStars").gameObject;
 
-                    gotStars.SetActive(true);
-                    GameObject.Find("StarCountText").GetComponent<Text>().text =
-                                        "+ " + award + " " + LanguageManager.getLanguage().stars;
-                    
+                    CompletedScreen.showCollectedStarsQuantity(award);
+                }
+                else if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && starsCount != -1)
+                {
+                    var previousStarsCount = Saver.getStarsCollectedOnLevel();
+
+                    if (previousStarsCount < starsCount)
+                    {
+                        Saver.saveCompletedLevelWithStars(starsCount);
+
+                        var award = previousStarsCount == -1
+                            ? starsCount
+                            : starsCount - previousStarsCount;
+
+                        Shop.AddStar(award);
+                        CompletedScreen.showCollectedStarsQuantity(award);
+                    }
                 }
             }
         }

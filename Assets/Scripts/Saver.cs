@@ -19,6 +19,10 @@ public class Saver : MonoBehaviour
     {
         return getLevelName(num) + "_comleted";
     }
+    private static string getLevelCompletedWithStarsName(int num = -1)
+    {
+        return getLevelName(num) + "_comleted_stars";
+    }
     public static bool getLevelComplete(int num = -1)
     {
         return PlayerPrefs.GetInt(getLevelCompletedName(num), 0) == 1;
@@ -55,7 +59,7 @@ public class Saver : MonoBehaviour
     }
     public static bool isLevelPlayable(int num)
     {
-        return num == 1 || getLevelComplete(num - 1);
+        return num == 1 || getLevelComplete(num - 1) || isLevelCompletedWithStars(num - 1);
     }
 
     public static void savePreferedLanguage(int langugeNumber)
@@ -103,5 +107,20 @@ public class Saver : MonoBehaviour
     public static int isHintBought()
     {
         return PlayerPrefs.GetInt(getHintString(), 0);
+    }
+
+    public static void saveCompletedLevelWithStars(int starsCount)
+    {
+        PlayerPrefs.SetInt(getLevelCompletedWithStarsName(), starsCount);
+    }
+
+    public static bool isLevelCompletedWithStars(int num = -1)
+    {
+        return getStarsCollectedOnLevel(num) != -1;
+    }
+
+    public static int getStarsCollectedOnLevel(int num = -1)
+    {
+        return PlayerPrefs.GetInt(getLevelCompletedWithStarsName(num), -1);
     }
 }
