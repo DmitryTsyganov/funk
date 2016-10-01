@@ -40,8 +40,6 @@ public class levelElement : MonoBehaviour {
             {
                 for (int i = Saver.getStarsCollectedOnLevel(index); i < Stars.Length; ++i)
                 {
-                    print("i " + i);
-                    print("index" + index);
                     Stars[i].GetComponent<Image>().color = Color.black;
                 }
             }
