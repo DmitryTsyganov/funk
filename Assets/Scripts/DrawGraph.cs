@@ -193,7 +193,6 @@ public class DrawGraph : MonoBehaviour
 
     public void GetText()
     {
-
         if (ScenesParameters.isValid) {
             try
             {

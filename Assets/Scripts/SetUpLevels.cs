@@ -14,7 +14,8 @@ public class SetUpLevels : MonoBehaviour {
 		LoadLevels ();
     }
 	void LoadLevels(){
-		int count =  System.Convert.ToInt32(Resources.Load<TextAsset> ("Levels" + "/" + ScenesParameters.Section + "/" + "config").text);
+		int count =  Convert.ToInt32(Resources.Load<TextAsset> (
+                    "Levels" + "/" + ScenesParameters.Section + "/" + "config").text);
 		for (int i = 1; i <= count; i++) {
 			CreateLevelElement (i);
 		}
