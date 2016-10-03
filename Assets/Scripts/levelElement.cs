@@ -32,10 +32,7 @@ public class levelElement : MonoBehaviour {
 
             if (!Saver.isLevelCompletedWithStars(index) && !Saver.isLevelComplete(index))
             {
-                for (int i = 0; i < Stars.Length; ++i)
-                {
-                    Stars[i].SetActive(false);
-                }
+                deactivateStars();
             } else if (Saver.isLevelCompletedWithStars(index))
             {
                 for (int i = Saver.getStarsCollectedOnLevel(index); i < Stars.Length; ++i)
@@ -46,9 +43,19 @@ public class levelElement : MonoBehaviour {
         }
 	    else
         {
+            deactivateStars();
+
             GetComponent<Image>().sprite = Lock;
 	        infa.gameObject.SetActive(false);
 	    }
         
 	}
+
+    private void deactivateStars()
+    {
+        for (int i = 0; i < Stars.Length; ++i)
+        {
+            Stars[i].SetActive(false);
+        }
+    }
 }
