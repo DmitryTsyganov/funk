@@ -6,7 +6,7 @@ using System.IO;
 
 public class MainLng : MonoBehaviour {
 
-	public Text Play;
+	/*public Text Play;
 	public Text Menu;
 	public Text MoreStars;
     public Text Options;
@@ -30,5 +30,5 @@ public class MainLng : MonoBehaviour {
 		System.IO.StringReader stringReader = new System.IO.StringReader(textAsset.text);
 		System.Xml.XmlReader reader = System.Xml.XmlReader.Create(stringReader);
 		return (MainScene)serializer.Deserialize (reader);
-	}
+	}*/
 }

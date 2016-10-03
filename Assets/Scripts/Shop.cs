@@ -8,7 +8,7 @@ class Shop
     public static int ballPrice = 50;
     public static int hintPrice = 10;
 
-	private static int starScore{ get; set; }
+    private static int starScore;
 	public static int StarScore{ 
 		get{ 
 			starScore = PlayerPrefs.GetInt ("StarScore");
@@ -20,15 +20,22 @@ class Shop
 		}
 	}
 
-	public static bool Buy(string name){
-		if (StarScore >= ballPrice) {
-			StarScore = StarScore - ballPrice;
-			PlayerPrefs.SetString (name, "Buyed");
-			return true;
-		} else {
-			return false;
-		}
+    public static bool BuyForPrice(string name, int price)
+    {
+        if (StarScore >= price)
+        {
+            StarScore -= price;
+            Saver.buyBall(name);
+            return true;
+        }
+        return false;
+    }
+
+    public static bool Buy(string name)
+	{
+	    return BuyForPrice(name, ballPrice);
 	}
+
 	public static bool BuyHint(){
 		if (StarScore>= 0) {
 			StarScore = StarScore - hintPrice;

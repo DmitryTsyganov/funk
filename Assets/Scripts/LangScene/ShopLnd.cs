@@ -6,7 +6,7 @@ using System.IO;
 
 public class ShopLnd : MonoBehaviour {
 
-	public Text Continue;
+	/*public Text Continue;
 	public Text Buy;
 
 	void Start () {
@@ -24,5 +24,5 @@ public class ShopLnd : MonoBehaviour {
 		System.IO.StringReader stringReader = new System.IO.StringReader(textAsset.text);
 		System.Xml.XmlReader reader = System.Xml.XmlReader.Create(stringReader);
 		return (ShopScene)serializer.Deserialize (reader);
-	}
+	}*/
 }

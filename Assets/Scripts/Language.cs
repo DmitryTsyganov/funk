@@ -49,6 +49,7 @@ public class Language
 
     //shop
     public string choose_ball;
+    public string watch_ad_shop;
 
     //options
     public string delete_progress;
@@ -144,6 +145,8 @@ public class LanguageXml
     //shop
     [XmlElement("choose_ball")]
     public string choose_ball;
+    [XmlElement("watch_ad_shop")]
+    public string watch_ad_shop;
 
     //options
     [XmlElement("delete_progress")]

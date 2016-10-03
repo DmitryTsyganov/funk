@@ -10,7 +10,6 @@ public class HintManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        watchAdButton.SetActive(false);
     }
 	
 	// Update is called once per frame

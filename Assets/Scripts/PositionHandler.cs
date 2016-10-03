@@ -28,6 +28,6 @@ public class PositionHandler : MonoBehaviour {
         ballBody.velocity = new Vector2(0, 0);
         ballBody.angularVelocity = 0;
         ballTransform.position = new Vector3(xDef, yDef, ballTransform.position.z);
-		ballSprite.sprite = BallParametrs.ballSprite;
+		//ballSprite.sprite = BallParametrs.ballSprite;
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class Saver : MonoBehaviour
@@ -6,9 +7,11 @@ public class Saver : MonoBehaviour
     private static string preferedLanguage = "pref_language";
     public static int russian = 0;
     public static int english = 0;
-    
-    private static string sawTraining = "saw_training";
-    private static string hintSave = "hint_";
+
+    private const string sawTraining = "saw_training";
+    private const string hintSave = "hint_";
+    private const string isBought = "Buyed";
+    private const string selectedBall = "sb";
 
     private static string getLevelName(int num = -1)
     {
@@ -122,5 +125,30 @@ public class Saver : MonoBehaviour
     public static int getStarsCollectedOnLevel(int num = -1)
     {
         return PlayerPrefs.GetInt(getLevelCompletedWithStarsName(num), -1);
+    }
+
+    public static void buyBall(string name)
+    {
+        PlayerPrefs.SetString(name, isBought);
+    }
+
+    public static bool isBallBought(string name)
+    {
+        return PlayerPrefs.GetString(name) == isBought;
+    }
+
+    public static void saveBallSelection(string ball)
+    {
+        PlayerPrefs.SetString(selectedBall, ball);
+    }
+
+    public static string getSavedBall()
+    {
+        return PlayerPrefs.GetString(selectedBall, null);
+    }
+
+    public static bool isBallSelectionSaved()
+    {
+        return PlayerPrefs.GetString(selectedBall, String.Empty) == String.Empty;
     }
 }

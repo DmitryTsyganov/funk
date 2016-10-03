@@ -6,6 +6,8 @@ public class BuyStarsPropmptSetUp : MonoBehaviour {
 
     public Button Yes;
     public Button AddStar;
+    public GameObject watchAdForFreeText;
+    public GameObject watchAdButton;
 
     // Use this for initialization
     void Start () {
@@ -18,6 +20,8 @@ public class BuyStarsPropmptSetUp : MonoBehaviour {
         }
         
         LanguageManager.setText("WatchAdButtonText", LanguageManager.getLanguage().get_for_free);
+
+        watchAdButton.SetActive(false);
     }
 
     // Update is called once per frame

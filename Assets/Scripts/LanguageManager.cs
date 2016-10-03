@@ -40,8 +40,6 @@ public class LanguageManager
         BinaryReader br = new BinaryReader(s);
 
         language = (Language)formatter.Deserialize(br.BaseStream);
-
-        Debug.Log(languageName);
     }
 
     public static void setLanguageIfNotAlready()

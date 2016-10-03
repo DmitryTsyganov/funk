@@ -6,7 +6,7 @@ using System.IO;
 
 public class MenuLnd : MonoBehaviour {
 
-	public Text Menu;
+	/*public Text Menu;
 	public Text Linear;
 	public Text Power;
 	public Text Root;
@@ -44,5 +44,5 @@ public class MenuLnd : MonoBehaviour {
 		System.IO.StringReader stringReader = new System.IO.StringReader(textAsset.text);
 		System.Xml.XmlReader reader = System.Xml.XmlReader.Create(stringReader);
 		return (MenuScene)serializer.Deserialize (reader);
-	}
+	}*/
 }

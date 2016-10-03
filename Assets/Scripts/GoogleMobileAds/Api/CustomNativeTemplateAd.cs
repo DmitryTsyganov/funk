@@ -39,7 +39,7 @@ namespace GoogleMobileAds.Api
             return this.client.GetTemplateId();
         }
 
-        // Get image asset corresponding to the key parameter of custom native template ad as a
+        // Get ballImage asset corresponding to the key parameter of custom native template ad as a
         // Texture2D. If the asset key does not map to an existing asset, a null object will be
         // returned.
         public Texture2D GetTexture2D(string key)
