@@ -9,7 +9,6 @@ public class LoadParameters : MonoBehaviour {
 	}
     void Load() {
         //BallParametrs.ballSprite =  Resources.Load<Sprite>("BallTexture/" + (PlayerPrefs.HasKey("BallSpriteName") ? PlayerPrefs.GetString("BallSpriteName"):"Default"));
-
     }
 	
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using ExpressionParser;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UnityEngine.Assertions;
 
 public class DrawGraph : MonoBehaviour
 {
@@ -196,11 +197,15 @@ public class DrawGraph : MonoBehaviour
         if (ScenesParameters.isValid) {
             try
             {
+                inputFieldCo.text = Regex.Replace(inputFieldCo.text, @"\^0\d+", "^0");
                 string rawExp = inputFieldCo.text.Replace("<color=#E12F0BFF>", string.Empty)
                                 .Replace("</color>", string.Empty).Replace(" ", string.Empty);
 
-                rawExp = Regex.Replace(rawExp, @"(?<=\/)\-\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.\))", "($0)");
-                rawExp = Regex.Replace(rawExp, @"(\d(?=[ax\(])|[ax\)](?=\d))", "$0*");
+                //rawExp = Regex.Replace(rawExp, @"(?<=\/)[\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.+?\))", "($0)");
+
+                //49 steps faster WOW WOW
+                rawExp = Regex.Replace(rawExp, @"([\/\*])([\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.+?\)))", "$1($2)");
+                rawExp = Regex.Replace(rawExp, @"(\d(?=[ascx\(])|[x\)](?=\d))", "$0*");
 
                 Expression exp = parser.EvaluateExpression(rawExp);
                 ExpressionDelegate fun = exp.ToDelegate("x");
