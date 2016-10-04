@@ -100,7 +100,6 @@ public class LevelCreator : MonoBehaviour {
                 ballClones[i].transform.localScale = ballScale;
 
                 var startPosition = ballPosition;
-                startPosition.z = 1;
 
                 GameObject ballStart = (GameObject)Instantiate(BallStartPrefab, startPosition, Quaternion.Euler(0, 0, 0));
                 ballStart.transform.localScale = ballScale;
