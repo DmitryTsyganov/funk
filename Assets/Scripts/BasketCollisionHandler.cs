@@ -60,7 +60,9 @@ public class BasketCollisionHandler : MonoBehaviour
                             : starsCount - previousStarsCount;
 
                         Shop.AddStar(award);
+
                         CompletedScreen.showCollectedStarsQuantity(award);
+                        CompletedScreen.showStars(starsCount);
                     }
                 }
             }
