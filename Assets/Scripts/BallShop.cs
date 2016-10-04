@@ -57,12 +57,12 @@ public class BallShop : MonoBehaviour
     public void watchAdForStars()
     {
         RewardedVideoUnityAdsManager.GetInstance().ShowRewardedAd(addStars);
-        updateStarsCountText();
     }
 
     private void addStars()
     {
         Shop.StarScore += ballShopReward;
+        updateStarsCountText();
     }
 
     private void setLanguage()
