@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,7 @@ public static class BallParametrs
     public static RuntimeAnimatorController Controller { get; private set; }
     public static SpriteRenderer Renderer { get; private set; }
     public static string BallName { get; private set; }
+    public static Dictionary<string, GameObject> Addons = new Dictionary<string, GameObject>();
 
     public static void setDefaultBall()
     {
@@ -42,12 +44,39 @@ public static class BallParametrs
         Saver.saveBallSelection(name);
     }
 
+    public static void addAddonName(string name)
+    {
+        GameObject addon = Resources.Load<GameObject>("Addons/" + name);
+        if (addon != null)
+        {
+            Addons[name] = addon;
+            Saver.addChosenAddon(name);
+        }
+    }
+
+    public static bool isAddonActive(string name)
+    {
+        return Addons.ContainsKey(name);
+    }
+
+    public static void removeAddonName(string name)
+    {
+        Addons.Remove(name);
+        Saver.removeChosenAddon(name);
+    }
+
     public static void start()
     {
-        string savedBall = Saver.getSavedBall();
+        getSavedBalls();
+        getSavedAddons();
+    }
 
+    private static void getSavedBalls()
+    {
         if (Renderer == null)
         {
+            string savedBall = Saver.getSavedBall();
+
             if (Saver.isBallSelectionSaved())
             {
                 setDefaultBall();
@@ -57,5 +86,19 @@ public static class BallParametrs
                 setBall(savedBall);
             }
         }
+    }
+
+    private static void getSavedAddons()
+    {
+        string[] addons = Saver.getChosenAddons();
+        for (int i = 0; i < addons.Length; ++i)
+        {
+            GameObject addon = Resources.Load<GameObject>("Addons/" + addons[i]);
+            if (addon != null)
+            {
+                Addons[addons[i]] = addon;
+            }
+        }
+        
     }
 }

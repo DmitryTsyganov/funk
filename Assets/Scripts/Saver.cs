@@ -10,8 +10,10 @@ public class Saver : MonoBehaviour
 
     private const string sawTraining = "saw_training";
     private const string hintSave = "hint_";
-    private const string isBought = "Buyed";
+    private const string isBallBoughtKey = "Buyed";
     private const string selectedBall = "sb";
+    private const string addons = "addons";
+    private const char addonsSeparator = ' ';
 
     private static string getLevelName(int num = -1)
     {
@@ -129,12 +131,12 @@ public class Saver : MonoBehaviour
 
     public static void buyBall(string name)
     {
-        PlayerPrefs.SetString(name, isBought);
+        PlayerPrefs.SetString(name, isBallBoughtKey);
     }
 
     public static bool isBallBought(string name)
     {
-        return PlayerPrefs.GetString(name) == isBought;
+        return PlayerPrefs.GetString(name) == isBallBoughtKey;
     }
 
     public static void saveBallSelection(string ball)
@@ -149,6 +151,28 @@ public class Saver : MonoBehaviour
 
     public static bool isBallSelectionSaved()
     {
-        return PlayerPrefs.GetString(selectedBall, String.Empty) == String.Empty;
+        return PlayerPrefs.GetString(selectedBall, string.Empty) == string.Empty;
+    }
+
+    public static string[] getChosenAddons()
+    {
+        string addonsString = PlayerPrefs.GetString(addons, string.Empty);
+        return addonsString.Split(addonsSeparator);
+    }
+
+    public static void addChosenAddon(string addon)
+    {
+        string addonsString = PlayerPrefs.GetString(addons, string.Empty);
+        if (!addons.Contains(addon))
+            PlayerPrefs.SetString(addons, addonsString + addon + addonsSeparator);
+    }
+
+    public static void removeChosenAddon(string addon)
+    {
+        string addonsString = PlayerPrefs.GetString(addons, string.Empty);
+        if (addonsString.Contains(addon + addonsSeparator))
+        {
+            PlayerPrefs.SetString(addons, addonsString.Replace(addon + addonsSeparator, string.Empty));
+        }
     }
 }

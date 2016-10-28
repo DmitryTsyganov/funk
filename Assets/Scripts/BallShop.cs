@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class BallShop : MonoBehaviour
@@ -12,6 +13,7 @@ public class BallShop : MonoBehaviour
     public GameObject ballShopItemPrefab;
     public Text starsCountText;
     public List<Item> ballsToSell = new List<Item>();
+    public List<Item> additionalFeatures = new List<Item>();
 
     public GameObject watchAdText;
     public GameObject backText;
@@ -28,20 +30,50 @@ public class BallShop : MonoBehaviour
 
         foreach (var item in ballsToSell)
         {
-            var button = Instantiate(ballShopItemPrefab);
-            button.transform.parent = content.transform;
-            button.transform.localScale = Vector3.one;
-            button.GetComponent<Animator>().runtimeAnimatorController =
-                item.obj.GetComponent<Animator>().runtimeAnimatorController;
-            button.GetComponent<SpriteRenderer>().sprite =
-                item.obj.GetComponent<SpriteRenderer>().sprite;
-            var handler = button.GetComponent<BallShopItemHandler>();
-            handler.price = item.price;
-            handler.Name = item.obj.name;
+            createButton(item);
         }
+
+        foreach (var item in additionalFeatures)
+        {
+            var button = createButton(item);
+            transformButton(button);
+        }
+
         setLanguage();
 
         watchAdButton.SetActive(false);
+    }
+
+    private GameObject createButton(Item item)
+    {
+        var button = Instantiate(ballShopItemPrefab);
+        button.transform.parent = content.transform;
+        button.transform.localScale = Vector3.one;
+        button.GetComponent<Animator>().runtimeAnimatorController =
+            item.obj.GetComponent<Animator>().runtimeAnimatorController;
+        button.GetComponent<SpriteRenderer>().sprite =
+            item.obj.GetComponent<SpriteRenderer>().sprite;
+        var handler = button.GetComponent<BallShopItemHandler>();
+        handler.price = item.price;
+        handler.Name = item.obj.name;
+        return button;
+    }
+
+    private void transformButton(GameObject button)
+    {
+        var oldhandler = button.GetComponent<BallShopItemHandler>();
+        var newHandler = button.AddComponent<AddonShopItemHandler>();
+
+        newHandler.Name = oldhandler.Name;
+        newHandler.price = oldhandler.price;
+        newHandler.lockImage = oldhandler.lockImage;
+        newHandler.priceText = oldhandler.priceText;
+        newHandler.StarImage = oldhandler.StarImage;
+        newHandler.ballImage = oldhandler.ballImage;
+
+        button.GetComponent<Button>().onClick.AddListener(delegate {newHandler.Click();});
+
+        Destroy(oldhandler);
     }
 	
 	// Update is called once per frame

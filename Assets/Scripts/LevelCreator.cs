@@ -16,9 +16,9 @@ public class LevelCreator : MonoBehaviour {
     public InputVerifyer inputVerifyer;
 	[SerializeField]
 	private GameObject tips;
-
+    #if UNITY_EDITOR
     public GameObject devInterface;
-
+    #endif
     private GameObject[] ballClones;
     private GameObject[] basketClones;
     private bool[] wasHit;
@@ -43,8 +43,10 @@ public class LevelCreator : MonoBehaviour {
         var inputFieldGo = GameObject.Find("InputField");
         inputFieldCo = inputFieldGo.GetComponent<InputField>();
 
+        #if UNITY_EDITOR
         if (!ScenesParameters.Devmode)
         {
+        #endif
             createLevelFromXml(ScenesParameters.LevelName + ScenesParameters.CurrentLevel);
 
             if (Saver.hasShownTraining() != 1 && ScenesParameters.Section == "linear" && 
@@ -52,6 +54,7 @@ public class LevelCreator : MonoBehaviour {
             {
                 Tips.SetActive(true);
             }
+        #if UNITY_EDITOR
         } else
         {
             devInterface = Instantiate(devInterface);
@@ -62,6 +65,7 @@ public class LevelCreator : MonoBehaviour {
                                     "use SectionsMenu Instead.");
             }
         }
+        #endif
     }
 
     private void setLanguage()
@@ -223,15 +227,19 @@ public class LevelCreator : MonoBehaviour {
     {
         resetStars();
 
+        #if UNITY_EDITOR
         if (ScenesParameters.Devmode)
         {
             resetBallsDevmode();
         }
         else
         {
+        #endif
             resetBalls();
             resetBaskets();
+        #if UNITY_EDITOR
         }
+        #endif
     }
 
     public void resetStars()
@@ -259,6 +267,7 @@ public class LevelCreator : MonoBehaviour {
         }
     }
 
+    #if UNITY_EDITOR
     private void resetBallsDevmode()
     {
         var ballStarts = GameObject.FindGameObjectsWithTag("BallStart");
@@ -273,6 +282,7 @@ public class LevelCreator : MonoBehaviour {
             balls[i].transform.position = ballStarts[i].transform.position;
         }
     }
+    #endif
 
     private void resetBaskets()
     {
@@ -285,7 +295,9 @@ public class LevelCreator : MonoBehaviour {
 
     public void hitBasket(GameObject basket)
     {
+        #if UNITY_EDITOR
         if (ScenesParameters.Devmode) ballClones = GameObject.FindGameObjectsWithTag("Basket");
+        #endif
         int index = Array.IndexOf(basketClones, basket);
         if (index != -1 && !wasHit[index])
         {
