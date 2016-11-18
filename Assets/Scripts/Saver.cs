@@ -13,6 +13,7 @@ public class Saver : MonoBehaviour
     private const string isBallBoughtKey = "Buyed";
     private const string selectedBall = "sb";
     private const string addons = "addons";
+    private const string rated = "rated";
     private const char addonsSeparator = ' ';
 
     private static string getLevelName(int num = -1)
@@ -174,5 +175,15 @@ public class Saver : MonoBehaviour
         {
             PlayerPrefs.SetString(addons, addonsString.Replace(addon + addonsSeparator, string.Empty));
         }
+    }
+
+    public static bool HasRated()
+    {
+        return PlayerPrefs.GetInt(rated, -1) == 1;
+    }
+
+    public static void SetRated()
+    {
+        PlayerPrefs.SetInt(rated, 1);
     }
 }
