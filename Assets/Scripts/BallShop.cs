@@ -56,6 +56,7 @@ public class BallShop : MonoBehaviour
         var handler = button.GetComponent<BallShopItemHandler>();
         handler.price = item.price;
         handler.Name = item.obj.name;
+        handler.ObjNameText.text = item.objName;
         return button;
     }
 
@@ -67,7 +68,7 @@ public class BallShop : MonoBehaviour
         newHandler.Name = oldhandler.Name;
         newHandler.price = oldhandler.price;
         newHandler.lockImage = oldhandler.lockImage;
-        newHandler.priceText = oldhandler.priceText;
+        newHandler.ObjNameText = oldhandler.ObjNameText;
         newHandler.StarImage = oldhandler.StarImage;
         newHandler.ballImage = oldhandler.ballImage;
 
@@ -104,15 +105,16 @@ public class BallShop : MonoBehaviour
         LanguageManager.setText(watchAdText, LanguageManager.getLanguage()
             .watch_ad_shop.Replace(rewardDummy, ballShopReward.ToString()));
 
-        foreach (var o in GameObject.FindGameObjectsWithTag("BuyText"))
+        /*foreach (var o in GameObject.FindGameObjectsWithTag("BuyText"))
         {
             LanguageManager.setText(o, LanguageManager.getLanguage().buy);
-        }
+        }*/
     }
     
     [Serializable]
     public class Item
     {
+        public string objName;
         public GameObject obj;
         public int price;
     }

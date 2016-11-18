@@ -18,7 +18,7 @@ public class AddonShopItemHandler : BasicShopItem
     {
         ballImage.sprite = renderer.sprite;
         ballImage.color = BallParametrs.isAddonActive(Name) ? Color.white : Color.grey;
-        priceText.color = Shop.StarScore > price ? Color.white : Color.red;
+        ObjNameText.color = Shop.StarScore > price ? Color.white : Color.red;
     }
 
     public void Click()

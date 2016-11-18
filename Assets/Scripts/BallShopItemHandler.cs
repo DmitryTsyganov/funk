@@ -35,6 +35,6 @@ public class BallShopItemHandler : BasicShopItem
         //TODO: find a better way
         ballImage.sprite = renderer.sprite;
         ballImage.color = BallParametrs.BallName == Name ? Color.white : Color.grey;
-        priceText.color = Shop.StarScore > price ? Color.white : Color.red;
+        PriceText.color = Shop.StarScore > price ? Color.black : Color.red;
     }
 }

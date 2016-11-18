@@ -10,7 +10,8 @@ public class BasicShopItem : MonoBehaviour {
     public Image ballImage;
     public Image lockImage;
     public Image StarImage;
-    public Text priceText;
+    public Text ObjNameText;
+    public Text PriceText;
 
     protected SpriteRenderer renderer;
 
@@ -50,15 +51,14 @@ public class BasicShopItem : MonoBehaviour {
     protected void setBoughtState()
     {
         lockImage.gameObject.SetActive(false);
-        priceText.gameObject.SetActive(false);
     }
 
     private void setNotBoughtState()
     {
         lockImage.gameObject.SetActive(true);
-        priceText.text = price.ToString();
+        PriceText.text = price.ToString();
         StarImage.gameObject.GetComponent<RectTransform>().pivot =
-            new Vector2(0.67f + 0.07f * price.ToString().Length, 1f);
+            new Vector2(0.67f + 0.07f * price.ToString().Length, 0.29f);
 
     }
 

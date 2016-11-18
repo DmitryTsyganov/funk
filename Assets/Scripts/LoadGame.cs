@@ -5,16 +5,14 @@ using UnityEngine.SceneManagement;
 public class LoadGame : MonoBehaviour {
 
     public GameObject loadingImage;
+    public AudioSource ButtonAudio;
 
 	public void LoadScene(int level)
-    {
-		if(loadingImage)
-        loadingImage.SetActive(true);
+    { 
+		if(loadingImage) loadingImage.SetActive(true);
 
-        if (SceneManager.GetActiveScene().buildIndex != 4 && SceneManager.GetActiveScene().buildIndex != 5)
-        {
-            ScenesParameters.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        }
+        ScenesParameters.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
         SceneManager.LoadScene(level);
     }
 	public void Continue(){
