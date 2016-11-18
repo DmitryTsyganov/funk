@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class CompletedScripts : MonoBehaviour {
 
+    public GameObject RateTheGameScreen;
+
     public void Start()
     {
         LanguageManager.setText("Text_Completed", LanguageManager.getLanguage().completed);
@@ -23,11 +25,21 @@ public class CompletedScripts : MonoBehaviour {
         Debug.Log(ScenesParameters.CurrentLevel + 1);
         Debug.Log(ScenesParameters.LevelsNumber);
 
-        if (ScenesParameters.LevelsNumber >= ScenesParameters.CurrentLevel + 1)
+        if (ScenesParameters.LevelsNumber > ScenesParameters.CurrentLevel)
         {
             ScenesParameters.CurrentLevel++;
+            SceneManager.LoadScene(3);
         }
-        SceneManager.LoadScene(3);
+        else if (ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel)
+
+            if (!Saver.HasRated())
+            {
+                Instantiate(RateTheGameScreen);
+            } else
+            {
+                SceneManager.LoadScene(3);
+            }
+        }
     }
     
 }
