@@ -43,4 +43,11 @@ public class AddonShopItemHandler : BasicShopItem
             }
         }
     }
+
+    public void GetForFree()
+    {
+        Shop.ButForFree(Name);
+        setBoughtState();
+        BallParametrs.addAddonName(Name);
+    }
 }

@@ -31,6 +31,11 @@ class Shop
         return false;
     }
 
+    public static void ButForFree(string name)
+    {
+        Saver.buyBall(name);
+    }
+
     public static bool Buy(string name)
 	{
 	    return BuyForPrice(name, ballPrice);

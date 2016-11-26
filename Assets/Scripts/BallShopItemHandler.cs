@@ -30,6 +30,13 @@ public class BallShopItemHandler : BasicShopItem
         }
     }
 
+    public void getForFree()
+    {
+        Shop.ButForFree(Name);
+        setBoughtState();
+        BallParametrs.setBall(Name);
+    }
+
     protected void updateBallItemActiveState()
     {
         //TODO: find a better way
