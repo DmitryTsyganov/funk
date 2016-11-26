@@ -41,6 +41,10 @@ public class AddonShopItemHandler : BasicShopItem
                 setBoughtState();
                 BallParametrs.addAddonName(Name);
             }
+            else
+            {
+                handleNotEnoughMoney();
+            }
         }
     }
 

@@ -50,6 +50,7 @@ public class Language
     //shop
     public string choose_ball;
     public string watch_ad_shop;
+    public string not_enough_stars;
 
     //options
     public string delete_progress;
@@ -156,6 +157,8 @@ public class LanguageXml
     public string choose_ball;
     [XmlElement("watch_ad_shop")]
     public string watch_ad_shop;
+    [XmlElement("not_enough_stars")]
+    public string not_enough_stars;
 
     //options
     [XmlElement("delete_progress")]

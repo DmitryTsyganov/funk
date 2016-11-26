@@ -27,6 +27,10 @@ public class BallShopItemHandler : BasicShopItem
                 setBoughtState();
                 BallParametrs.setBall(Name);
             }
+            else
+            {
+                handleNotEnoughMoney();
+            }
         }
     }
 

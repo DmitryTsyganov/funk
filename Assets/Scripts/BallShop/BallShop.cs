@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BallShop : MonoBehaviour
 {
+    public const int ballShopReward = 40;
 
     public static string selectedBall;
     public GameObject content;
@@ -13,20 +14,14 @@ public class BallShop : MonoBehaviour
     public List<Item> ballsToSell = new List<Item>();
     public List<Item> additionalFeatures = new List<Item>();
 
-    public GameObject watchAdText;
-    public GameObject backText;
-    public GameObject watchAdButton;
-
-
-    private const int ballShopReward = 40;
-    private const string rewardDummy = "{0}";
-
     private BallShopItemHandler[] ballButtonHandlers;
 
     // Use this for initialization
     void Start () {
         BallParametrs.start();
         updateStarsCountText();
+
+        ballButtonHandlers = new BallShopItemHandler[ballsToSell.Count];
 
         int i = 0;
         foreach (var item in ballsToSell)
@@ -43,8 +38,6 @@ public class BallShop : MonoBehaviour
         }
 
         setLanguage();
-
-        watchAdButton.SetActive(false);
     }
 
     private GameObject createButton(Item item)
@@ -85,7 +78,7 @@ public class BallShop : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	    if (RewardedVideoUnityAdsManager.GetInstance().isAdReady()) watchAdButton.SetActive(true);
+	    
 	}
 
     public void updateStarsCountText()
@@ -122,15 +115,7 @@ public class BallShop : MonoBehaviour
 
     private void setLanguage()
     {
-        LanguageManager.setLanguageIfNotAlready();
-        LanguageManager.setText(backText, LanguageManager.getLanguage().back);
-        LanguageManager.setText(watchAdText, LanguageManager.getLanguage()
-            .watch_ad_shop.Replace(rewardDummy, ballShopReward.ToString()));
-
-        /*foreach (var o in GameObject.FindGameObjectsWithTag("BuyText"))
-        {
-            LanguageManager.setText(o, LanguageManager.getLanguage().buy);
-        }*/
+       
     }
     
     [Serializable]

@@ -6,6 +6,7 @@ public class BasicShopItem : MonoBehaviour {
 
     public string Name;
     public int price;
+    public GameObject NotEnoughStars;
     public BallShop ballShop;
     public Image ballImage;
     public Image lockImage;
@@ -49,6 +50,11 @@ public class BasicShopItem : MonoBehaviour {
     protected void setBoughtState()
     {
         lockImage.gameObject.SetActive(false);
+    }
+
+    protected void handleNotEnoughMoney()
+    {
+        Instantiate(NotEnoughStars);
     }
 
     private void setNotBoughtState()
