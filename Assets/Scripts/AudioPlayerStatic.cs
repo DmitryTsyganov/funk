@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class AudioPlayerStatic : MonoBehaviour
 {
     public AudioSource mainTheme;
-    public AudioSource buttonSFX;
+    public AudioSource[] buttonSFX;
 
     private static AudioPlayerStatic instance = null;
 
@@ -36,5 +37,10 @@ public class AudioPlayerStatic : MonoBehaviour
     public static AudioPlayerStatic GetInstance()
     {
         return instance;
+    }
+
+    public void PlayRandomButtonSound()
+    {
+        buttonSFX[Mathf.RoundToInt((buttonSFX.Length -1) * Random.value)].Play();   
     }
 }

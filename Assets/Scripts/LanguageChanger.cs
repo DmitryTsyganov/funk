@@ -13,15 +13,8 @@ public class LanguageChanger : MonoBehaviour {
 	
 	}
 
-    public void setEnglish()
+    public void setLanguage(string languageName)
     {
-        LanguageManager.setLanguage("Eng");
-        Saver.savePreferedLanguage(Saver.english);
-    }
-
-    public void setRussian()
-    {
-        LanguageManager.setLanguage("Rus");
-        Saver.savePreferedLanguage(Saver.russian);
+        LanguageManager.setLanguage(languageName);
     }
 }

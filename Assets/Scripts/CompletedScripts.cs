@@ -30,16 +30,16 @@ public class CompletedScripts : MonoBehaviour {
             ScenesParameters.CurrentLevel++;
             SceneManager.LoadScene(3);
         }
-        else if (ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel)
+        else if (ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel) { 
 
             if (!Saver.HasRated())
             {
                 Instantiate(RateTheGameScreen);
+                Saver.SetRated();
             } else
             {
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(1);
             }
         }
     }
-    
 }

@@ -6,7 +6,7 @@ public class AddonShopItemHandler : BasicShopItem
     // Use this for initialization
     void Start()
     {
-        basicShopItemStart();
+        //basicShopItemStart();
     }
 
     void LateUpdate()

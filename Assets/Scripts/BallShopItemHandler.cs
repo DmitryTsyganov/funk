@@ -6,7 +6,7 @@ public class BallShopItemHandler : BasicShopItem
     // Use this for initialization
     void Start()
     {
-        basicShopItemStart();
+        //basicShopItemStart();
     }
 
     void LateUpdate()

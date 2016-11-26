@@ -60,6 +60,15 @@ public class Language
     public string name_3;
     public string position_3;
 
+    //rate game
+    public string yeah;
+    public string later;
+    public string sure;
+    public string not_really;
+    public string rate_prompt_1;
+    public string rate_prompt_yes;
+    public string rate_prompt_no;
+
     //star shop
     public string add;
 }
@@ -163,6 +172,22 @@ public class LanguageXml
     public string name_3;
     [XmlElement("position_3")]
     public string position_3;
+
+    //rate game
+    [XmlElement("yeah")]
+    public string yeah;
+    [XmlElement("later")]
+    public string later;
+    [XmlElement("sure")]
+    public string sure;
+    [XmlElement("not_really")]
+    public string not_really;
+    [XmlElement("rate_prompt_1")]
+    public string rate_prompt_1;
+    [XmlElement("rate_prompt_yes")]
+    public string rate_prompt_yes;
+    [XmlElement("rate_prompt_no")]
+    public string rate_prompt_no;
 
     //star shop
     [XmlElement("add")]

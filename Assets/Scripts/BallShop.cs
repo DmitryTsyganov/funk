@@ -55,6 +55,7 @@ public class BallShop : MonoBehaviour
             item.obj.GetComponent<SpriteRenderer>().sprite;
         var handler = button.GetComponent<BallShopItemHandler>();
         handler.price = item.price;
+        handler.basicShopItemStart();
         handler.Name = item.obj.name;
         handler.ObjNameText.text = item.objName;
         return button;
@@ -67,6 +68,7 @@ public class BallShop : MonoBehaviour
 
         newHandler.Name = oldhandler.Name;
         newHandler.price = oldhandler.price;
+        newHandler.PriceText = oldhandler.PriceText;
         newHandler.lockImage = oldhandler.lockImage;
         newHandler.ObjNameText = oldhandler.ObjNameText;
         newHandler.StarImage = oldhandler.StarImage;
@@ -74,6 +76,7 @@ public class BallShop : MonoBehaviour
 
         button.GetComponent<Button>().onClick.AddListener(delegate {newHandler.Click();});
 
+        newHandler.basicShopItemStart();
         Destroy(oldhandler);
     }
 	

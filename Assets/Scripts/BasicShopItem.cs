@@ -15,9 +15,7 @@ public class BasicShopItem : MonoBehaviour {
 
     protected SpriteRenderer renderer;
 
-    
-
-    protected void basicShopItemStart()
+    public void basicShopItemStart()
     {
         ballShop = FindObjectOfType<BallShop>();
 

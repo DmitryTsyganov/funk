@@ -38,6 +38,7 @@ public class LanguageManager
         var text = Resources.Load(ScenesParameters.LanguagesDirectory + '/' + languageName) as TextAsset;
         Stream s = new MemoryStream(text.bytes);
         BinaryReader br = new BinaryReader(s);
+        Saver.savePreferedLanguage(languageName);
 
         language = (Language)formatter.Deserialize(br.BaseStream);
     }

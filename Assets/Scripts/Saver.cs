@@ -73,6 +73,22 @@ public class Saver : MonoBehaviour
         PlayerPrefs.SetInt(preferedLanguage, langugeNumber);
     }
 
+    public static void savePreferedLanguage(string language)
+    {
+        int langugeNumber = 1;
+        switch (@language)
+        {
+            case "Rus":
+                langugeNumber = 0;
+                break;
+            case "Eng":
+                langugeNumber = 1;
+                break;
+        }
+        if (langugeNumber == -1) throw new Exception("Unknown Language: " + language);
+        PlayerPrefs.SetInt(preferedLanguage, langugeNumber);
+    }
+
     public static string getPreferedLanguage()
     {
         int langugeNumber = PlayerPrefs.GetInt(preferedLanguage, -1);

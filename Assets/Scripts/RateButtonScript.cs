@@ -8,13 +8,13 @@ public class RateButtonScript : MonoBehaviour {
     private const string sectionNameDummy = "{0}";
     private bool isDesicionMade = false;
 
-    public Text RateText;
-    public Text YesButtonText;
-    public Text NoButtonText;
+    public GameObject RateText;
+    public GameObject YesButtonText;
+    public GameObject NoButtonText;
 
 	// Use this for initialization
 	void Start () {
-        RateText.text = RateText.text.Replace(sectionNameDummy, ScenesParameters.Section);
+       setLanguage();
 	}
 	
 	// Update is called once per frame
@@ -26,14 +26,11 @@ public class RateButtonScript : MonoBehaviour {
     {
         if (!isDesicionMade)
         {
-            if (desicion)
-            {
-
-            }
-            else
-            {
-
-            }
+            print("yeah");
+            LanguageManager.setText(RateText,
+                desicion ? LanguageManager.getLanguage().rate_prompt_yes : LanguageManager.getLanguage().rate_prompt_no);
+            LanguageManager.setText(YesButtonText, LanguageManager.getLanguage().sure);
+            LanguageManager.setText(NoButtonText, LanguageManager.getLanguage().later);
             isDesicionMade = true;
         } else
         {
@@ -61,5 +58,14 @@ public class RateButtonScript : MonoBehaviour {
     private void setLanguage()
     {
         LanguageManager.setLanguageIfNotAlready();
+        LanguageManager
+            .setText(
+            RateText, 
+            LanguageManager
+            .getLanguage()
+            .rate_prompt_1
+            .Replace(sectionNameDummy, ScenesParameters.Section));
+        LanguageManager.setText(YesButtonText, LanguageManager.getLanguage().yeah);
+        LanguageManager.setText(NoButtonText, LanguageManager.getLanguage().not_really);
     }
 }
