@@ -1,8 +1,6 @@
 ﻿using System;
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Networking;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BallShop : MonoBehaviour
@@ -23,14 +21,19 @@ public class BallShop : MonoBehaviour
     private const int ballShopReward = 40;
     private const string rewardDummy = "{0}";
 
+    private BallShopItemHandler[] ballButtonHandlers;
+
     // Use this for initialization
     void Start () {
         BallParametrs.start();
         updateStarsCountText();
 
+        int i = 0;
         foreach (var item in ballsToSell)
         {
-            createButton(item);
+            var button = createButton(item);
+            ballButtonHandlers[i] = button.GetComponent<BallShopItemHandler>();
+            ++i;
         }
 
         foreach (var item in additionalFeatures)
@@ -89,6 +92,22 @@ public class BallShop : MonoBehaviour
     public void watchAdForStars()
     {
         RewardedVideoUnityAdsManager.GetInstance().ShowRewardedAd(addStars);
+    }
+
+    public void getRandomBallForFree()
+    {
+        BallShopItemHandler[] handlersToBuy = {};
+        int i = 0;
+        foreach (var handler in ballButtonHandlers)
+        {
+            if (!handler.isBought())
+            {
+                handlersToBuy[i] = handler;
+                ++i;
+            }
+        }
+
+        handlersToBuy[Mathf.RoundToInt(UnityEngine.Random.value*handlersToBuy.Length -1)].getForFree();
     }
 
     private void addStars()

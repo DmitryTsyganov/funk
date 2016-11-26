@@ -37,7 +37,7 @@ public class BasicShopItem : MonoBehaviour {
 
     }
 
-    protected bool isBought()
+    public bool isBought()
     {
         return Name == "Default" || Saver.isBallBought(Name);
     }
