@@ -4,7 +4,7 @@ using System.Collections;
 public class FireHandler : MonoBehaviour {
 
     Quaternion rotation;
-    private Vector3 positionOffset;
+    public Vector3 positionOffset = Vector3.zero;
 
     void Awake()
     {
@@ -13,7 +13,8 @@ public class FireHandler : MonoBehaviour {
 
     void Start()
     {
-        positionOffset = transform.position - transform.parent.position;
+        if (positionOffset == Vector3.zero)
+            positionOffset = transform.position - transform.parent.position;
     }
     void LateUpdate()
     {

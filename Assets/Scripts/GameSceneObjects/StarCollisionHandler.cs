@@ -3,6 +3,7 @@ using System.Collections;
 
 public class StarCollisionHandler : MonoBehaviour
 {
+    public GameObject GatheredAnimation;
     private LevelCreator level;
 
 	// Use this for initialization
@@ -14,5 +15,8 @@ public class StarCollisionHandler : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         gameObject.SetActive(false);
+        var anim = Instantiate(GatheredAnimation);
+
+        anim.transform.position = gameObject.transform.position;
     }
 }

@@ -90,6 +90,7 @@ public class BallShop : MonoBehaviour
         newHandler.ObjNameText = oldhandler.ObjNameText;
         newHandler.StarImage = oldhandler.StarImage;
         newHandler.ballImage = oldhandler.ballImage;
+        newHandler.NotEnoughStars = oldhandler.NotEnoughStars;
 
         button.GetComponent<Button>().onClick.AddListener(delegate {newHandler.Click();});
 
