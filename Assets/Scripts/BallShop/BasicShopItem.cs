@@ -23,6 +23,7 @@ public class BasicShopItem : MonoBehaviour {
         renderer = GetComponent<SpriteRenderer>();
         if (!isBought())
         {
+            print("not bought");
             setNotBoughtState();
         }
         else

@@ -51,6 +51,11 @@ public class Language
     public string choose_ball;
     public string watch_ad_shop;
     public string not_enough_stars;
+    public string congratilation_new_ball;
+    public string ball_machine_help;
+    public string balls;
+    public string addons;
+    public string addons_help;
 
     //options
     public string delete_progress;
@@ -159,6 +164,16 @@ public class LanguageXml
     public string watch_ad_shop;
     [XmlElement("not_enough_stars")]
     public string not_enough_stars;
+    [XmlElement("congratilation_new_ball")]
+    public string congratilation_new_ball;
+    [XmlElement("ball_machine_help")]
+    public string ball_machine_help;
+    [XmlElement("balls")]
+    public string balls;
+    [XmlElement("addons")]
+    public string addons;
+    [XmlElement("addons_help")]
+    public string addons_help;
 
     //options
     [XmlElement("delete_progress")]

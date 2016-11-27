@@ -15,6 +15,7 @@ public class ButtonSoundHandler : MonoBehaviour {
 
     public void SoundEffect2()
     {
-        AudioPlayerStatic.GetInstance().PlayRandomButtonSound();
+        var player = AudioPlayerStatic.GetInstance();
+        if (player != null) player.PlayRandomButtonSound();
     }
 }

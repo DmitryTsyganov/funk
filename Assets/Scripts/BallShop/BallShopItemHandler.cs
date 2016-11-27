@@ -6,7 +6,7 @@ public class BallShopItemHandler : BasicShopItem
     // Use this for initialization
     void Start()
     {
-        //basicShopItemStart();
+        basicShopItemStart();
     }
 
     void LateUpdate()
@@ -26,6 +26,7 @@ public class BallShopItemHandler : BasicShopItem
                 ballShop.updateStarsCountText();
                 setBoughtState();
                 BallParametrs.setBall(Name);
+                BallShop.CountBallsToBuy();
             }
             else
             {
