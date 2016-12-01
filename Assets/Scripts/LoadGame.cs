@@ -11,7 +11,8 @@ public class LoadGame : MonoBehaviour {
     { 
 		if(loadingImage) loadingImage.SetActive(true);
 
-        ScenesParameters.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (level != SceneManager.GetActiveScene().buildIndex)
+            ScenesParameters.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex;
         
         SceneManager.LoadScene(level);
     }
