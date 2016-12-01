@@ -20,9 +20,11 @@ public class LoadGame : MonoBehaviour {
 		LoadScene (ScenesParameters.PreviousSceneIndex);
 	}
 
-    public void Update()
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) LoadScene(ScenesParameters.PreviousSceneIndex);
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0) Continue();
     }
+
+
 
 }
