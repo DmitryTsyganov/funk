@@ -25,8 +25,6 @@ public class CongratilationsScreen : MonoBehaviour
         var size = CongratilationsImage.sprite.bounds.size;
         print("size "+size);
         button.transform.parent = CongratilationsImage.transform.parent;
-        //button.transform.localScale = Vector3.one;
-        //var newSize = camera.WorldToScreenPoint(new Vector3(size.x/4, -size.y/4, 0f));
         var newSize = CongratilationsImage.GetComponent<RectTransform>().sizeDelta/2;
         print("newsize " + newSize);
         var rect = button.GetComponent<RectTransform>();
