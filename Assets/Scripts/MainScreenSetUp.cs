@@ -14,6 +14,7 @@ public class MainScreenSetUp : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        MuteHandler.turnSound(Saver.isSoundOn());
         StartCoroutine(WaitForLanguage());
     }
 

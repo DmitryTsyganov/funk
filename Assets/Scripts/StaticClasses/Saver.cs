@@ -15,6 +15,7 @@ public class Saver : MonoBehaviour
     private const string addons = "addons";
     private const string rated = "rated";
     private const char addonsSeparator = ' ';
+    private const string soundOn = "sound";
 
     private static string getLevelName(int num = -1)
     {
@@ -201,5 +202,16 @@ public class Saver : MonoBehaviour
     public static void SetRated()
     {
         PlayerPrefs.SetInt(rated, 1);
+    }
+
+    public static void turnSound(bool on)
+    {
+        int boolOn = on ? 1 : 0;
+        PlayerPrefs.SetInt(soundOn, boolOn);
+    }
+
+    public static bool isSoundOn()
+    {
+        return PlayerPrefs.GetInt(soundOn, 1) == 1;
     }
 }

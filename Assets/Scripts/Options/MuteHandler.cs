@@ -23,5 +23,12 @@ public class MuteHandler : MonoBehaviour
         isSoundOn = !isSoundOn;
         AudioListener.volume = isSoundOn ? 1 : 0;
         Cross.SetActive(!isSoundOn);
+        Saver.turnSound(isSoundOn);
+    }
+
+    public static void turnSound(bool on)
+    {
+        isSoundOn = on;
+        AudioListener.volume = isSoundOn ? 1 : 0;
     }
 }
