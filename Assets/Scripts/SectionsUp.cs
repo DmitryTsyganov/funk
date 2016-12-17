@@ -19,8 +19,11 @@ public class SectionsUp : MonoBehaviour
     public GameObject SpecialText;
     public GameObject BottomMenuButtonText;
 
+    private LoadGame loadGame;
+
     void Start()
     {
+        loadGame = new LoadGame();
         setLanguage();
     }
 
@@ -55,10 +58,10 @@ public class SectionsUp : MonoBehaviour
 		ScenesParameters.LevelsNumber = Int32.Parse(text.text);
 		if (!ScenesParameters.Devmode)
 		{
-			Application.LoadLevel(2);
+		    loadGame.LoadScene(2);
 		} else
 		{
-			Application.LoadLevel(3);
+		    loadGame.LoadScene(3);
 		}
 	}
 }

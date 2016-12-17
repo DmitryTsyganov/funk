@@ -7,14 +7,24 @@ public class LoadGame : MonoBehaviour {
     public GameObject loadingImage;
     public AudioSource ButtonAudio;
 
-	public void LoadScene(int level)
-    { 
+    //if a scene contains several LoadGameScripts, only one should answer to the back button
+    private static bool canLoad;
+
+    public LoadGame()
+    {
+        canLoad = true;
+    }
+
+    public void LoadScene(int level)
+	{
+	    print("level to load :" + level);
+	    print("current level " + SceneManager.GetActiveScene().buildIndex);
 		if(loadingImage) loadingImage.SetActive(true);
 
         if (level != SceneManager.GetActiveScene().buildIndex)
             ScenesParameters.PreviousSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        
-        SceneManager.LoadScene(level);
+	    print("previous scen index " + ScenesParameters.PreviousSceneIndex);
+	    SceneManager.LoadScene(level);
     }
 	public void Continue(){
 		LoadScene (ScenesParameters.PreviousSceneIndex);
@@ -22,9 +32,10 @@ public class LoadGame : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0) Continue();
+        if (Input.GetKeyDown(KeyCode.Escape) && canLoad && SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            canLoad = false;
+            Continue();
+        }
     }
-
-
-
 }
