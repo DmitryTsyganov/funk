@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BallShop : MonoBehaviour
@@ -21,6 +22,7 @@ public class BallShop : MonoBehaviour
     public GameObject CongratilationsScreen;
     public Image MenuImage;
     public Text starsCountText;
+    public GameObject BackText;
     public List<Item> ballsToSell = new List<Item>();
     public List<Item> additionalFeatures = new List<Item>();
     public int BallsToBuy;
@@ -158,32 +160,45 @@ public class BallShop : MonoBehaviour
 
     public void ActivateBalls()
     {
-        BallsButton.color = Color.grey;
-        AddonsButton.color = Color.white;
-        ContentBalls.SetActive(true);
-        ContentAddons.SetActive(false);
-        BallMachine.SetActive(true);
-        BallMachineHelpText.SetActive(true);
-        AddonsHelpText.SetActive(false);
-        MenuImage.transform.localScale = MenuImage.transform.localScale + new Vector3(0, 0.5f, 0);
+        if (!BallMachine.activeSelf)
+        {
+            BallsButton.gameObject.transform.SetSiblingIndex(BallsButton.gameObject.transform.GetSiblingIndex() + 1);
+            //AddonsButton.gameObject.transform.SetSiblingIndex(AddonsButton.gameObject.transform.GetSiblingIndex() - 1);
+            BallsButton.color = Color.white;
+            AddonsButton.color = Color.grey;
+            ContentBalls.SetActive(true);
+            ContentAddons.SetActive(false);
+            BallMachine.SetActive(true);
+            BallMachineHelpText.SetActive(true);
+            AddonsHelpText.SetActive(false);
+            //MenuImage.transform.localScale = MenuImage.transform.localScale + new Vector3(0, 0.5f, 0);
+        }
     }
 
     public void ActivateAddons()
     {
-        BallsButton.color = Color.white;
-        AddonsButton.color = Color.grey;
-        ContentBalls.SetActive(false);
-        ContentAddons.SetActive(true);
-        BallMachine.SetActive(false);
-        BallMachineHelpText.SetActive(false);
-        AddonsHelpText.SetActive(true);
-        MenuImage.transform.localScale = MenuImage.transform.localScale - new Vector3(0, 0.5f, 0);
+        if (BallMachine.activeSelf)
+        {
+            BallsButton.gameObject.transform.SetSiblingIndex(BallsButton.gameObject.transform.GetSiblingIndex() - 1);
+            //AddonsButton.gameObject.transform.SetSiblingIndex(AddonsButton.gameObject.transform.GetSiblingIndex() + 1);
+            BallsButton.color = Color.grey;
+            AddonsButton.color = Color.white;
+            ContentBalls.SetActive(false);
+            ContentAddons.SetActive(true);
+            BallMachine.SetActive(false);
+            BallMachineHelpText.SetActive(false);
+            AddonsHelpText.SetActive(true);
+            //MenuImage.transform.localScale = MenuImage.transform.localScale - new Vector3(0, 0.5f, 0);
+        }
     }
 
     private void addStars()
     {
         Shop.StarScore += ballShopReward;
         updateStarsCountText();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //Canvas.ForceUpdateCanvases();
+        //SceneView.RepaintAll();
     }
 
     private void setLanguage()
@@ -192,6 +207,7 @@ public class BallShop : MonoBehaviour
         LanguageManager.setText(BallsButtonText, LanguageManager.getLanguage().balls);
         LanguageManager.setText(AddonsButtonText, LanguageManager.getLanguage().addons);
         LanguageManager.setText(AddonsHelpText, LanguageManager.getLanguage().addons_help);
+        LanguageManager.setText(BackText, LanguageManager.getLanguage().back);
     }
     
     [Serializable]

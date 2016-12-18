@@ -12,6 +12,7 @@ public class LevelCreator : MonoBehaviour {
     public GameObject ErrorText;
     public GameObject StarPrefab;
     public GameObject Tips;
+    public GameObject SectionsMenu;
 
     public InputVerifyer inputVerifyer;
 	[SerializeField]
@@ -77,6 +78,7 @@ public class LevelCreator : MonoBehaviour {
         LanguageManager.setText("ResetButtonText", LanguageManager.getLanguage().reset);
         LanguageManager.setText("ShopText", LanguageManager.getLanguage().shop);
         LanguageManager.setText("HintButtonText", LanguageManager.getLanguage().hint);
+        //LanguageManager.setText(SectionsMenu, LanguageManager.getLanguage().sections_menu);
 
         //buy stars
         LanguageManager.setText("ResetButtonText", LanguageManager.getLanguage().reset);

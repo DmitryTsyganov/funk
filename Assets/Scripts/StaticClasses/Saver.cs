@@ -5,8 +5,6 @@ using System.Collections;
 public class Saver : MonoBehaviour
 {
     private static string preferedLanguage = "pref_language";
-    public static int russian = 0;
-    public static int english = 0;
 
     private const string sawTraining = "saw_training";
     private const string hintSave = "hint_";
@@ -76,32 +74,12 @@ public class Saver : MonoBehaviour
 
     public static void savePreferedLanguage(string language)
     {
-        int langugeNumber = 1;
-        switch (@language)
-        {
-            case "Rus":
-                langugeNumber = 0;
-                break;
-            case "Eng":
-                langugeNumber = 1;
-                break;
-        }
-        if (langugeNumber == -1) throw new Exception("Unknown Language: " + language);
-        PlayerPrefs.SetInt(preferedLanguage, langugeNumber);
+        PlayerPrefs.SetString(preferedLanguage, language);
     }
 
     public static string getPreferedLanguage()
     {
-        int langugeNumber = PlayerPrefs.GetInt(preferedLanguage, -1);
-
-        switch (@langugeNumber)
-        {
-            case 0:
-                return "Rus";
-            case 1:
-                return "Eng";
-        }
-        return null;
+        return PlayerPrefs.GetString(preferedLanguage, null);
     }
 
     public static void dontShowTraining()

@@ -153,5 +153,10 @@ public class LanguageCreatorMeta : MonoBehaviour
     {
         saveBinaryLangaugeInFile(readXml("Eng"), "Eng");
         saveBinaryLangaugeInFile(readXml("Rus"), "Rus");
+        saveBinaryLangaugeInFile(readXml("Fr"), "Fr");
+        saveBinaryLangaugeInFile(readXml("De"), "De");
+        saveBinaryLangaugeInFile(readXml("Pl"), "Pl");
+        saveBinaryLangaugeInFile(readXml("It"), "It");
+        saveBinaryLangaugeInFile(readXml("Es"), "Es");
     }
 }

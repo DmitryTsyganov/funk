@@ -50,7 +50,7 @@ public class AddonShopItemHandler : BasicShopItem
 
     public void GetForFree()
     {
-        Shop.ButForFree(Name);
+        Shop.BuyForFree(Name);
         setBoughtState();
         BallParametrs.addAddonName(Name);
     }

@@ -31,8 +31,9 @@ public class MainScreenSetUp : MonoBehaviour
         {
 
             string language = Saver.getPreferedLanguage();
-            if (language != null)
+            if (!string.IsNullOrEmpty(language))
             {
+                print(language);
                 LanguageManager.setLanguage(language);
             }
             else

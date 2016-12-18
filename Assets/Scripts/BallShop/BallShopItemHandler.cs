@@ -37,7 +37,7 @@ public class BallShopItemHandler : BasicShopItem
 
     public void getForFree()
     {
-        Shop.ButForFree(Name);
+        Shop.BuyForFree(Name);
         setBoughtState();
         BallParametrs.setBall(Name);
     }
