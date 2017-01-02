@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -6,6 +7,7 @@ using System.IO;
 
 public class SectionsUp : MonoBehaviour
 {
+    public SectionButton[] buttons;
 
     public GameObject LinearText;
     public GameObject PowerText;
@@ -25,6 +27,7 @@ public class SectionsUp : MonoBehaviour
     {
         loadGame = new LoadGame();
         setLanguage();
+        ActivateButtons();
     }
 
     void setLanguage()
@@ -64,4 +67,23 @@ public class SectionsUp : MonoBehaviour
 		    loadGame.LoadScene(3);
 		}
 	}
+
+    private void ActivateButtons()
+    {
+        for (int i = 1; i < buttons.Length; ++i)
+        {
+            if (Saver.isSectionComplete(buttons[i-1].name))
+            {
+                buttons[i].button.transform.Find("LockImage").gameObject.SetActive(false);
+                buttons[i].button.GetComponent<Button>().interactable = true;
+            }
+        }
+    }
+
+    [Serializable]
+    public struct SectionButton
+    {
+        public GameObject button;
+        public string name;
+    }
 }

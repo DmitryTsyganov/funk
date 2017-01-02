@@ -38,6 +38,11 @@ public class BasketCollisionHandler : MonoBehaviour
             {
                 CompletedScreen.getInstanse().SetActive(true);
                
+                if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))
+                {
+                    Saver.completeSection(ScenesParameters.Section);
+                }
+
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && starsCount == -1)
                 {
                     int award = starsCount != -1 ? starsCount : Shop.levelAward;
