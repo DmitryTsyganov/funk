@@ -275,16 +275,7 @@ public class InputVerifyer : MonoBehaviour {
                 clearString = clearString.Replace(function, string.Empty);
             }
 
-            clearString = Regex.Replace(clearString, @"[\d-]", string.Empty)
-                .Replace("+", string.Empty)
-                .Replace("-", string.Empty)
-                .Replace("*", string.Empty)
-                .Replace("/", string.Empty)
-                .Replace("#", string.Empty)
-                .Replace("(", string.Empty)
-                .Replace(")", string.Empty)
-                .Replace(".", string.Empty)
-                .Replace("^", string.Empty);
+            clearString = Regex.Replace(clearString, @"[\+\-\*\/\#\(\)\.\^\d]", string.Empty);
 
             foreach (string VARIABLE in allowedFunctions)
             {
