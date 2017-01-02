@@ -46,7 +46,7 @@ public class BallShop : MonoBehaviour
         {
             var button = createButton(item);
             ballButtons[i] = button;
-            ballButtonHandlers[i] = button.GetComponent<BallShopItemHandler>();
+            ballButtonHandlers[i] = button.transform.Find("BallShopItem").gameObject.GetComponent<BallShopItemHandler>();
             ++i;
         }
 
@@ -64,9 +64,10 @@ public class BallShop : MonoBehaviour
 
     private GameObject createButton(Item item)
     {
-        var button = Instantiate(ballShopItemPrefab);
-        button.transform.parent = ContentBalls.transform;
-        button.transform.localScale = Vector3.one;
+        var buttonWrapper = Instantiate(ballShopItemPrefab);
+        var button = buttonWrapper.transform.Find("BallShopItem").gameObject;
+        buttonWrapper.transform.parent = ContentBalls.transform;
+        buttonWrapper.transform.localScale = Vector3.one;
         button.GetComponent<Animator>().runtimeAnimatorController =
             item.obj.GetComponent<Animator>().runtimeAnimatorController;
         button.GetComponent<SpriteRenderer>().sprite =
@@ -76,12 +77,13 @@ public class BallShop : MonoBehaviour
         handler.basicShopItemStart();
         handler.Name = item.obj.name;
         handler.ObjNameText.text = item.objName;
-        return button;
+        return buttonWrapper;
     }
 
-    private void transformButton(GameObject button)
+    private void transformButton(GameObject buttonWrapper)
     {
-        button.transform.parent = ContentAddons.transform;
+        var button = buttonWrapper.transform.Find("BallShopItem").gameObject;
+        buttonWrapper.transform.parent = ContentAddons.transform;
         var oldhandler = button.GetComponent<BallShopItemHandler>();
         var newHandler = button.AddComponent<AddonShopItemHandler>();
 
