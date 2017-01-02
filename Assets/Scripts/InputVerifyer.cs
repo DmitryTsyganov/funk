@@ -217,7 +217,7 @@ public class InputVerifyer : MonoBehaviour {
 
     public void setDefaultFunction(string function)
     {
-        function = Regex.Replace(function, @"[\d\+\-\*\/\#\(\)\.\^]", string.Empty);
+        function = Regex.Replace(function, @"[\d\+\-\*\/\#\(\)\.\^]", " ");
         function = Regex.Replace(function, @"[ ]{2,}", " ");
 
         //Debug.Log("allowed string " + function + "1\n");
