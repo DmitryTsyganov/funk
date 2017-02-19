@@ -162,7 +162,7 @@ public class BallShop : MonoBehaviour
 
     public void ActivateBalls()
     {
-        if (!BallMachine.activeSelf)
+        if (AddonsHelpText.activeSelf)
         {
             BallsButton.gameObject.transform.SetSiblingIndex(BallsButton.gameObject.transform.GetSiblingIndex() + 1);
             //AddonsButton.gameObject.transform.SetSiblingIndex(AddonsButton.gameObject.transform.GetSiblingIndex() - 1);
@@ -170,16 +170,20 @@ public class BallShop : MonoBehaviour
             AddonsButton.color = Color.grey;
             ContentBalls.SetActive(true);
             ContentAddons.SetActive(false);
-            BallMachine.SetActive(true);
-            BallMachineHelpText.SetActive(true);
             AddonsHelpText.SetActive(false);
+            if (BallsToBuy != 0)
+            {
+                BallMachine.SetActive(true);
+                BallMachineHelpText.SetActive(true);
+            }
+
             //MenuImage.transform.localScale = MenuImage.transform.localScale + new Vector3(0, 0.5f, 0);
         }
     }
 
     public void ActivateAddons()
     {
-        if (BallMachine.activeSelf)
+        if (!AddonsHelpText.activeSelf)
         {
             BallsButton.gameObject.transform.SetSiblingIndex(BallsButton.gameObject.transform.GetSiblingIndex() - 1);
             //AddonsButton.gameObject.transform.SetSiblingIndex(AddonsButton.gameObject.transform.GetSiblingIndex() + 1);
@@ -187,9 +191,10 @@ public class BallShop : MonoBehaviour
             AddonsButton.color = Color.white;
             ContentBalls.SetActive(false);
             ContentAddons.SetActive(true);
-            BallMachine.SetActive(false);
             BallMachineHelpText.SetActive(false);
             AddonsHelpText.SetActive(true);
+            if (BallMachine != null)
+                BallMachine.SetActive(false);
             //MenuImage.transform.localScale = MenuImage.transform.localScale - new Vector3(0, 0.5f, 0);
         }
     }
