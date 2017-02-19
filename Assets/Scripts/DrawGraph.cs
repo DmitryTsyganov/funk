@@ -163,7 +163,7 @@ public class DrawGraph : MonoBehaviour
             //print("first x " + firstX);
             //print("last x " + lastX);
 
-            int stepsTotal = 260;
+            int stepsTotal = 90;
 
             double stepLength = (-firstX + lastX) / stepsTotal;
 
