@@ -4,12 +4,14 @@ using System.Collections;
 class Shop
 {
 
-    public static int levelAward = 3;
-    public static int ballPrice = 50;
-    public static int hintPrice = 10;
+    public const int levelAward = 3;
+    public const int ballPrice = 50;
+    public const int hintPrice = 10;
+
+    public const int StarsUltimate = 1000000;
 
     private static int starScore;
-	public static int StarScore{ 
+	public static int StarScore{
 		get{ 
 			starScore = PlayerPrefs.GetInt ("StarScore");
 			return starScore;
