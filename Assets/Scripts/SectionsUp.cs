@@ -72,7 +72,7 @@ public class SectionsUp : MonoBehaviour
     {
         for (int i = 1; i < buttons.Length; ++i)
         {
-            if (Saver.isSectionComplete(buttons[i-1].name))
+            if (ScenesParameters.Devmode || Saver.isSectionComplete(buttons[i-1].name))
             {
                 buttons[i].button.transform.Find("LockImage").gameObject.SetActive(false);
                 buttons[i].button.GetComponent<Button>().interactable = true;
