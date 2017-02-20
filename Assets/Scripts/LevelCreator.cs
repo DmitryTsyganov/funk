@@ -85,11 +85,13 @@ public class LevelCreator : MonoBehaviour {
 
     }
 
-    private void createLevelFromXml(string filename)
+    public void createLevelFromXml(string filename)
     {		
         var parser = new XMLParser();
 
         level = (FullLevel)parser.parse(filename);
+
+        if (level == null) return;
 
         if (level.balls != null)
         {
@@ -99,7 +101,7 @@ public class LevelCreator : MonoBehaviour {
             {
 
                 var ballPosition = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
-                ballClones[i] = (GameObject) Instantiate(BallPrefab, ballPosition, Quaternion.Euler(0, 0, 0));
+                ballClones[i] = Instantiate(BallPrefab, ballPosition, Quaternion.Euler(0, 0, 0));
 
                 var ballScale = new Vector3(level.balls[i].scale, level.balls[i].scale, 1f);
 
@@ -107,7 +109,7 @@ public class LevelCreator : MonoBehaviour {
 
                 var startPosition = ballPosition;
 
-                GameObject ballStart = (GameObject)Instantiate(BallStartPrefab, startPosition, Quaternion.Euler(0, 0, 0));
+                GameObject ballStart = Instantiate(BallStartPrefab, startPosition, Quaternion.Euler(0, 0, 0));
                 ballStart.transform.localScale = ballScale;
 
                 //фуфло
@@ -162,7 +164,7 @@ public class LevelCreator : MonoBehaviour {
                 var starPosition =
                 new Vector2(level.stars[i].x, level.stars[i].y);
 
-                starClones[i] = (GameObject)Instantiate(StarPrefab, starPosition,
+                starClones[i] = Instantiate(StarPrefab, starPosition,
                                 Quaternion.AngleAxis(level.stars[i].angle, Vector3.forward));
 
                 starClones[i].transform.localScale = new Vector3(level.stars[i].scale, level.stars[i].scale, 1f);
@@ -172,8 +174,16 @@ public class LevelCreator : MonoBehaviour {
         funk = level.Funk;
         defaultFunk = level.DefaultFunk;
 
+#if UNITY_EDITOR
+        if (ScenesParameters.Devmode)
+        {
+            GameObject.Find("RequiredInputField").GetComponent<InputField>().text = funk;
+            GameObject.Find("DefaultInputField").GetComponent<InputField>().text = defaultFunk;
+            GameObject.Find("hintField").GetComponent<InputField>().text = level.HintText;
+        }
+#endif
     
-        string[] args = new string[1] { funk};
+        string[] args = { funk };
 
         inputVerifyer.setReqiredFunctions(args);
         inputVerifyer.setDefaultFunction(defaultFunk);
@@ -250,7 +260,10 @@ public class LevelCreator : MonoBehaviour {
         {
             for (int i = 0; i < starClones.Length; ++i)
             {
-                starClones[i].SetActive(true);
+                if (starClones[i] != null)
+                {
+                    starClones[i].SetActive(true);
+                }
             }
         }
 
@@ -260,7 +273,7 @@ public class LevelCreator : MonoBehaviour {
     {
         for (int i = 0; i < ballClones.Length; ++i)
         {
-            if (ScenesParameters.isValid)
+            if (ScenesParameters.isValid && ballClones[i] != null)
             {
                 ballClones[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 ballClones[i].GetComponent<Rigidbody2D>().angularVelocity = 0;

@@ -19,7 +19,6 @@ public class StarGatheredHandler : MonoBehaviour
     private IEnumerator PlayAnimation()
     {
         yield return new WaitForSecondsRealtime(1.15f);
-        print("This just happened");
         Destroy(gameObject);
         yield return null;
     }

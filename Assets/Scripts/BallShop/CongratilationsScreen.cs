@@ -31,7 +31,7 @@ public class CongratilationsScreen : MonoBehaviour
         //rect.position = newSize;
         button.transform.position = new Vector3(Screen.width/2, Screen.height*0.54f, 0);
         rect.sizeDelta = newSize/2;
-        button.transform.Find("NameText").GetComponent<Text>().color = Color.black;
+        button.transform.Find("NameText").gameObject.GetComponent<Text>().color = Color.black;
         
     }
 

@@ -16,7 +16,7 @@ public class XMLParser {
                                             ScenesParameters.LevelsDirectory +
                                             '/' + ScenesParameters.Section +
                                              '/' + filename);
-        
+        if (textAsset == null) return null;
         System.IO.StringReader stringReader = new System.IO.StringReader(textAsset.text);
         System.Xml.XmlReader reader = System.Xml.XmlReader.Create(stringReader);
 
@@ -25,14 +25,19 @@ public class XMLParser {
 
     public void makeLevel(object level)
     {
+        makeLevel(ScenesParameters.LevelsNumber);
+    }
+
+    public void makeLevel(object level, int number)
+    {
         var serializationFile = Path.Combine(Directory.GetCurrentDirectory(),
-                                            "Assets"
-                                            + Path.DirectorySeparatorChar +
-                                            "Resources" + Path.DirectorySeparatorChar +
-                                            ScenesParameters.LevelsDirectory + Path.DirectorySeparatorChar 
-                                            + ScenesParameters.Section + 
-                                            Path.DirectorySeparatorChar + ScenesParameters.LevelName 
-                                            + ScenesParameters.LevelsNumber + ".xml");
+            "Assets"
+            + Path.DirectorySeparatorChar +
+            "Resources" + Path.DirectorySeparatorChar +
+            ScenesParameters.LevelsDirectory + Path.DirectorySeparatorChar
+            + ScenesParameters.Section +
+            Path.DirectorySeparatorChar + ScenesParameters.LevelName
+            + number + ".xml");
 
         using (var writer = XmlWriter.Create(serializationFile))
         {
@@ -42,7 +47,14 @@ public class XMLParser {
 
     public void makeLevelFromCurrentState()
     {
-        var balls = GameObject.FindGameObjectsWithTag("Ball");
+        makeLevelFromCurrentState(ScenesParameters.LevelsNumber);
+    }
+
+    public void makeLevelFromCurrentState(int number)
+    {
+        if (number > ScenesParameters.LevelsNumber) return;
+
+        var balls = GameObject.FindGameObjectsWithTag("BallStart");
 
 		var baskets = GameObject.FindGameObjectsWithTag("Basket");
 
@@ -72,26 +84,32 @@ public class XMLParser {
 
         if (balls.Length > 0 && baskets.Length > 0)
         {
-            ++ScenesParameters.LevelsNumber;
-
             FullLevel level = new FullLevel(balls,baskets,triangleObsticles, stars, inputFieldCo.text, inputFieldDefCo.text, hintString);
-            makeLevel(level);
+            makeLevel(level, number);
 
-            var configPass = Path.Combine(Directory.GetCurrentDirectory(),
-                                            "Assets" + Path.DirectorySeparatorChar +
-                                            "Resources"
-                                            + Path.DirectorySeparatorChar +
-                                            ScenesParameters.LevelsDirectory 
-                                            + Path.DirectorySeparatorChar
-                                            + ScenesParameters.Section +
-                                            Path.DirectorySeparatorChar + "config.txt");
+            if (number == ScenesParameters.LevelsNumber)
+            {
 
-            FileStream fcreate = File.Open(configPass, FileMode.Create);
-            var stream = new StreamWriter(fcreate);
-            stream.WriteLine(ScenesParameters.LevelsNumber);
-            stream.Close();
-            fcreate.Close();
-            Debug.Log("Level " + ScenesParameters.LevelsNumber + " created successfully.\n");
+                var configPass = Path.Combine(Directory.GetCurrentDirectory(),
+                    "Assets" + Path.DirectorySeparatorChar +
+                    "Resources"
+                    + Path.DirectorySeparatorChar +
+                    ScenesParameters.LevelsDirectory
+                    + Path.DirectorySeparatorChar
+                    + ScenesParameters.Section +
+                    Path.DirectorySeparatorChar + "config.txt");
+
+
+                ++ScenesParameters.LevelsNumber;
+                ++number;
+
+                FileStream fcreate = File.Open(configPass, FileMode.Create);
+                var stream = new StreamWriter(fcreate);
+                stream.WriteLine(number);
+                stream.Close();
+                fcreate.Close();
+            }
+            Debug.Log("Level " + number + " created successfully.\n");
         } else
         {
             Debug.Log("Ball and Basket are required");
