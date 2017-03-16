@@ -29,9 +29,10 @@ public class CongratilationsScreen : MonoBehaviour
         print("newsize " + newSize);
         var rect = button.GetComponent<RectTransform>();
         //rect.position = newSize;
-        button.transform.position = new Vector3(Screen.width/2, Screen.height*0.54f, 0);
+        button.transform.position = new Vector3(Screen.width/2, Screen.height*0.58f, 0);
         rect.sizeDelta = newSize/2;
-        button.transform.Find("NameText").gameObject.GetComponent<Text>().color = Color.black;
+        button.transform.localScale = Vector3.one;
+        button.transform.Find("BallShopItem").Find("NameText").gameObject.GetComponent<Text>().color = Color.black;
         
     }
 

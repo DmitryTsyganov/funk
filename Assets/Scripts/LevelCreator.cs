@@ -43,6 +43,8 @@ public class LevelCreator : MonoBehaviour {
 
         var inputFieldGo = GameObject.Find("InputField");
         inputFieldCo = inputFieldGo.GetComponent<InputField>();
+        var graphDrawer = GameObject.Find("Bounds").GetComponent<DrawGraph>();
+        inputFieldCo.onEndEdit.AddListener(delegate(string _) { graphDrawer.GetText(); });
 
         #if UNITY_EDITOR
         if (!ScenesParameters.Devmode)
