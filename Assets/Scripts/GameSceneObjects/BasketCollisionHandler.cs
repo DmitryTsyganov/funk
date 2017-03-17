@@ -41,6 +41,7 @@ public class BasketCollisionHandler : MonoBehaviour
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))
                 {
                     Saver.completeSection(ScenesParameters.Section);
+                    CompletedScripts.ShowRateTheGameScreen = true;
                 }
 
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && starsCount == -1)

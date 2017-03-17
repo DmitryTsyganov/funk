@@ -2,7 +2,10 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class CompletedScripts : MonoBehaviour {
+public class CompletedScripts : MonoBehaviour
+{
+
+    public static bool ShowRateTheGameScreen = false;
 
     public GameObject RateTheGameScreen;
 
@@ -32,10 +35,11 @@ public class CompletedScripts : MonoBehaviour {
         }
         else if (ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel) { 
 
-            if (!Saver.HasRated())
+            if (ShowRateTheGameScreen && !Saver.HasRated())
             {
                 Instantiate(RateTheGameScreen);
                 Saver.SetRated();
+                ShowRateTheGameScreen = false;
             } else
             {
                 SceneManager.LoadScene(1);

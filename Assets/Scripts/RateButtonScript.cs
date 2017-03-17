@@ -39,7 +39,7 @@ public class RateButtonScript : MonoBehaviour {
 #if UNITY_EDITOR
                 Application.OpenURL("https://play.google.com/store/apps/details?id=com.NoCHgames.func");
 #elif UNITY_ANDROID
-                 Application.OpenURL("market://details?id=com.NoCHgames.func");
+                Application.OpenURL("market://details?id=com.NoCHgames.func");
                 Saver.SetRated();
                 
 #elif UNITY_IPHONE
