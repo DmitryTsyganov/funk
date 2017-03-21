@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 87916b03388747649a1834fadc318487
-timeCreated: 1447335704
+guid: 51f4bf17b0251a84a8d1d3fbe97f01b3
+timeCreated: 1489687010
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,9 +9,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: PF Kids Pro
+  fontName: beer money
   fontNames:
-  - PF Kids Pro
+  - beer money
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
