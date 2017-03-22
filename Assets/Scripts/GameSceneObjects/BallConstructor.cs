@@ -15,8 +15,10 @@ public class BallConstructor : MonoBehaviour {
         foreach (var addon in BallParametrs.Addons)
         {
             var addonInstance = Instantiate(addon.Value);
+            addonInstance.transform.position =
+                addonInstance.transform.position / addonInstance.transform.localScale.x * gameObject.transform.localScale.x;
             addonInstance.transform.parent = gameObject.transform;
-            addonInstance.transform.localScale = gameObject.transform.localScale;
+            addonInstance.transform.localScale = Vector3.one;
             addonInstance.transform.position = gameObject.transform.position + addonInstance.transform.position;
         }
     }
