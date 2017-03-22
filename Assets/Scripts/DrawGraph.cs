@@ -202,10 +202,11 @@ public class DrawGraph : MonoBehaviour
                                 .Replace("</color>", string.Empty).Replace(" ", string.Empty);
 
                 //rawExp = Regex.Replace(rawExp, @"(?<=\/)[\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.+?\))", "($0)");
-
                 //49 steps faster WOW WOW
                 rawExp = Regex.Replace(rawExp, @"([\/\*])([\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.+?\)))", "$1($2)");
+
                 rawExp = Regex.Replace(rawExp, @"(\d(?=[ascx\(])|[x\)](?=\d))", "$0*");
+                rawExp = Regex.Replace(rawExp, @"(?<![0-9])0[0-9]+", "0");
 
                 Expression exp = parser.EvaluateExpression(rawExp);
                 ExpressionDelegate fun = exp.ToDelegate("x");
