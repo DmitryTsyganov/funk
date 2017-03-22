@@ -1,12 +1,15 @@
 # =============== #
 # Levels	  #
 # =============== #
-
+Assets/Resources/Levels
 # ==== #
 # APK  #
 # ==== #
-APK
-Assets/Resources/Levels
+*.apk
+# ====== #
+# Rider  #
+# ====== #
+.idea/
 # =============== #
 # Unity generated #
 # =============== #
