@@ -18,7 +18,7 @@ public class levelElement : MonoBehaviour {
 	public void SetLevelNumber(){
 		if(Saver.isLevelPlayable (Index)){
 		    ScenesParameters.CurrentLevel = Index;
-			SceneManager.LoadScene(3);
+			//SceneManager.LoadScene(3);
 		}
 	}
 	public void SetLevelIndex(int index)
