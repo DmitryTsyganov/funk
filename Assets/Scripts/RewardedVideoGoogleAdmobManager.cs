@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using UnityEngine;
 using System.Collections;
 using System.Globalization;
@@ -109,10 +109,10 @@ public class RewardedVideoGoogleAdmobManager : MonoBehaviour
 
     public void HandleRewardBasedVideoRewarded(object sender, Reward args)
     {
-        /*hintText.text = ScenesParameters.trueFunction;
-        hintWindow.SetActive(true);
-        Saver.saveHint();
-        ScoreStartText.text = Shop.StarScore.ToString();*/
+//        hintText.text = ScenesParameters.trueFunction;
+//        hintWindow.SetActive(true);
+//        Saver.saveHint();
+//        ScoreStartText.text = Shop.StarScore.ToString();
 
         string type = args.Type;
         double amount = args.Amount;
@@ -126,4 +126,4 @@ public class RewardedVideoGoogleAdmobManager : MonoBehaviour
     }
 
     #endregion
-}
+}*/

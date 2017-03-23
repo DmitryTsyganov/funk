@@ -4,7 +4,6 @@ using System.Collections;
 using System.Globalization;
 using UnityEngine.UI;
 using System.IO;
-using GoogleMobileAds.Api;
 
 public class StarScoreText : MonoBehaviour {
 
