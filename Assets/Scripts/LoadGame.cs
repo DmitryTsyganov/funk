@@ -47,15 +47,18 @@ public class LoadGame : MonoBehaviour {
 
     private void ChangeTrackIfNecessary(int currentLevel, int nextLevel)
     {
+        var player = AudioPlayerStatic.GetInstance();
+        if (player == null) return;
+
         if (currentLevel == GameIndex && nextLevel != GameIndex)
         {
-            AudioPlayerStatic.GetInstance().PlayMenuTracks();
+            player.PlayMenuTracks();
             print("Changing music to Menu");
         }
 
         if (currentLevel != GameIndex && nextLevel == GameIndex)
         {
-            AudioPlayerStatic.GetInstance().PlayGameTracks();
+            player.PlayGameTracks();
             print("Changing music to Game");
         }
     }
