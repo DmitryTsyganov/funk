@@ -34,8 +34,9 @@ public class BasketCollisionHandler : MonoBehaviour
             level.hitBasket(gameObject.transform.parent.gameObject);
             var starsCount = level.getHitStarsCount();
 
-            if (level.IsCompleted())
+            if (level.IsCompleted() && level.IsActive())
             {
+                level.Deactivate();
                 CompletedScreen.getInstanse().SetActive(true);
                
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))

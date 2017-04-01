@@ -18,7 +18,7 @@ public class CompletedScripts : MonoBehaviour
     public void replay()
     {
         CompletedScreen.getInstanse().SetActive(false);
-        SceneManager.LoadScene(3);
+        //SceneManager.LoadScene(3);
     }
 
     public void continueGame()

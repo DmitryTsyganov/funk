@@ -23,6 +23,7 @@ public class LevelCreator : MonoBehaviour {
     private GameObject[] ballClones;
     private GameObject[] basketClones;
     private bool[] wasHit;
+    private bool active = true;
     private int basketsHitsLeft;
     private GameObject[] brickClones;
     private GameObject[] starClones;
@@ -239,6 +240,8 @@ public class LevelCreator : MonoBehaviour {
 
     public void resetLevelObjects()
     {
+        active = true;
+
         resetStars();
 
         #if UNITY_EDITOR
@@ -254,6 +257,16 @@ public class LevelCreator : MonoBehaviour {
         #if UNITY_EDITOR
         }
         #endif
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+    }
+
+    public bool IsActive()
+    {
+        return active;
     }
 
     public void resetStars()

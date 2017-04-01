@@ -20,9 +20,9 @@ public class CompletedScreen : MonoBehaviour {
 
     public static void showStars(int starCount)
     {
-        deactivateStarIfDidntGet("StarBigImage", 3, starCount);
-        deactivateStarIfDidntGet("StarMiddleImage", 2, starCount);
-        deactivateStarIfDidntGet("StarLittleImage", 1, starCount);
+        showStarIfDidGet("StarBigImage", 3, starCount);
+        showStarIfDidGet("StarMiddleImage", 2, starCount);
+        showStarIfDidGet("StarLittleImage", 1, starCount);
     }
 
     public static void showCollectedStarsQuantity(int award)
@@ -35,8 +35,17 @@ public class CompletedScreen : MonoBehaviour {
                             "+ " + award + " " + LanguageManager.getLanguage().stars;
     }
 
-    private static void deactivateStarIfDidntGet(string name, int number, int starCount)
+    private static void showStarIfDidGet(string name, int number, int starCount)
     {
-        if (starCount < number) GameObject.Find(name).GetComponent<Image>().color = Color.black;
+        var starImage = GameObject.Find(name).GetComponent<Image>();
+        if (starCount < number)
+        {
+            starImage.color = Color.black;
+        }
+        else
+        {
+            starImage.color =Color.white;
+        }
+
     }
 }
