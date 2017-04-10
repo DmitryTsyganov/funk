@@ -40,7 +40,7 @@ public class SetUpLevels : MonoBehaviour {
 
     private void Update()
     {
-        print($" {LevelScrollRect.verticalNormalizedPosition}");
+        
     }
 
     void CreateLevelElement(int index){
