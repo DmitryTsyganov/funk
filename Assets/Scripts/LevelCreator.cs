@@ -191,7 +191,12 @@ public class LevelCreator : MonoBehaviour {
         inputVerifyer.setReqiredFunctions(args);
         inputVerifyer.setDefaultFunction(defaultFunk);
 
+#if UNITY_IOS
+        inputFieldCo.keyboardType = TouchScreenKeyboardType.NumbersAndPunctuation;
+#else
         inputFieldCo.keyboardType = TouchScreenKeyboardType.PhonePad;
+#endif
+
         //inputFieldCo.text = "<color=red>" + level.Funk + "</color>";
 
         //inputFieldCo.text = "<size=30><color=red>" + level.Funk + "</color></size>";

@@ -40,7 +40,7 @@ public class SetUpLevels : MonoBehaviour {
 
     private void Update()
     {
-        
+
     }
 
     void CreateLevelElement(int index){

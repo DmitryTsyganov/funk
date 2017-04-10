@@ -42,8 +42,9 @@ public class RateButtonScript : MonoBehaviour {
                 Application.OpenURL("market://details?id=com.NoCHgames.func");
                 Saver.SetRated();
                 
-#elif UNITY_IPHONE
-                //Application.OpenURL("");
+#elif UNITY_IOS
+                Application.OpenURL("itms-apps://itunes.apple.com/us/genre/ios-games-puzzle/");
+                Saver.SetRated();
 #endif
             }
             else
