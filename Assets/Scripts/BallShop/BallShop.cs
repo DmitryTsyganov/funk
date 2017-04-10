@@ -77,11 +77,6 @@ public class BallShop : MonoBehaviour
         handler.basicShopItemStart();
         handler.Name = item.obj.name;
 
-        print(LanguageManager.getLanguageDynamic());
-        foreach (var obj in LanguageManager.getLanguageDynamic().list)
-        {
-            print(obj.keys);
-        }
         handler.ObjNameText.text = LanguageManager.getLanguageDynamic()[item.obj.name].str;
         return buttonWrapper;
     }
