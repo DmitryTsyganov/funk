@@ -65,6 +65,7 @@ public class Language
     public string position_2;
     public string name_3;
     public string position_3;
+    public string info;
 
     //rate game
     public string yeah;

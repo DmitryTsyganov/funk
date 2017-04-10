@@ -12,6 +12,7 @@ public class OptionsSetUp : MonoBehaviour
     public GameObject Dev1PositionText;
     public GameObject Dev2PositionText;
     public GameObject Dev3PositionText;
+    public GameObject InfoText;
 
     // Use this for initialization
     void Start () {
@@ -29,5 +30,6 @@ public class OptionsSetUp : MonoBehaviour
         LanguageManager.setText(Dev1PositionText, LanguageManager.getLanguage().position_1);
         LanguageManager.setText(Dev2PositionText, LanguageManager.getLanguage().position_2);
         LanguageManager.setText(Dev3PositionText, LanguageManager.getLanguage().position_3);
+        LanguageManager.setText(InfoText, LanguageManager.getLanguage().info);
     }
 }
