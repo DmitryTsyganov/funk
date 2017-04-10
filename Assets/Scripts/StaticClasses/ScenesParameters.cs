@@ -57,6 +57,19 @@ public static class ScenesParameters {
         }
     }
 
+    private static string languagesDynamicDirectory = "ShopTranslation";
+    public static string LanguagesDynamicDirectory
+    {
+        get
+        {
+            return languagesDynamicDirectory;
+        }
+        set
+        {
+            languagesDynamicDirectory = value;
+        }
+    }
+
     private static int currentLevel;
     public static int CurrentLevel
     {

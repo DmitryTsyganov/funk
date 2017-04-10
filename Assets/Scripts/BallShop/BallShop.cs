@@ -35,6 +35,7 @@ public class BallShop : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        setLanguage();
         BallParametrs.start();
         updateStarsCountText();
 
@@ -59,7 +60,6 @@ public class BallShop : MonoBehaviour
 
         ActivateAddons();
         ActivateBalls();
-        setLanguage();
     }
 
     private GameObject createButton(Item item)
@@ -76,7 +76,13 @@ public class BallShop : MonoBehaviour
         handler.price = item.price;
         handler.basicShopItemStart();
         handler.Name = item.obj.name;
-        handler.ObjNameText.text = item.objName;
+
+        print(LanguageManager.getLanguageDynamic());
+        foreach (var obj in LanguageManager.getLanguageDynamic().list)
+        {
+            print(obj.keys);
+        }
+        handler.ObjNameText.text = LanguageManager.getLanguageDynamic()[item.obj.name].str;
         return buttonWrapper;
     }
 
@@ -220,7 +226,6 @@ public class BallShop : MonoBehaviour
     [Serializable]
     public class Item
     {
-        public string objName;
         public GameObject obj;
         public int price;
     }

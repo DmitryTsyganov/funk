@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LanguageManager
 {
     private static Language language = null;
+    private static JSONObject languageDynamic = null;
 
     static BinaryFormatter formatter = new BinaryFormatter();
 
@@ -33,8 +34,15 @@ public class LanguageManager
         return language;
     }
 
+    public static JSONObject getLanguageDynamic()
+    {
+        return languageDynamic;
+    }
+
     public static void setLanguage(string languageName)
     {
+        languageDynamic = new JSONObject(Resources.Load<TextAsset>(
+            ScenesParameters.LanguagesDynamicDirectory + '/' + languageName).text);
         var text = Resources.Load(ScenesParameters.LanguagesDirectory + '/' + languageName) as TextAsset;
         Stream s = new MemoryStream(text.bytes);
         BinaryReader br = new BinaryReader(s);
