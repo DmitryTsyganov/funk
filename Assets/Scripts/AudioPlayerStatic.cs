@@ -104,18 +104,21 @@ public class AudioPlayerStatic : MonoBehaviour
     {
         Stop();
 
+        if (_tracks.Length == 0)
+            return;
+
         _isOn = true;
 
         if (index == -1)
             index = Mathf.RoundToInt((_tracks.Length - 1) * Random.value);
+
+        print("index is " + index);
 
         _currentTrack = _tracks[index];
         _currentTrack.Play();
         int nextIndex = index + 1 != _tracks.Length ? index + 1 : 0;
 
         int trackLength = Mathf.RoundToInt(_currentTrack.clip.length);
-
-        print("Track length " + trackLength);
 
         _nextTrackSwither = StartCoroutine(PlayNextTrack(nextIndex, trackLength));
     }
