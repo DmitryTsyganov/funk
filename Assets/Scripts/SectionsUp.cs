@@ -21,11 +21,10 @@ public class SectionsUp : MonoBehaviour
     public GameObject SpecialText;
     public GameObject BottomMenuButtonText;
 
-    private LoadGame loadGame;
+    public LoadGame loadGame;
 
     void Start()
     {
-        loadGame = new LoadGame();
         setLanguage();
         ActivateButtons();
     }
