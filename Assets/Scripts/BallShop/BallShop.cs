@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,14 +34,23 @@ public class BallShop : MonoBehaviour
     private static bool doCountBallsToBuy = false;
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         setLanguage();
         BallParametrs.start();
-        updateStarsCountText();
 
         ballButtonHandlers = new BallShopItemHandler[ballsToSell.Count];
         ballButtons = new GameObject[ballsToSell.Count];
+
+        Comparison<Item> comparison = delegate(Item item, Item item1)
+        {
+            if (item.price == item1.price)
+                return 0;
+            return item.price < item1.price ? -1 : 1;
+        };
+
+        ballsToSell.Sort(comparison);
+        additionalFeatures.Sort(comparison);
 
         int i = 0;
         foreach (var item in ballsToSell)
@@ -60,6 +70,17 @@ public class BallShop : MonoBehaviour
 
         ActivateAddons();
         ActivateBalls();
+    }
+
+    private void OnEnable()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            starsCountText = GameObject.Find("StarCountText").GetComponent<Text>();
+            BackText = GameObject.Find("BackButtonText");
+            updateStarsCountText();
+            setLanguage();
+        }
     }
 
     private GameObject createButton(Item item)
@@ -102,7 +123,7 @@ public class BallShop : MonoBehaviour
         newHandler.basicShopItemStart();
         Destroy(oldhandler);
     }
-	
+
 	// Update is called once per frame
 	void Update () {
 	    if (doCountBallsToBuy)
