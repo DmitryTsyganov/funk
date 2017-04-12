@@ -29,17 +29,20 @@ public class BallShop : MonoBehaviour
     public int BallsToBuy;
 
     private BallShopItemHandler[] ballButtonHandlers;
+    private BallShopItemHandler[] effectButtonHandlers;
     private GameObject[] ballButtons;
+
+    private bool isLanguageSet = false;
 
     private static bool doCountBallsToBuy = false;
 
     // Use this for initialization
     void Awake ()
     {
-        setLanguage();
         BallParametrs.start();
 
         ballButtonHandlers = new BallShopItemHandler[ballsToSell.Count];
+        effectButtonHandlers = new BallShopItemHandler[additionalFeatures.Count];
         ballButtons = new GameObject[ballsToSell.Count];
 
         Comparison<Item> comparison = delegate(Item item, Item item1)
@@ -55,16 +58,17 @@ public class BallShop : MonoBehaviour
         int i = 0;
         foreach (var item in ballsToSell)
         {
-            var button = createButton(item);
+            var button = createButton(item, i, ballButtonHandlers);
             ballButtons[i] = button;
-            ballButtonHandlers[i] = button.transform.Find("BallShopItem").gameObject.GetComponent<BallShopItemHandler>();
             ++i;
         }
 
+        i = 0;
         foreach (var item in additionalFeatures)
         {
-            var button = createButton(item);
+            var button = createButton(item, i, effectButtonHandlers);
             transformButton(button);
+            ++i;
         }
         BallsToBuy = countBallsToBuy();
 
@@ -79,15 +83,20 @@ public class BallShop : MonoBehaviour
             starsCountText = GameObject.Find("StarCountText").GetComponent<Text>();
             BackText = GameObject.Find("BackButtonText");
             updateStarsCountText();
-            setLanguage();
+            if (!isLanguageSet && LanguageManager.getLanguage() != null)
+            {
+                setLanguage();
+                isLanguageSet = true;
+                print("Shop language is set");
+            }
         }
     }
 
-    private GameObject createButton(Item item)
+    private GameObject createButton(Item item, int number, BallShopItemHandler[] handlerArray)
     {
         var buttonWrapper = Instantiate(ballShopItemPrefab);
         var button = buttonWrapper.transform.Find("BallShopItem").gameObject;
-        buttonWrapper.transform.parent = ContentBalls.transform;
+        buttonWrapper.transform.SetParent(ContentBalls.transform);
         buttonWrapper.transform.localScale = Vector3.one;
         button.GetComponent<Animator>().runtimeAnimatorController =
             item.obj.GetComponent<Animator>().runtimeAnimatorController;
@@ -97,15 +106,15 @@ public class BallShop : MonoBehaviour
         handler.price = item.price;
         handler.basicShopItemStart();
         handler.Name = item.obj.name;
+        handlerArray[number] = handler;
 
-        handler.ObjNameText.text = LanguageManager.getLanguageDynamic()[item.obj.name].str;
         return buttonWrapper;
     }
 
     private void transformButton(GameObject buttonWrapper)
     {
         var button = buttonWrapper.transform.Find("BallShopItem").gameObject;
-        buttonWrapper.transform.parent = ContentAddons.transform;
+        buttonWrapper.transform.SetParent(ContentAddons.transform);
         var oldhandler = button.GetComponent<BallShopItemHandler>();
         var newHandler = button.AddComponent<AddonShopItemHandler>();
 
@@ -237,6 +246,18 @@ public class BallShop : MonoBehaviour
         LanguageManager.setText(AddonsButtonText, LanguageManager.getLanguage().addons);
         LanguageManager.setText(AddonsHelpText, LanguageManager.getLanguage().addons_help);
         LanguageManager.setText(BackText, LanguageManager.getLanguage().back);
+
+        for (int i = 0; i < ballsToSell.Count; ++i)
+        {
+            ballButtonHandlers[i].ObjNameText.text =
+                LanguageManager.getLanguageDynamic()[ballsToSell[i].obj.name].str;
+        }
+
+        for (int i = 0; i < additionalFeatures.Count; ++i)
+        {
+            effectButtonHandlers[i].ObjNameText.text =
+                LanguageManager.getLanguageDynamic()[additionalFeatures[i].obj.name].str;
+        }
     }
     
     [Serializable]

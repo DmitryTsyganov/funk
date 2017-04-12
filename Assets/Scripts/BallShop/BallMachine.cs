@@ -16,6 +16,16 @@ public class BallMachine : MonoBehaviour {
     private bool isActive = false;
 
     private const string ActiveString = "Active";
+    private bool isLanguageSet = false;
+
+    private void OnEnable()
+    {
+        if (!isLanguageSet && LanguageManager.getLanguage() != null)
+        {
+            setLanguage();
+            isLanguageSet = true;
+        }
+    }
 
     void Awake()
     {
@@ -27,7 +37,6 @@ public class BallMachine : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         InfoText.SetActive(true);
-	    setLanguage();
 	}
 	
 	// Update is called once per frame

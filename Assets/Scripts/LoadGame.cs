@@ -23,13 +23,13 @@ public class LoadGame : MonoBehaviour {
 
 	    ChangeTrackIfNecessary(currentLevel, level);
 
-	    print("level to load :" + level);
-	    print("current level " + currentLevel);
+	    //print("level to load :" + level);
+	    //print("current level " + currentLevel);
 		if(loadingImage) loadingImage.SetActive(true);
 
         if (level != currentLevel)
             ScenesParameters.PreviousSceneIndex = currentLevel;
-	    print("previous scene index " + ScenesParameters.PreviousSceneIndex);
+	    //print("previous scene index " + ScenesParameters.PreviousSceneIndex);
 	    SceneManager.LoadScene(level);
     }
 	public void Continue(){

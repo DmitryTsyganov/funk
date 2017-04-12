@@ -17,30 +17,28 @@ public class AudioPlayerStatic : MonoBehaviour
     private AudioSource _currentTrack;
     private bool _isOn;
 
+    private bool _tryToStartPlaying = false;
+
     private static AudioPlayerStatic _instance;
 
-	// Use this for initialization
-	void Start () {
-        
-
-    }
-
-    void Awake()
+    private void Start()
     {
         if (_instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
-        PlayMenuTracks();
+
+        StartTracks();
+
         //PlayMainTheme();
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    TryToStartPlaying();
 	}
 
     public static AudioPlayerStatic GetInstance()
@@ -82,6 +80,26 @@ public class AudioPlayerStatic : MonoBehaviour
         _isOn = false;
     }
 
+    private void StartTracks()
+    {
+        bool allLoaded = true;
+        foreach (var track in MenuTracks)
+        {
+            allLoaded &= track.clip.loadState == AudioDataLoadState.Loaded;
+        }
+        if (allLoaded)
+        {
+            print("All tracks loaded, choosing random one");
+            PlayMenuTracks();
+        }
+        else
+        {
+            print("Not all tracks are loaded, waiting for the first one");
+            _tracks = MenuTracks;
+            _tryToStartPlaying = true;
+        }
+    }
+
     private void Play(int index  = -1)
     {
         Stop();
@@ -100,6 +118,24 @@ public class AudioPlayerStatic : MonoBehaviour
         print("Track length " + trackLength);
 
         _nextTrackSwither = StartCoroutine(PlayNextTrack(nextIndex, trackLength));
+    }
+
+    private void TryToStartPlaying()
+    {
+        if (_tryToStartPlaying)
+        {
+
+            for (int i = 0; i < _tracks.Length; ++i)
+            {
+                if (_tracks[i].clip.loadState == AudioDataLoadState.Loaded)
+                {
+                    print($"Track number {i} is loaded first");
+                    _tryToStartPlaying = false;
+                    Play(i);
+                    break;
+                }
+            }
+        }
     }
 
     private IEnumerator PlayNextTrack(int nextTrack, int seconds)

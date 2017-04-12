@@ -5,13 +5,23 @@ using UnityEngine;
 public class BuyStarsHandler : MonoBehaviour
 {
     public GameObject BuyStarsText;
+    private bool isLanguageSet = false;
 
 	// Use this for initialization
 	void Start () {
-		setLanguage();
+
 	}
-	
-	// Update is called once per frame
+
+    private void OnEnable()
+    {
+        if (!isLanguageSet && LanguageManager.getLanguage() != null)
+        {
+            setLanguage();
+            isLanguageSet = true;
+        }
+    }
+
+    // Update is called once per frame
 	void Update () {
 		
 	}

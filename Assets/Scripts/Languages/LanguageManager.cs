@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,13 +59,9 @@ public class LanguageManager
 
         string savedLanguage = Saver.getPreferedLanguage();
 
-        if (savedLanguage != null)
+        if (!String.IsNullOrEmpty(savedLanguage))
         {
             setLanguage(savedLanguage);
-        }
-        else
-        {
-            setLanguage("Eng");
         }
     }
 }
