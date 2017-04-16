@@ -35,7 +35,8 @@ public class InputVerifyer : MonoBehaviour {
         {
             fakeInputFieldButton = fakeInputFieldButtonGO.GetComponent<Button>();
             fakeInputFieldButtonText = fakeInputFieldButton.GetComponentInChildren<Text>();
-            fakeInputFieldButtonText.text = mainInput.text.Replace(requiredFunctions[0], "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
+            fakeInputFieldButtonText.text = mainInput.text.Replace(requiredFunctions[0],
+                                    "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
         }
     }
 

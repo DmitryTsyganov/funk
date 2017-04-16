@@ -42,14 +42,17 @@ public class FullLevel {
         this.HintText = hint;
     }
 
-    public FullLevel(GameObject[] balls, GameObject[] baskets, GameObject[] obsticles, GameObject[] stars, string funk, string defFunk, string hint)
+    public FullLevel(GameObject[] balls, GameObject[] baskets, GameObject[] obsticles,
+                        GameObject[] stars, string funk, string defFunk, string hint)
     {
+        var offset = ScenesParameters.LevelOffsetY;
+
         this.balls = new Ball[balls.Length];
 
         for (int i = 0; i < balls.Length; ++i)
         {
             this.balls[i] = new Ball(balls[i].transform.position.x,
-                            balls[i].transform.position.y,
+                            balls[i].transform.position.y + offset,
                             balls[i].transform.localScale.x,
                             null);
         }
@@ -59,7 +62,7 @@ public class FullLevel {
         for (int i = 0; i < baskets.Length; ++i)
         {
             this.baskets[i] = new Basket(baskets[i].transform.position.x,
-                            baskets[i].transform.position.y,
+                            baskets[i].transform.position.y + offset,
                             baskets[i].transform.localScale.x,
                             baskets[i].transform.eulerAngles.z);
         }
@@ -71,7 +74,7 @@ public class FullLevel {
             for (int i = 0; i < stars.Length; i++)
             {
                 this.stars[i] = new Star(stars[i].transform.position.x,
-                            stars[i].transform.position.y,
+                            stars[i].transform.position.y + offset,
                             stars[i].transform.localScale.x,
                             stars[i].transform.eulerAngles.z);
             }
@@ -84,7 +87,7 @@ public class FullLevel {
             for (int i = 0; i < obsticles.Length; ++i)
             {
                 this.obsticleBricks[i] = new ObsticleBrick(obsticles[i].transform.position.x,
-                    obsticles[i].transform.position.y,
+                    obsticles[i].transform.position.y + offset,
                     obsticles[i].transform.localScale.x,
                     obsticles[i].transform.eulerAngles.z);
             }

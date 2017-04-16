@@ -5,6 +5,15 @@ public static class ScenesParameters {
 
     public static bool isValid { get; set; }
 
+    private static float levelOffsetY = 2.5f;
+    public static float LevelOffsetY
+    {
+        get
+        {
+            return levelOffsetY;
+        }
+    }
+
     private static bool devMode = true;
     public static bool Devmode
     {

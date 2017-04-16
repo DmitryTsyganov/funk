@@ -23,11 +23,14 @@ public class DrawGraph : MonoBehaviour
     private ExpressionParser.ExpressionParser parser;
     private Camera cam;
     private Transform DotPrefab;
-    private int mappingQuantity = 5;
-    private float mapLenght = 0.3f;
+    private const int mappingQuantity = 5;
+    private const float mapLenght = 0.3f;
+    private const float lineWidth = 0.06f;
 
     private Color lineColor = new Color(225, 1, 1);
     private Color mapColor = new Color(255f, 255f, 255f);
+
+    private float offsetY;
 
     List<BoxCollider2D> graphDots = new List<BoxCollider2D>();
     List<LineRenderer> lines = new List<LineRenderer>();
@@ -36,6 +39,8 @@ public class DrawGraph : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        offsetY = ScenesParameters.LevelOffsetY;
+        
         inputFieldGo = GameObject.Find("InputField");
         inputFieldCo = inputFieldGo.GetComponent<InputField>();
 
@@ -48,15 +53,18 @@ public class DrawGraph : MonoBehaviour
     {
         for (int i = -mappingQuantity; i <= mappingQuantity; ++i)
         {
+            if (i == 0)
+                continue;
+
             var line = createLine(MapMaterial);
-            line.SetPosition(0, new Vector2(i, -mapLenght / 2));
-            line.SetPosition(1, new Vector3(i, mapLenght / 2));
+            line.SetPosition(0, new Vector2(i, -mapLenght / 2 + offsetY));
+            line.SetPosition(1, new Vector3(i, mapLenght / 2 + offsetY));
             
             line.material.SetColor("_Color", mapColor);
 
             line = createLine(MapMaterial);
-            line.SetPosition(0, new Vector2(-mapLenght / 2, i));
-            line.SetPosition(1, new Vector3(mapLenght / 2, i));
+            line.SetPosition(0, new Vector2(-mapLenght / 2, i + offsetY));
+            line.SetPosition(1, new Vector3(mapLenght / 2, i + offsetY));
 
             line.material.SetColor("_Color", mapColor);
         }
@@ -67,7 +75,7 @@ public class DrawGraph : MonoBehaviour
         var line = new GameObject("Line").AddComponent<LineRenderer>();
         line.transform.SetParent(Lines.transform);
 
-        line.SetWidth(0.06f, 0.06f);
+        line.SetWidth(lineWidth, lineWidth);
        
         line.material = material;
 
@@ -124,7 +132,7 @@ public class DrawGraph : MonoBehaviour
 
         float length = Mathf.Abs(Mathf.Sqrt(Mathf.Pow((float) (x - prevX), 2) + Mathf.Pow((float) (y - prevY), 2)));
 
-        bc.size = new Vector2(0.06f, length);
+        bc.size = new Vector2(lineWidth, length);
 
         graphDots.Add(bc);
     }
@@ -142,42 +150,48 @@ public class DrawGraph : MonoBehaviour
 
         if (fun != null)
         {
-            float firstX = -5.65f;
-            float lastX = 5.65f;
+            const float halfPlotInterval = 5.65f;
+            const float step = 0.005f;
+            const int stepsTotal = 260;
+            const int halfPlotSize = 6;
 
-            double firstY = fun(firstX);
+            float maxY = halfPlotSize + offsetY;
+            float minY = -halfPlotSize + offsetY;
 
-            while ((firstY > 6 || firstY < -6) && firstX < 0)
+            float firstX = -halfPlotInterval;
+            float lastX = halfPlotInterval;
+
+            double firstY = fun(firstX) + offsetY;
+
+            while ((firstY > maxY || firstY < minY) && firstX < 0)
             {
-                firstX += 0.005f;
-                firstY = fun(firstX);
+                firstX += step;
+                firstY = fun(firstX) + offsetY;
             }
 
-            double lastY = fun(lastX);
+            double lastY = fun(lastX) + offsetY;
 
-            while ((lastY > 6 || lastY < -6) && lastX > 0)
+            while ((lastY > maxY || lastY < minY) && lastX > 0)
             {
-                lastX -= 0.005f;
-                lastY = fun(lastX);
+                lastX -= step;
+                lastY = fun(lastX) + offsetY;
             }
 
             double PrevX = firstX;
-            double PrevY = fun(PrevX);
+            double PrevY = fun(PrevX) + offsetY;
             double x;
             double y;
 
             //print("first x " + firstX);
             //print("last x " + lastX);
 
-            int stepsTotal = 260;
-
             double stepLength = (-firstX + lastX) / stepsTotal;
 
             for (double i = 0; i <= stepsTotal; ++i)
             {
                 x = firstX + i * stepLength;
-                y = fun(x);
-                if (y < 6 && y > -6 && PrevY < 6 && PrevY > -6)
+                y = fun(x) + offsetY;
+                if (y < maxY && y > minY && PrevY < maxY && PrevY > minY)
                 {
                     buildSegment(x, y, PrevX, PrevY);
                 }

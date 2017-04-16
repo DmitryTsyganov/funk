@@ -12,6 +12,7 @@ public class LevelCreator : MonoBehaviour {
     public GameObject StarPrefab;
     public GameObject Tips;
     public GameObject SectionsMenu;
+    public GameObject LevelObjects;
 
     public InputVerifyer inputVerifyer;
     #if UNITY_EDITOR
@@ -67,6 +68,10 @@ public class LevelCreator : MonoBehaviour {
             }
         }
         #endif
+
+        var levelPos = LevelObjects.transform.position;
+        levelPos.y += ScenesParameters.LevelOffsetY;
+        LevelObjects.transform.position = levelPos;
     }
 
     private void setLanguage()
@@ -99,7 +104,6 @@ public class LevelCreator : MonoBehaviour {
 
             for (int i = 0; i < level.balls.Length; ++i)
             {
-
                 var ballPosition = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
                 ballClones[i] = Instantiate(BallPrefab, ballPosition, Quaternion.Euler(0, 0, 0));
 
@@ -112,12 +116,8 @@ public class LevelCreator : MonoBehaviour {
                 GameObject ballStart = Instantiate(BallStartPrefab, startPosition, Quaternion.Euler(0, 0, 0));
                 ballStart.transform.localScale = ballScale;
 
-                //фуфло
-                /*ballClones[i].GetComponent<SpriteRenderer>().sprite = ballStart.GetComponent<SpriteRenderer>().sprite;
-                ballClones[i].GetComponent<Animator>().runtimeAnimatorController =
-                ballStart.GetComponent<Animator>().runtimeAnimatorController;*/
-                //фуфло
-
+                ballStart.transform.SetParent(LevelObjects.transform);
+                ballClones[i].transform.SetParent(LevelObjects.transform);
             }
         }
 
@@ -132,10 +132,12 @@ public class LevelCreator : MonoBehaviour {
             {
                 var basketPosition = new Vector3(level.baskets[i].x, level.baskets[i].y, 0f);
 
-                basketClones[i] = (GameObject)Instantiate(BasketPrefab, basketPosition,
+                basketClones[i] = Instantiate(BasketPrefab, basketPosition,
                             Quaternion.AngleAxis(level.baskets[i].angle, Vector3.forward));
 
                 basketClones[i].transform.localScale = new Vector3(level.baskets[i].scale, level.baskets[i].scale, 1f);
+
+                basketClones[i].transform.SetParent(LevelObjects.transform);
             }
         }
 
@@ -148,10 +150,13 @@ public class LevelCreator : MonoBehaviour {
                 var brickPosition =
                 new Vector2(level.obsticleBricks[i].x, level.obsticleBricks[i].y);
 
-                brickClones[i] = (GameObject)Instantiate(BrickPrefab, brickPosition,
+                brickClones[i] = Instantiate(BrickPrefab, brickPosition,
                                 Quaternion.AngleAxis(level.obsticleBricks[i].angle, Vector3.forward));
 
-                brickClones[i].transform.localScale = new Vector3(level.obsticleBricks[i].scale, level.obsticleBricks[i].scale, 1f);
+                brickClones[i].transform.localScale =
+                    new Vector3(level.obsticleBricks[i].scale, level.obsticleBricks[i].scale, 1f);
+
+                brickClones[i].transform.SetParent(LevelObjects.transform);
             }
         }
 
@@ -168,6 +173,8 @@ public class LevelCreator : MonoBehaviour {
                                 Quaternion.AngleAxis(level.stars[i].angle, Vector3.forward));
 
                 starClones[i].transform.localScale = new Vector3(level.stars[i].scale, level.stars[i].scale, 1f);
+
+                starClones[i].transform.SetParent(LevelObjects.transform);
             }
         }
 
@@ -277,7 +284,8 @@ public class LevelCreator : MonoBehaviour {
             {
                 ballClones[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 ballClones[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
-                ballClones[i].GetComponent<Transform>().position = new Vector3(level.balls[i].x, level.balls[i].y, 0f);
+                ballClones[i].GetComponent<Transform>().position
+                    = new Vector3(level.balls[i].x, level.balls[i].y + ScenesParameters.LevelOffsetY, 0f);
             }
         }
     }
