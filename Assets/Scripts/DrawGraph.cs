@@ -9,6 +9,10 @@ public class DrawGraph : MonoBehaviour
 {
     public Material GraphMaterial;
     public Material MapMaterial;
+
+    public GameObject Colliders;
+    public GameObject Lines;
+
     private GameObject inputFieldGo;
     private GameObject setUp;
     private InputField inputFieldCo;
@@ -37,7 +41,7 @@ public class DrawGraph : MonoBehaviour
 
         parser = new ExpressionParser.ExpressionParser();
 
-       createMapping();
+        createMapping();
     }
 
     private void createMapping()
@@ -61,6 +65,7 @@ public class DrawGraph : MonoBehaviour
     private LineRenderer createLine(Material material)
     {
         var line = new GameObject("Line").AddComponent<LineRenderer>();
+        line.transform.SetParent(Lines.transform);
 
         line.SetWidth(0.06f, 0.06f);
        
@@ -100,6 +105,7 @@ public class DrawGraph : MonoBehaviour
         //Transform dot = (Transform)Instantiate(DotPrefab, newDotPosition, Quaternion.identity);
 
         var colliderKeeper = new GameObject("collider");
+        colliderKeeper.transform.SetParent(Colliders.transform);
 
         var line = createLine(GraphMaterial);
 
@@ -192,7 +198,7 @@ public class DrawGraph : MonoBehaviour
         lines.Clear();
     }
 
-    public void GetText()
+    public void Draw()
     {
         if (ScenesParameters.isValid) {
             try

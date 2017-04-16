@@ -9,14 +9,11 @@ public class LevelCreator : MonoBehaviour {
     public GameObject BallStartPrefab;
     public GameObject BasketPrefab;
     public GameObject BrickPrefab;
-    public GameObject ErrorText;
     public GameObject StarPrefab;
     public GameObject Tips;
     public GameObject SectionsMenu;
 
     public InputVerifyer inputVerifyer;
-	[SerializeField]
-	private GameObject tips;
     #if UNITY_EDITOR
     public GameObject devInterface;
     #endif
@@ -210,8 +207,6 @@ public class LevelCreator : MonoBehaviour {
 
         inputFieldCo.text = coloredText;
 
-        //inputFieldCo.onValueChange.AddListener(delegate { ValueChangeCheck(); });
-
         var button = GameObject.Find("RunButton");
         button.GetComponent<Button>().onClick.Invoke();
 
@@ -226,21 +221,6 @@ public class LevelCreator : MonoBehaviour {
 
         inputFieldCo.text = defaultFunk;
 
-    }
-
-    public void ValueChangeCheck()
-    {
-        int index = inputFieldCo.text.IndexOf(funk);
-
-        if (index == -1)
-        {
-            ScenesParameters.isValid = false;
-            ErrorText.SetActive(true);
-        } else
-        {
-            ScenesParameters.isValid = true;
-            ErrorText.SetActive(false);
-        }
     }
 
     public void resetLevelObjects()
