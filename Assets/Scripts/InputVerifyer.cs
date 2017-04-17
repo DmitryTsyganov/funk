@@ -5,11 +5,15 @@ using UnityEngine.EventSystems;
 using System.Text.RegularExpressions;
 
 [System.Serializable]
-public class InputVerifyer : MonoBehaviour {
+public class InputVerifyer : MonoBehaviour
+{
+    public Animator KeyboardAnimator;
+    public GameObject InvisibleButton;
 
-    private InputField mainInput;
-    private Button fakeInputFieldButton;
-    private Text fakeInputFieldButtonText;
+    public InputField mainInput;
+    public Button fakeInputFieldButton;
+    public Text fakeInputFieldButtonText;
+
     private string prevInput = null;
     private string[] requiredFunctions = {};
     private string[] allowedFunctions = { };
@@ -18,9 +22,6 @@ public class InputVerifyer : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        var mainInputGO = GameObject.Find("InputField");
-        mainInput = mainInputGO.GetComponent<InputField>();
-        var fakeInputFieldButtonGO = GameObject.Find("FakeInputFieldButton");
 
         if (ScenesParameters.Devmode)
         {
@@ -29,12 +30,10 @@ public class InputVerifyer : MonoBehaviour {
             fakeInputFieldImage.enabled = false;
             var fakeIputFieldImageGO = GameObject.Find("FakeInputFieldImage");
             fakeIputFieldImageGO.SetActive(false);
-            fakeInputFieldButtonGO.SetActive(false);
+            fakeInputFieldButton.gameObject.SetActive(false);
         }
         else
         {
-            fakeInputFieldButton = fakeInputFieldButtonGO.GetComponent<Button>();
-            fakeInputFieldButtonText = fakeInputFieldButton.GetComponentInChildren<Text>();
             fakeInputFieldButtonText.text = mainInput.text.Replace(requiredFunctions[0],
                                     "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
         }
@@ -54,8 +53,12 @@ public class InputVerifyer : MonoBehaviour {
 
     public void activeInputField()
     {
+        InvisibleButton.SetActive(true);
+        mainInput.transform.SetSiblingIndex(mainInput.transform.GetSiblingIndex() + 1);
+        FocusedInputField.IsSelected = true;
         EventSystem.current.SetSelectedGameObject(mainInput.gameObject, null);
         mainInput.OnPointerClick(new PointerEventData(EventSystem.current));
+        KeyboardAnimator.SetBool("Open", true);
     }
 
     private void correctCaretPosition(InputField input)

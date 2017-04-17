@@ -112,8 +112,6 @@ public class AudioPlayerStatic : MonoBehaviour
         if (index == -1)
             index = Mathf.RoundToInt((_tracks.Length - 1) * Random.value);
 
-        print("index is " + index);
-
         _currentTrack = _tracks[index];
         _currentTrack.Play();
         int nextIndex = index + 1 != _tracks.Length ? index + 1 : 0;

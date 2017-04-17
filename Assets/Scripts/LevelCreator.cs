@@ -14,6 +14,8 @@ public class LevelCreator : MonoBehaviour {
     public GameObject SectionsMenu;
     public GameObject LevelObjects;
 
+    public Animator KeyboardAnimator;
+
     public InputVerifyer inputVerifyer;
     #if UNITY_EDITOR
     public GameObject devInterface;
@@ -42,8 +44,12 @@ public class LevelCreator : MonoBehaviour {
 
         var inputFieldGo = GameObject.Find("InputField");
         inputFieldCo = inputFieldGo.GetComponent<InputField>();
-        var button = GameObject.Find("RunButton").GetComponent<Button>();
-        inputFieldCo.onEndEdit.AddListener(delegate(string _) { button.onClick.Invoke(); });
+        /*var button = GameObject.Find("RunButton").GetComponent<Button>();
+        inputFieldCo.onEndEdit.AddListener(delegate(string _)
+        {
+            button.onClick.Invoke();
+            //KeyboardAnimator.SetBool("Open", false);
+        });*/
 
         #if UNITY_EDITOR
         if (!ScenesParameters.Devmode)
@@ -216,6 +222,7 @@ public class LevelCreator : MonoBehaviour {
 
         var button = GameObject.Find("RunButton");
         button.GetComponent<Button>().onClick.Invoke();
+        button.SetActive(false);
 
 		ScenesParameters.trueFunction = level.HintText;
     }
