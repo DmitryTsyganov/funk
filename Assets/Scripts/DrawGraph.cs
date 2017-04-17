@@ -75,16 +75,17 @@ public class DrawGraph : MonoBehaviour
         var line = new GameObject("Line").AddComponent<LineRenderer>();
         line.transform.SetParent(Lines.transform);
 
-        line.SetWidth(lineWidth, lineWidth);
+        line.startWidth = line.endWidth = lineWidth;
        
         line.material = material;
 
         //line.material.SetColor("_Color", lineColor);
 
         line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        line.SetColors(lineColor, lineColor);
 
-        line.SetVertexCount(2);
+        line.startColor = line.endColor = lineColor;
+
+        line.numPositions =2;
 
         return line;
     }

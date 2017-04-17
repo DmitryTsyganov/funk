@@ -6,7 +6,7 @@ class Shop
 
     public const int levelAward = 3;
     public const int ballPrice = 50;
-    public const int hintPrice = 10;
+    public const int hintPrice = 30;
 
     public const int StarsUltimate = 1000000;
 

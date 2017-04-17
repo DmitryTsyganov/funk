@@ -25,8 +25,8 @@ public class CompletedScripts : MonoBehaviour
     {
         CompletedScreen.getInstanse().SetActive(false);
 
-        Debug.Log(ScenesParameters.CurrentLevel + 1);
-        Debug.Log(ScenesParameters.LevelsNumber);
+        //Debug.Log(ScenesParameters.CurrentLevel + 1);
+        //Debug.Log(ScenesParameters.LevelsNumber);
 
         if (ScenesParameters.LevelsNumber > ScenesParameters.CurrentLevel)
         {
