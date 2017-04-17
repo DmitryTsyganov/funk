@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,8 +22,16 @@ public class FocusedInputField : InputField
 
     protected override void OnDisable()
     {
-        base.OnDisable();
-        print("disabled");
+        try
+        {
+            base.OnDisable();
+            print("disabled");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
     }
 
     public override void OnDeselect(BaseEventData eventData)
@@ -31,5 +40,15 @@ public class FocusedInputField : InputField
         {
             base.OnDeselect(eventData);
         }
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
     }
 }
