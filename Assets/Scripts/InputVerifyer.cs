@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text.RegularExpressions;
@@ -8,11 +8,11 @@ using System.Text.RegularExpressions;
 public class InputVerifyer : MonoBehaviour
 {
     public Animator KeyboardAnimator;
-    public GameObject InvisibleButton;
 
-    public InputField mainInput;
+    public InputFieldHandler mainInput;
     public Button fakeInputFieldButton;
     public Text fakeInputFieldButtonText;
+    public GameObject InvisibleButton;
 
     private string prevInput = null;
     private string[] requiredFunctions = {};
@@ -34,7 +34,7 @@ public class InputVerifyer : MonoBehaviour
         }
         else
         {
-            fakeInputFieldButtonText.text = mainInput.text.Replace(requiredFunctions[0],
+            fakeInputFieldButtonText.text = mainInput.Input.text.Replace(requiredFunctions[0],
                                     "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
         }
     }
@@ -53,11 +53,11 @@ public class InputVerifyer : MonoBehaviour
 
     public void activeInputField()
     {
+        //mainInput.transform.SetSiblingIndex(mainInput.transform.GetSiblingIndex() + 1);
         InvisibleButton.SetActive(true);
-        mainInput.transform.SetSiblingIndex(mainInput.transform.GetSiblingIndex() + 1);
         FocusedInputField.IsSelected = true;
         EventSystem.current.SetSelectedGameObject(mainInput.gameObject, null);
-        mainInput.OnPointerClick(new PointerEventData(EventSystem.current));
+        //mainInput.OnPointerClick(new PointerEventData(EventSystem.current));
         KeyboardAnimator.SetBool("Open", true);
     }
 
@@ -251,22 +251,22 @@ public class InputVerifyer : MonoBehaviour
         }
     }
 
-    public void verifyInput()
+    public bool verifyInput()
     {
+        bool isValid = true;
+
         if (mainInput != null && !ScenesParameters.Devmode)
         {
-            string text = mainInput.text;
+            string text = mainInput.Input.text;
 
             while (text.Contains("#"))
             {
                 text = text.Replace("#", "/");
             }
 
-            bool isValid = true;
-
             foreach (string function in requiredFunctions)
             {
-                if (text.IndexOf(function) == -1)
+                if (text.IndexOf(function, StringComparison.Ordinal) == -1)
                 {
                     isValid = false;
                 }
@@ -296,9 +296,11 @@ public class InputVerifyer : MonoBehaviour
                 prevInput = text;
             }
 
-            mainInput.text = prevInput;
+            mainInput.Input.text = prevInput;
 
             fakeInputFieldButtonText.text = prevInput.Replace(requiredFunctions[0], "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
         }
+
+        return isValid;
     }
 }

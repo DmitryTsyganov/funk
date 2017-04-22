@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using ExpressionParser;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEngine.Assertions;
 
 public class DrawGraph : MonoBehaviour
 {
@@ -12,10 +11,10 @@ public class DrawGraph : MonoBehaviour
 
     public GameObject Colliders;
     public GameObject Lines;
+    public InputFieldHandler inputFieldCo;
 
     private GameObject inputFieldGo;
     private GameObject setUp;
-    private InputField inputFieldCo;
 
     private static Texture2D _staticRectTexture;
     private static GUIStyle _staticRectStyle;
@@ -40,9 +39,6 @@ public class DrawGraph : MonoBehaviour
     void Start()
     {
         offsetY = ScenesParameters.LevelOffsetY;
-        
-        inputFieldGo = GameObject.Find("InputField");
-        inputFieldCo = inputFieldGo.GetComponent<InputField>();
 
         parser = new ExpressionParser.ExpressionParser();
 
@@ -218,8 +214,8 @@ public class DrawGraph : MonoBehaviour
         if (ScenesParameters.isValid) {
             try
             {
-                inputFieldCo.text = Regex.Replace(inputFieldCo.text, @"\^0\d+", "^0");
-                string rawExp = inputFieldCo.text.Replace("<color=#E12F0BFF>", string.Empty)
+                inputFieldCo.Input.text = Regex.Replace(inputFieldCo.Input.text, @"\^0\d+", "^0");
+                string rawExp = inputFieldCo.Input.text.Replace("<color=#E12F0BFF>", string.Empty)
                                 .Replace("</color>", string.Empty).Replace(" ", string.Empty);
 
                 //rawExp = Regex.Replace(rawExp, @"(?<=\/)[\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.+?\))", "($0)");
@@ -235,7 +231,7 @@ public class DrawGraph : MonoBehaviour
             }
             catch (KeyNotFoundException e)
             {
-                Expression exp = parser.EvaluateExpression(inputFieldCo.text);
+                Expression exp = parser.EvaluateExpression(inputFieldCo.Input.text);
                 ExpressionDelegate fun = exp.ToDelegate();
                 BuildPlot(fun);
             }

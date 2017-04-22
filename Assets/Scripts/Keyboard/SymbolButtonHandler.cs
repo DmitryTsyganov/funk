@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using ADBannerView = UnityEngine.iOS.ADBannerView;
 
 public class SymbolButtonHandler : MonoBehaviour
 {
     public Text Input;
-    public InputField FunctionField;
+    public InputFieldHandler FunctionField;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +18,6 @@ public class SymbolButtonHandler : MonoBehaviour
 
     public void Click()
     {
-        FunctionField.text = FunctionField.text.Insert(FunctionField.caretPosition, Input.text);
-        FunctionField.caretPosition += 1;
+        FunctionField.AddCharacter(Input.text);
     }
 }

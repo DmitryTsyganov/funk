@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class okButtonHandler : MonoBehaviour
@@ -26,7 +24,6 @@ public class okButtonHandler : MonoBehaviour
     {
         InvisibleButton.SetActive(false);
         FocusedInputField.IsSelected = false;
-        mainInput.transform.SetSiblingIndex(mainInput.transform.GetSiblingIndex() - 1);
         KeyboardAnimator.SetBool("Open", false);
         _runButton.onClick.Invoke();
     }

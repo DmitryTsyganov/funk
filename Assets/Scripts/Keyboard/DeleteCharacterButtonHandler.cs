@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DeleteCharacterButtonHandler : MonoBehaviour
 {
-    public InputField FunctionInput;
+    public InputFieldHandler FunctionInput;
 
 	// Use this for initialization
 	void Start () {
@@ -19,13 +17,6 @@ public class DeleteCharacterButtonHandler : MonoBehaviour
 
     public void Click()
     {
-        var pos = FunctionInput.caretPosition;
-        if (pos == 0)
-            return;
-        bool doMoveCarret = pos != FunctionInput.text.Length;
-        FunctionInput.text = FunctionInput.text.Remove(pos - 1, 1);
-
-        if (doMoveCarret)
-            FunctionInput.caretPosition -= 1;
+        FunctionInput.DeleteCharacter();
     }
 }
