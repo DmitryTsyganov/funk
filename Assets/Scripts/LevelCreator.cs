@@ -13,10 +13,12 @@ public class LevelCreator : MonoBehaviour {
     public GameObject Tips;
     public GameObject SectionsMenu;
     public GameObject LevelObjects;
+    public InputVerifyer Verifyer;
 
     public Animator KeyboardAnimator;
 
     public InputVerifyer inputVerifyer;
+    public InputFieldHandler inputFieldCo;
     #if UNITY_EDITOR
     public GameObject devInterface;
     #endif
@@ -29,7 +31,6 @@ public class LevelCreator : MonoBehaviour {
     private GameObject[] starClones;
 	private string funk;
     private string defaultFunk;
-    private InputField inputFieldCo;
 
     private FullLevel level;
 
@@ -41,15 +42,6 @@ public class LevelCreator : MonoBehaviour {
         setLanguage();
 
         ScenesParameters.isValid = true;
-
-        var inputFieldGo = GameObject.Find("InputField");
-        inputFieldCo = inputFieldGo.GetComponent<InputField>();
-        /*var button = GameObject.Find("RunButton").GetComponent<Button>();
-        inputFieldCo.onEndEdit.AddListener(delegate(string _)
-        {
-            button.onClick.Invoke();
-            //KeyboardAnimator.SetBool("Open", false);
-        });*/
 
         #if UNITY_EDITOR
         if (!ScenesParameters.Devmode)
@@ -78,6 +70,10 @@ public class LevelCreator : MonoBehaviour {
         var levelPos = LevelObjects.transform.position;
         levelPos.y += ScenesParameters.LevelOffsetY;
         LevelObjects.transform.position = levelPos;
+
+        var button = GameObject.Find("RunButton");
+        button.GetComponent<Button>().onClick.Invoke();
+        button.SetActive(false);
     }
 
     private void setLanguage()
@@ -202,9 +198,10 @@ public class LevelCreator : MonoBehaviour {
         inputVerifyer.setDefaultFunction(defaultFunk);
 
 #if UNITY_IOS
-        inputFieldCo.keyboardType = TouchScreenKeyboardType.NumbersAndPunctuation;
+        //inputFieldCo.keyboardType = TouchScreenKeyboardType.NumbersAndPunctuation;
 #else
-        inputFieldCo.keyboardType = TouchScreenKeyboardType.PhonePad;
+        //inputFieldCo.keyboardType = TouchScreenKeyboardType.PhonePad;
+
 #endif
 
         //inputFieldCo.text = "<color=red>" + level.Funk + "</color>";
@@ -218,11 +215,7 @@ public class LevelCreator : MonoBehaviour {
 
         inputVerifyer.setPrevInput(coloredText);
 
-        inputFieldCo.text = coloredText;
-
-        var button = GameObject.Find("RunButton");
-        button.GetComponent<Button>().onClick.Invoke();
-        button.SetActive(false);
+        inputFieldCo.Input.text = coloredText;
 
 		ScenesParameters.trueFunction = level.HintText;
     }
@@ -233,8 +226,8 @@ public class LevelCreator : MonoBehaviour {
 
         //inputFieldCo.text = "<size=30><color=red>" + level.Funk + "</color></size>";
 
-        inputFieldCo.text = defaultFunk;
-
+        inputFieldCo.Input.text = defaultFunk;
+        Verifyer.verifyInput();
     }
 
     public void resetLevelObjects()
