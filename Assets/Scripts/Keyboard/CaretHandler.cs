@@ -46,8 +46,8 @@ public class CaretHandler : Button
 	    if (!doCheck)
 	        return;
 
-        print(rt.rect.width + 20);
-        print(_rect.rect.width / 2 + localCursor.x);
+        //print(rt.rect.width + 20);
+        //print(_rect.rect.width / 2 + localCursor.x);
 	    if (rt.rect.width + 20 < _rect.rect.width / 2 + localCursor.x && Input.caretPosition < _inputText.text.Length)
 	    {
 	        ++Input.caretPosition;

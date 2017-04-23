@@ -23,7 +23,6 @@ public class okButtonHandler : MonoBehaviour
     public void Click()
     {
         InvisibleButton.SetActive(false);
-        FocusedInputField.IsSelected = false;
         KeyboardAnimator.SetBool("Open", false);
         _runButton.onClick.Invoke();
     }

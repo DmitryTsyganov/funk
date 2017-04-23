@@ -53,11 +53,10 @@ public class InputVerifyer : MonoBehaviour
 
     public void activeInputField()
     {
-        //mainInput.transform.SetSiblingIndex(mainInput.transform.GetSiblingIndex() + 1);
+        if (InvisibleButton.activeSelf)
+            return;
         InvisibleButton.SetActive(true);
-        FocusedInputField.IsSelected = true;
         EventSystem.current.SetSelectedGameObject(mainInput.gameObject, null);
-        //mainInput.OnPointerClick(new PointerEventData(EventSystem.current));
         KeyboardAnimator.SetBool("Open", true);
     }
 
