@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class BasketCollisionHandler : MonoBehaviour
@@ -51,6 +53,8 @@ public class BasketCollisionHandler : MonoBehaviour
 
                     Shop.AddStar(award);
                     Saver.levelComplete();
+
+                    Analytics.CustomEvent(AnalyticsParameters.LevelComplete + ScenesParameters.CurrentLevel + ScenesParameters.ScenesOrder[ScenesParameters.Section] * 20);
 
                     CompletedScreen.showCollectedStarsQuantity(award);
                 }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 public class NotEnohghStars : MonoBehaviour
 {
@@ -41,6 +43,7 @@ public class NotEnohghStars : MonoBehaviour
 
     public void WatchAd()
     {
+        Analytics.CustomEvent(AnalyticsParameters.AdWatchedInShop);
         ballshop = GameObject.Find("Canvas").GetComponent<BallShop>();
         ballshop.watchAdForStars();
         Destroy(gameObject);

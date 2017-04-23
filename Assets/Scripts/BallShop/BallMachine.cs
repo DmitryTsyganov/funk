@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Analytics;
 
 public class BallMachine : MonoBehaviour {
 
@@ -56,6 +57,7 @@ public class BallMachine : MonoBehaviour {
         animator.SetBool(ActiveString, true);
         StartCoroutine(WaitForAnimation());
         source.Play();
+        Analytics.CustomEvent(AnalyticsParameters.BallMachineUsed);
     }
 
     private IEnumerator WaitForAnimation()

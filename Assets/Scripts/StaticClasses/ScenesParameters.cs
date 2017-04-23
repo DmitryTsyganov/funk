@@ -1,7 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public static class ScenesParameters {
+public static class ScenesParameters
+{
+    private static Dictionary<string, int> scenesOrder = new Dictionary<string, int>
+    {
+        {"liniear", 0},
+        {"power", 1},
+        {"root", 2},
+        {"logarithm", 3},
+        {"triganometric", 4}
+    };
+    public static Dictionary<string, int> ScenesOrder
+    {
+        get { return scenesOrder; }
+    }
 
     public static bool isValid { get; set; }
 
@@ -120,20 +134,20 @@ public static class ScenesParameters {
 	private static int previouSceneIndex;
 	public static int PreviousSceneIndex
 	{
-		get { 
+		get {
 			return previouSceneIndex;
-		}	
-		set { 
+		}
+		set {
 			previouSceneIndex = value;
 		}
 	}
 
 	private static string TrueFunction;
 	public static string trueFunction{
-		get{ 
+		get{
 			return TrueFunction;
 		}
-		set{ 
+		set{
 			TrueFunction = value;
 		}
 	}

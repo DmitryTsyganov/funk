@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class HintManager : MonoBehaviour {
@@ -26,12 +28,23 @@ public class HintManager : MonoBehaviour {
     {
         if (Shop.BuyHint())
         {
+            Analytics.CustomEvent(AnalyticsParameters.HintBought,
+                new Dictionary<string, object> {
+                    {"payment_type", "stars"},
+                    {"section", ScenesParameters.Section},
+                    {"level", ScenesParameters.CurrentLevel}});
             getHint();
         }
     }
 
     public void watchAdForHint()
     {
+
+        Analytics.CustomEvent(AnalyticsParameters.HintBought,
+            new Dictionary<string, object> {
+                {"payment_type", "ad"},
+                {"section", ScenesParameters.Section},
+                {"level", ScenesParameters.CurrentLevel}});
         //RewardedVideoGoogleAdmobManager.GetInstance().watchAdForHint();
         RewardedVideoUnityAdsManager.GetInstance().ShowRewardedAd(getHint);
     }

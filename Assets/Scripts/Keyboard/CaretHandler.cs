@@ -27,7 +27,7 @@ public class CaretHandler : Button
 	    RealText = GameObject.Find("InputText");
 	    CaretText = GameObject.Find("CaretText");
 	    Caret = GameObject.Find("CaretImage");
-	    Input = GameObject.Find("InputFieldNoKeyboard").GetComponent<InputFieldHandler>();
+	    Input = GameObject.Find("FakeInputField").GetComponent<InputFieldHandler>();
 	    _rect = GetComponent<RectTransform>();
 	    _caretText = CaretText.GetComponent<Text>();
 	    _inputText = RealText.GetComponent<Text>();

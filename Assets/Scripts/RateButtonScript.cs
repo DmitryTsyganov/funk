@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -26,7 +28,6 @@ public class RateButtonScript : MonoBehaviour {
     {
         if (!isDesicionMade)
         {
-            print("yeah");
             LanguageManager.setText(RateText,
                 desicion ? LanguageManager.getLanguage().rate_prompt_yes : LanguageManager.getLanguage().rate_prompt_no);
             LanguageManager.setText(YesButtonText, LanguageManager.getLanguage().sure);
@@ -36,6 +37,9 @@ public class RateButtonScript : MonoBehaviour {
         {
             if (desicion)
             {
+                Analytics.CustomEvent(AnalyticsParameters.RateGameButtonPressed,
+                    new Dictionary<string, object> {
+                        {"section", ScenesParameters.Section}});
 #if UNITY_EDITOR
                 Application.OpenURL("https://play.google.com/store/apps/details?id=com.NoCHgames.func");
 #elif UNITY_ANDROID

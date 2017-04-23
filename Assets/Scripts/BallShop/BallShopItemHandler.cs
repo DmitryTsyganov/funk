@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 public class BallShopItemHandler : BasicShopItem
 {
@@ -23,6 +25,9 @@ public class BallShopItemHandler : BasicShopItem
         else {
             if (Shop.BuyForPrice(Name, price))
             {
+                Analytics.CustomEvent(AnalyticsParameters.BallBought,
+                    new Dictionary<string, object> {
+                        {"name", Name}});
                 ballShop.updateStarsCountText();
                 setBoughtState();
                 BallParametrs.setBall(Name);
