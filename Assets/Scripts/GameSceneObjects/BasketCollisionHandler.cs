@@ -41,10 +41,17 @@ public class BasketCollisionHandler : MonoBehaviour
                 level.Deactivate();
                 CompletedScreen.getInstanse().SetActive(true);
                
-                if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))
+                if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) &&
+                    ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))
                 {
                     Saver.completeSection(ScenesParameters.Section);
                     CompletedScripts.ShowRateTheGameScreen = true;
+                }
+
+                if (!Saver.isLevelCompletedWithStars())
+                {
+                    Analytics.CustomEvent(AnalyticsParameters.LevelComplete +
+                                          (ScenesParameters.CurrentLevel + ScenesParameters.ScenesOrder[ScenesParameters.Section] * 20));
                 }
 
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && starsCount == -1)
@@ -54,7 +61,8 @@ public class BasketCollisionHandler : MonoBehaviour
                     Shop.AddStar(award);
                     Saver.levelComplete();
 
-                    Analytics.CustomEvent(AnalyticsParameters.LevelComplete + ScenesParameters.CurrentLevel + ScenesParameters.ScenesOrder[ScenesParameters.Section] * 20);
+                    Analytics.CustomEvent(AnalyticsParameters.LevelComplete +
+                                          (ScenesParameters.CurrentLevel + ScenesParameters.ScenesOrder[ScenesParameters.Section] * 20));
 
                     CompletedScreen.showCollectedStarsQuantity(award);
                 }
