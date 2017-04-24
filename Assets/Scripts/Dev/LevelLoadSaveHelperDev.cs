@@ -8,13 +8,16 @@ public class LevelLoadSaveHelperDev : MonoBehaviour
 {
     public LevelCreator Creator;
     public InputField LevelNumber;
+    public InputVerifyer Verifyer;
 
     private static readonly string[] _tagsForRemoving = { "Ball", "Basket", "TriangleObsticle", "Star", "BallStart" };
 
 	// Use this for initialization
 	void Start ()
 	{
-	    Creator = GameObject.Find("Level").GetComponent<LevelCreator>();
+	    var level = GameObject.Find("Level");
+	    Creator = level.GetComponent<LevelCreator>();
+	    Verifyer = level.GetComponent<InputVerifyer>();
 	}
 	
 	// Update is called once per frame
@@ -26,6 +29,9 @@ public class LevelLoadSaveHelperDev : MonoBehaviour
     {
         DestroyAllLevelObjects();
         Creator.createLevelFromXml(ScenesParameters.LevelName + LevelNumber.text);
+        Verifyer.verifyInput();
+        var drawer = GameObject.Find("Drawer").GetComponent<DrawGraph>();
+        drawer.Draw();
     }
 
     public void SaveLevel()

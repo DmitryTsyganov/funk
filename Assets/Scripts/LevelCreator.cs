@@ -67,10 +67,6 @@ public class LevelCreator : MonoBehaviour {
         }
         #endif
 
-        var levelPos = LevelObjects.transform.position;
-        levelPos.y += ScenesParameters.LevelOffsetY;
-        LevelObjects.transform.position = levelPos;
-
         var button = GameObject.Find("RunButton");
         button.GetComponent<Button>().onClick.Invoke();
         button.SetActive(false);
@@ -218,6 +214,10 @@ public class LevelCreator : MonoBehaviour {
         inputFieldCo.Input.text = coloredText;
 
 		ScenesParameters.trueFunction = level.HintText;
+
+        var levelPos = LevelObjects.transform.position;
+        levelPos.y += ScenesParameters.LevelOffsetY;
+        LevelObjects.transform.position = levelPos;
     }
 
     public void resetField()

@@ -22,21 +22,10 @@ public class InputVerifyer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         if (ScenesParameters.Devmode)
-        {
-            var fakeInputField = GameObject.Find("FakeInputField");
-            var fakeInputFieldImage = fakeInputField.GetComponentInChildren<Image>();
-            fakeInputFieldImage.enabled = false;
-            var fakeIputFieldImageGO = GameObject.Find("FakeInputFieldImage");
-            fakeIputFieldImageGO.SetActive(false);
-            fakeInputFieldButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            fakeInputFieldButtonText.text = mainInput.Input.text.Replace(requiredFunctions[0],
-                                    "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
-        }
+            return;
+        fakeInputFieldButtonText.text = mainInput.Input.text.Replace(requiredFunctions[0],
+                                "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
     }
 
     // Update is called once per frame
@@ -294,11 +283,12 @@ public class InputVerifyer : MonoBehaviour
             {
                 prevInput = text;
             }
-
-            mainInput.Input.text = prevInput;
-
-            fakeInputFieldButtonText.text = prevInput.Replace(requiredFunctions[0], "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
         }
+
+        if (ScenesParameters.Devmode)
+            prevInput = mainInput.Input.text;
+
+        fakeInputFieldButtonText.text = prevInput.Replace(requiredFunctions[0], "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
 
         return isValid;
     }
