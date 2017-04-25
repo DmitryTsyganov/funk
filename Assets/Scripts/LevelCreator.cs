@@ -114,8 +114,8 @@ public class LevelCreator : MonoBehaviour {
                 GameObject ballStart = Instantiate(BallStartPrefab, startPosition, Quaternion.Euler(0, 0, 0));
                 ballStart.transform.localScale = ballScale;
 
-                ballStart.transform.SetParent(LevelObjects.transform);
-                ballClones[i].transform.SetParent(LevelObjects.transform);
+                ballStart.transform.SetParent(LevelObjects.transform, false);
+                ballClones[i].transform.SetParent(LevelObjects.transform, false);
             }
         }
 
@@ -135,7 +135,7 @@ public class LevelCreator : MonoBehaviour {
 
                 basketClones[i].transform.localScale = new Vector3(level.baskets[i].scale, level.baskets[i].scale, 1f);
 
-                basketClones[i].transform.SetParent(LevelObjects.transform);
+                basketClones[i].transform.SetParent(LevelObjects.transform, false);
             }
         }
 
@@ -154,7 +154,7 @@ public class LevelCreator : MonoBehaviour {
                 brickClones[i].transform.localScale =
                     new Vector3(level.obsticleBricks[i].scale, level.obsticleBricks[i].scale, 1f);
 
-                brickClones[i].transform.SetParent(LevelObjects.transform);
+                brickClones[i].transform.SetParent(LevelObjects.transform, false);
             }
         }
 
@@ -172,7 +172,7 @@ public class LevelCreator : MonoBehaviour {
 
                 starClones[i].transform.localScale = new Vector3(level.stars[i].scale, level.stars[i].scale, 1f);
 
-                starClones[i].transform.SetParent(LevelObjects.transform);
+                starClones[i].transform.SetParent(LevelObjects.transform, false);
             }
         }
 
@@ -216,7 +216,7 @@ public class LevelCreator : MonoBehaviour {
 		ScenesParameters.trueFunction = level.HintText;
 
         var levelPos = LevelObjects.transform.position;
-        levelPos.y += ScenesParameters.LevelOffsetY;
+        levelPos.y = ScenesParameters.LevelOffsetY;
         LevelObjects.transform.position = levelPos;
     }
 

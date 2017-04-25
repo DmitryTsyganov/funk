@@ -45,7 +45,7 @@ public class FullLevel {
     public FullLevel(GameObject[] balls, GameObject[] baskets, GameObject[] obsticles,
                         GameObject[] stars, string funk, string defFunk, string hint)
     {
-        var offset = ScenesParameters.LevelOffsetY;
+        var offset = -ScenesParameters.LevelOffsetY;
 
         this.balls = new Ball[balls.Length];
 
