@@ -17,7 +17,7 @@ public class BuyStarsPropmptSetUp : MonoBehaviour {
         
         LanguageManager.setText("WatchAdButtonText", LanguageManager.getLanguage().get_for_free);
 
-        watchAdButton.SetActive(false);
+        //watchAdButton.SetActive(false);
     }
 
     void OnEnable()

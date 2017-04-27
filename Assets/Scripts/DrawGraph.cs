@@ -221,6 +221,7 @@ public class DrawGraph : MonoBehaviour
                 //rawExp = Regex.Replace(rawExp, @"(?<=\/)[\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.+?\))", "($0)");
                 //49 steps faster WOW WOW
                 rawExp = Regex.Replace(rawExp, @"([\/\*])([\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]){3}\(.+?\)))", "$1($2)");
+                //rawExp = Regex.Replace(rawExp,@"([\/\*])([\-\+]\d*\.?\d*(([a-z])?(?![a-z])|([a-z]*\(([^()]|(?5))*\))))", "$1($2)");
 
                 rawExp = Regex.Replace(rawExp, @"(\d(?=[a-z\(])|[x\)](?=\d))", "$0*");
                 rawExp = Regex.Replace(rawExp, @"(?<![0-9\.])0[0-9]+", "0");

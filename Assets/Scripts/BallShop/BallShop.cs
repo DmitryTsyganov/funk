@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BallShop : MonoBehaviour
 {
-    public const int ballShopReward = 40;
+    public const int ballShopReward = 30;
 
     public static string selectedBall;
     public GameObject ContentBalls;

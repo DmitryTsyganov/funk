@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyStarsHandler : MonoBehaviour
+public class BuyStarsHandler : InternetDependantHandler
 {
     public GameObject BuyStarsText;
     private bool isLanguageSet = false;
@@ -19,6 +20,9 @@ public class BuyStarsHandler : MonoBehaviour
             setLanguage();
             isLanguageSet = true;
         }
+
+        DoStart();
+        OnClick += delegate(object sender, EventArgs args) { BuyMillionStars(); };
     }
 
     // Update is called once per frame
@@ -33,7 +37,7 @@ public class BuyStarsHandler : MonoBehaviour
         LanguageManager.setText(BuyStarsText, language.buy + "\n" + Shop.StarsUltimate + "\n" + language.stars);
     }
 
-    public void Click()
+    public void BuyMillionStars()
     {
         IAPHandler.GetInstance().BuyProduct("million_stars");
     }

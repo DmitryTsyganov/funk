@@ -20,7 +20,7 @@ public class HintManager : MonoBehaviour {
             !watchAdButton.activeInHierarchy)
         {
             print("Activating watch ad button");
-            watchAdButton.SetActive(true);
+            //watchAdButton.SetActive(true);
         }
     }
 
