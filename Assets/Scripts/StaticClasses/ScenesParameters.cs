@@ -6,7 +6,7 @@ public static class ScenesParameters
 {
     private static Dictionary<string, int> scenesOrder = new Dictionary<string, int>
     {
-        {"liniear", 0},
+        {"linear", 0},
         {"power", 1},
         {"root", 2},
         {"logarithm", 3},

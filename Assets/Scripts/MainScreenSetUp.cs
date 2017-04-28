@@ -15,6 +15,7 @@ public class MainScreenSetUp : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        ScenesParameters.Devmode = false;
         MuteHandler.turnSound(Saver.isSoundOn());
         StartCoroutine(WaitForLanguage());
     }
