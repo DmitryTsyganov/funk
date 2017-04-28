@@ -48,7 +48,7 @@ public class BasicShopItem : MonoBehaviour {
 
     }
 
-    protected void setBoughtState()
+    public void setBoughtState()
     {
         lockImage.gameObject.SetActive(false);
     }

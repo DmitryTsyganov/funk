@@ -14,6 +14,7 @@ public class LevelCreator : MonoBehaviour {
     public GameObject SectionsMenu;
     public GameObject LevelObjects;
     public InputVerifyer Verifyer;
+    public GameObject CanBuyBallCanvas;
 
     public Animator KeyboardAnimator;
 
@@ -35,6 +36,7 @@ public class LevelCreator : MonoBehaviour {
     private FullLevel level;
 
 	private int levelsNumber;
+    private bool didShowCanBuyBall;
 
     // Use this for initialization
     void Start () {
@@ -72,6 +74,11 @@ public class LevelCreator : MonoBehaviour {
         button.SetActive(false);
     }
 
+    void Update()
+    {
+
+    }
+
     private void setLanguage()
     {
         LanguageManager.setLanguageIfNotAlready();
@@ -86,6 +93,13 @@ public class LevelCreator : MonoBehaviour {
         //buy stars
         LanguageManager.setText("ResetButtonText", LanguageManager.getLanguage().reset);
 
+    }
+
+    public void ShowCanBuyBallCanvas()
+    {
+        var canvas = Instantiate(CanBuyBallCanvas);
+        canvas.GetComponent<BallAvailableScreen>().AddButton(ShopManagerhandler.GetBallShop().GetCheapestBall());
+        Saver.dontShowFirstBall();
     }
 
     public void createLevelFromXml(string filename)

@@ -283,6 +283,10 @@ public class InputVerifyer : MonoBehaviour
             {
                 prevInput = text;
             }
+            else
+            {
+                mainInput.Input.text = prevInput;
+            }
         }
 
         if (ScenesParameters.Devmode)

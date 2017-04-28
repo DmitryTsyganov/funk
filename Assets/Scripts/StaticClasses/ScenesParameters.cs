@@ -10,7 +10,7 @@ public static class ScenesParameters
         {"power", 1},
         {"root", 2},
         {"logarithm", 3},
-        {"triganometric", 4}
+        {"trigonometric", 4}
     };
     public static Dictionary<string, int> ScenesOrder
     {

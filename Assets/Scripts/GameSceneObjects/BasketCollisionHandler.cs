@@ -9,7 +9,7 @@ public class BasketCollisionHandler : MonoBehaviour
 {
     private LevelCreator level;
 
-    void Start()
+    void Awake()
     {
         level = GameObject.Find("Level").GetComponent<LevelCreator>();
     }
@@ -40,6 +40,11 @@ public class BasketCollisionHandler : MonoBehaviour
             {
                 level.Deactivate();
                 CompletedScreen.getInstanse().SetActive(true);
+
+                if (!Saver.sawFirstBall() && ShopManagerhandler.GetBallShop().CanBuyCheapestBall())
+                {
+                    level.ShowCanBuyBallCanvas();
+                }
                
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) &&
                     ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))

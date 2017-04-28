@@ -32,6 +32,7 @@ public class BallShop : MonoBehaviour
     private GameObject[] ballButtons;
 
     private bool isLanguageSet = false;
+    private int cheapestBallIndex = 1;
 
     private static bool doCountBallsToBuy = false;
 
@@ -146,6 +147,16 @@ public class BallShop : MonoBehaviour
         doCountBallsToBuy = true;
     }
 
+    public bool CanBuyCheapestBall()
+    {
+        return ballsToSell[cheapestBallIndex].price < Shop.StarScore;
+    }
+
+    public GameObject GetCheapestBall()
+    {
+        return ballButtons[cheapestBallIndex];
+    }
+
     public void updateStarsCountText()
     {
         starsCountText.text = Shop.StarScore.ToString();
@@ -169,8 +180,8 @@ public class BallShop : MonoBehaviour
             }
         }
         int index = UnityEngine.Random.Range(0, handlersToBuy.Count);
-        print("index "+index);
-        print("lenght "+ handlersToBuy.Count);
+        //print("index "+index);
+        //print("lenght "+ handlersToBuy.Count);
         handlersToBuy[index].getForFree();
         BallsToBuy = countBallsToBuy();
         var screen = Instantiate(CongratilationsScreen);

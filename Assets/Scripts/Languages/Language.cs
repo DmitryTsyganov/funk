@@ -52,6 +52,7 @@ public class Language
     public string watch_ad_shop;
     public string not_enough_stars;
     public string congratilation_new_ball;
+    public string congratilation_first_ball;
     public string ball_machine_help;
     public string balls;
     public string addons;
@@ -167,6 +168,8 @@ public class LanguageXml
     public string not_enough_stars;
     [XmlElement("congratilation_new_ball")]
     public string congratilation_new_ball;
+    [XmlElement("congratilation_first_ball")]
+    public string congratilation_first_ball;
     [XmlElement("ball_machine_help")]
     public string ball_machine_help;
     [XmlElement("balls")]

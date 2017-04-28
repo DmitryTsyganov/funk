@@ -9,8 +9,17 @@ public class CongratilationsScreen : MonoBehaviour
     public GameObject BackText;
     public Image CongratilationsImage;
 
+    private const float ButtonSizeCoefficient = 0.5f;
+    private const float ButtonYCoefficient = 0.58f;
+    protected float buttonSizeCoefficient;
+    protected float buttonYCoefficient;
+
 	// Use this for initialization
-	void Start () {
+	void Awake()
+	{
+	    buttonSizeCoefficient = ButtonSizeCoefficient;
+	    buttonYCoefficient = ButtonYCoefficient;
+	    print(buttonYCoefficient);
 	    setLanguage();
 	}
 	
@@ -22,18 +31,27 @@ public class CongratilationsScreen : MonoBehaviour
     public void AddButton(GameObject buttonOriginal)
     {
         var button = Instantiate(buttonOriginal);
+        var item = button.transform.Find("BallShopItem");
+        item.gameObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+        var handler = button.transform.Find("BallShopItem").gameObject.GetComponent<BallShopItemHandler>();
+        print(handler.Name);
+        handler.ObjNameText.text = LanguageManager.getLanguageDynamic()[handler.Name].str;
         var size = CongratilationsImage.sprite.bounds.size;
         print("size "+size);
         button.transform.parent = CongratilationsImage.transform.parent;
-        var newSize = CongratilationsImage.GetComponent<RectTransform>().sizeDelta/2;
+        var newSize = CongratilationsImage.GetComponent<RectTransform>().sizeDelta * 0.5f;
         print("newsize " + newSize);
         var rect = button.GetComponent<RectTransform>();
         //rect.position = newSize;
-        button.transform.position = new Vector3(Screen.width/2, Screen.height*0.58f, 0);
-        rect.sizeDelta = newSize/2;
+        button.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * buttonYCoefficient, 0);
+        print(buttonYCoefficient);
+        print(button.transform.position);
+        rect.sizeDelta = newSize * 0.5f;
         button.transform.localScale = Vector3.one;
-        button.transform.Find("BallShopItem").Find("NameText").gameObject.GetComponent<Text>().color = Color.black;
-        
+        item.Find("NameText").gameObject.GetComponent<Text>().color = Color.black;
+        Destroy(item.Find("LockedImage").gameObject);
+        //handler.setBoughtState();
+        //item.Find("LockedImage").gameObject.SetActive(false);
     }
 
     public void Back()

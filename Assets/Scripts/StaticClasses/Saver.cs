@@ -7,6 +7,7 @@ public class Saver : MonoBehaviour
     private static string preferedLanguage = "pref_language";
 
     private const string sawTraining = "saw_training";
+    private const string sawBuyFirstBall = "saw_first_ball";
     private const string hintSave = "hint_";
     private const string isBallBoughtKey = "Buyed";
     private const string selectedBall = "sb";
@@ -91,6 +92,16 @@ public class Saver : MonoBehaviour
     public static int hasShownTraining()
     {
         return PlayerPrefs.GetInt(sawTraining, 0);
+    }
+
+    public static void dontShowFirstBall()
+    {
+        PlayerPrefs.SetInt(sawBuyFirstBall, 1);
+    }
+
+    public static bool sawFirstBall()
+    {
+        return PlayerPrefs.GetInt(sawBuyFirstBall, 0) == 1;
     }
 
     private static string getHintString()

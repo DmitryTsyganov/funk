@@ -8,8 +8,9 @@ public class ShopManagerhandler : MonoBehaviour
     public GameObject BallShop;
 
     private static ShopManagerhandler _instance;
+    private static BallShop _ballShop;
 
-    private void Start()
+    private void Awake()
     {
         if (_instance != null)
         {
@@ -17,6 +18,10 @@ public class ShopManagerhandler : MonoBehaviour
             return;
         }
         _instance = this;
+        var shopCanvas = transform.Find("ShopCanvas");
+        shopCanvas.gameObject.SetActive(false);
+        shopCanvas.gameObject.SetActive(true);
+        _ballShop = shopCanvas.GetComponent<BallShop>();
         DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
@@ -33,5 +38,15 @@ public class ShopManagerhandler : MonoBehaviour
         {
             BallShop.SetActive(false);
         }
+    }
+
+    public static ShopManagerhandler GetInstance()
+    {
+        return _instance;
+    }
+
+    public static BallShop GetBallShop()
+    {
+        return _ballShop;
     }
 }

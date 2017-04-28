@@ -25,10 +25,12 @@ public class InputFieldHandler : MonoBehaviour
     public void AddCharacter(string character)
     {
         Input.text = Input.text.Insert(caretPosition, character);
-        caretPosition += 1;
-        Verifyer.verifyInput();
-        CaretText.text =
-            Input.text.Substring(0, caretPosition);
+        if (Verifyer.verifyInput())
+        {
+            caretPosition += 1;
+            CaretText.text =
+                Input.text.Substring(0, caretPosition);
+        }
     }
 
     public void DeleteCharacter()
