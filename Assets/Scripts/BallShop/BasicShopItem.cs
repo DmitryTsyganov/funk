@@ -43,9 +43,14 @@ public class BasicShopItem : MonoBehaviour {
         return Name == "Default" || Saver.isBallBought(Name);
     }
 
-    private void setSelectedState()
+    public void setSelectedState()
     {
+        ballImage.color = Color.white;
+    }
 
+    public void setNotSelectedState()
+    {
+        ballImage.color = Color.gray;
     }
 
     public void setBoughtState()

@@ -8,13 +8,14 @@ public class WatchAdHandler : InternetDependantHandler
 {
 
     public GameObject WatchAdText;
+    public GameObject BackText;
 
 	// Use this for initialization
 	void Start ()
 	{
+	    setLanguage();
 	    DoStart();
 	    OnClick += delegate(object sender, EventArgs args) { WatchAd(); };
-	    setLanguage();
 	}
 
 	// Update is called once per frame
@@ -34,5 +35,6 @@ public class WatchAdHandler : InternetDependantHandler
     {
         LanguageManager.setText(WatchAdText, String.Format(LanguageManager.getLanguage()
             .watch_ad_shop, BallShop.ballShopReward));
+        LanguageManager.setText(BackText, LanguageManager.getLanguage().back);
     }
 }

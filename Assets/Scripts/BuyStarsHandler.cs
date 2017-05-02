@@ -6,7 +6,6 @@ using UnityEngine;
 public class BuyStarsHandler : InternetDependantHandler
 {
     public GameObject BuyStarsText;
-    private bool isLanguageSet = false;
 
 	// Use this for initialization
 	void Start () {
@@ -15,10 +14,9 @@ public class BuyStarsHandler : InternetDependantHandler
 
     private void OnEnable()
     {
-        if (!isLanguageSet && LanguageManager.getLanguage() != null)
+        if (LanguageManager.getLanguage() != null)
         {
             setLanguage();
-            isLanguageSet = true;
         }
 
         DoStart();

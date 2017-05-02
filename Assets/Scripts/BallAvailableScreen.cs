@@ -6,8 +6,8 @@ public class BallAvailableScreen : CongratilationsScreen
 {
     public GameObject ShopButtonText;
 
-    private const float ButtonSizeCoefficient = 0.35f;
-    private const float ButtonYCoefficient = 0.62f;
+    private const float ButtonSizeCoefficient = 0.42f;
+    private const float ButtonYCoefficient = 0.57f;
 
 	// Use this for initialization
 	void Awake()

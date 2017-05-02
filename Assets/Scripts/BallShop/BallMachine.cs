@@ -17,14 +17,12 @@ public class BallMachine : MonoBehaviour {
     private bool isActive = false;
 
     private const string ActiveString = "Active";
-    private bool isLanguageSet = false;
 
     private void OnEnable()
     {
-        if (!isLanguageSet && LanguageManager.getLanguage() != null)
+        if (LanguageManager.getLanguage() != null)
         {
             setLanguage();
-            isLanguageSet = true;
         }
     }
 

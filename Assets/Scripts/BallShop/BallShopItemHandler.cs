@@ -9,6 +9,11 @@ public class BallShopItemHandler : BasicShopItem
     void Start()
     {
         basicShopItemStart();
+        if (BallParametrs.BallName == Name)
+        {
+            ballShop.currentBall = this;
+            setSelectedState();
+        }
     }
 
     void LateUpdate()
@@ -20,6 +25,12 @@ public class BallShopItemHandler : BasicShopItem
     {
         if (isBought())
         {
+            if (ballShop.currentBall != null)
+            {
+                ballShop.currentBall.setNotSelectedState();
+            }
+            ballShop.currentBall = this;
+            setSelectedState();
             BallParametrs.setBall(Name);
         }
         else {
@@ -51,7 +62,7 @@ public class BallShopItemHandler : BasicShopItem
     {
         //TODO: find a better way
         ballImage.sprite = renderer.sprite;
-        ballImage.color = BallParametrs.BallName == Name ? Color.white : Color.grey;
+        //ballImage.color = BallParametrs.BallName == Name ? Color.white : Color.grey;
         if(PriceText != null)
             PriceText.color = Shop.StarScore > price ? Color.black : Color.red;
     }

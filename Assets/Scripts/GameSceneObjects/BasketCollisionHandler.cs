@@ -40,11 +40,6 @@ public class BasketCollisionHandler : MonoBehaviour
             {
                 level.Deactivate();
                 CompletedScreen.getInstanse().SetActive(true);
-
-                if (!Saver.sawFirstBall() && ShopManagerhandler.GetBallShop().CanBuyCheapestBall())
-                {
-                    level.ShowCanBuyBallCanvas();
-                }
                
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) &&
                     ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))
@@ -84,6 +79,11 @@ public class BasketCollisionHandler : MonoBehaviour
                             : starsCount - previousStarsCount;
 
                         Shop.AddStar(award);
+
+                        if (!Saver.sawFirstBall() && ShopManagerhandler.GetBallShop().CanBuyCheapestBall())
+                        {
+                            level.ShowCanBuyBallCanvas();
+                        }
 
                         CompletedScreen.showCollectedStarsQuantity(award);
                         CompletedScreen.showStars(starsCount);

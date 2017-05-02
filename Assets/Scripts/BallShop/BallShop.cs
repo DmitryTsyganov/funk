@@ -22,16 +22,15 @@ public class BallShop : MonoBehaviour
     public GameObject CongratilationsScreen;
     public Image MenuImage;
     public Text starsCountText;
-    public GameObject BackText;
     public List<Item> ballsToSell = new List<Item>();
     public List<Item> additionalFeatures = new List<Item>();
     public int BallsToBuy;
+    public BallShopItemHandler currentBall;
 
     private BallShopItemHandler[] ballButtonHandlers;
     private BallShopItemHandler[] effectButtonHandlers;
     private GameObject[] ballButtons;
 
-    private bool isLanguageSet = false;
     private int cheapestBallIndex = 1;
 
     private static bool doCountBallsToBuy = false;
@@ -81,12 +80,10 @@ public class BallShop : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 5)
         {
             starsCountText = GameObject.Find("StarCountText").GetComponent<Text>();
-            BackText = GameObject.Find("BackButtonText");
             updateStarsCountText();
-            if (!isLanguageSet && LanguageManager.getLanguage() != null)
+            if (LanguageManager.getLanguage() != null)
             {
                 setLanguage();
-                isLanguageSet = true;
                 print("Shop language is set");
             }
         }
@@ -255,7 +252,6 @@ public class BallShop : MonoBehaviour
         LanguageManager.setText(BallsButtonText, LanguageManager.getLanguage().balls);
         LanguageManager.setText(AddonsButtonText, LanguageManager.getLanguage().addons);
         LanguageManager.setText(AddonsHelpText, LanguageManager.getLanguage().addons_help);
-        LanguageManager.setText(BackText, LanguageManager.getLanguage().back);
 
         for (int i = 0; i < ballsToSell.Count; ++i)
         {
