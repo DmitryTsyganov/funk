@@ -11,6 +11,7 @@ public class LevelCreator : MonoBehaviour {
     public GameObject BrickPrefab;
     public GameObject StarPrefab;
     public GameObject Tips;
+    public GameObject InputsCanvas;
     public GameObject SectionsMenu;
     public GameObject LevelObjects;
     public InputVerifyer Verifyer;
@@ -54,7 +55,7 @@ public class LevelCreator : MonoBehaviour {
             if (Saver.hasShownTraining() != 1 && ScenesParameters.Section == "linear" && 
                 ScenesParameters.CurrentLevel == 1)
             {
-                Tips.SetActive(true);
+                Instantiate(Tips, InputsCanvas.transform, false);
             }
         #if UNITY_EDITOR
         } else

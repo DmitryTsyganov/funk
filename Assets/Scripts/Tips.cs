@@ -16,6 +16,12 @@ public class Tips : MonoBehaviour {
     public GameObject [] tipTexts;
     public GameObject [] tapTexts;
 
+    void Awake()
+    {
+        if (ScenesParameters.Section != "linear" || ScenesParameters.CurrentLevel != 1)
+            Destroy(gameObject);
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
