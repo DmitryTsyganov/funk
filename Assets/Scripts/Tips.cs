@@ -16,6 +16,8 @@ public class Tips : MonoBehaviour {
     public GameObject [] tipTexts;
     public GameObject [] tapTexts;
 
+    public static bool DidPressButton = false;
+
     void Awake()
     {
         if (ScenesParameters.Section != "linear" || ScenesParameters.CurrentLevel != 1)
@@ -27,7 +29,13 @@ public class Tips : MonoBehaviour {
 	{
 //		StartCoroutine (Tips1());
 	    StartCoroutine(TipsAnimation());
+
 	}
+
+    void OnEnable()
+    {
+        Saver.saveHint();
+    }
 
     IEnumerator TipsAnimation()
     {
@@ -41,7 +49,7 @@ public class Tips : MonoBehaviour {
         while (true)
         {
 
-            if (Input.anyKey || firstIteration)
+            if (Input.anyKey && i != 4 || firstIteration || DidPressButton && i == 4)
             {
                 firstIteration = false;
 
@@ -58,7 +66,8 @@ public class Tips : MonoBehaviour {
 
                 tips_obj[i].SetActive(true);
 
-                Debug.Log("tip text " + type.GetField("tip" + (i + 1)).GetValue(LanguageManager.getLanguage()).ToString());
+                Debug.Log("tip text " + type.GetField("tip" + (i + 1))
+                              .GetValue(LanguageManager.getLanguage()));
                 Debug.Log("tip1 " + LanguageManager.getLanguage().tip1);
 
                 //bad practice
@@ -67,11 +76,11 @@ public class Tips : MonoBehaviour {
 
                 ++i;
 
-                yield return new WaitForSeconds(4);
+                if (i != 4) yield return new WaitForSeconds(4);
 
                 Debug.Log("Waiting is over\n");
 
-                tips_obj[i - 1].transform.FindChild("TapImage").gameObject.SetActive(true);
+                if (i != 4) tips_obj[i - 1].transform.FindChild("TapImage").gameObject.SetActive(true);
             }
 
             yield return null;

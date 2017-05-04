@@ -16,12 +16,12 @@ public class HintManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (RewardedVideoUnityAdsManager.GetInstance().isAdReady() && 
+        /*if (RewardedVideoUnityAdsManager.GetInstance().isAdReady() &&
             !watchAdButton.activeInHierarchy)
         {
             print("Activating watch ad button");
             //watchAdButton.SetActive(true);
-        }
+        }*/
     }
 
     public void AddHint()

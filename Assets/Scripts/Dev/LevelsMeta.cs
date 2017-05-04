@@ -8,13 +8,13 @@ public class LevelsMeta : MonoBehaviour
 {
     string[] sections =
        {
-            "linear", "power", "root", "Exponental", "Hyperbolic",
-            "Logarithm", "Mixed", "Polinomial", "Special", "Trigonometric"
+            "linear", "power", "root", "exponental", "hyperbolic",
+            "logarithm", "mixed", "polinomial", "special", "trigonometric"
         };
 
     public void completeAllLevels()
     {
-        for (int i = 0; i < sections.Length; i++)
+        for (int i = 1; i <= sections.Length; i++)
         {
             ScenesParameters.Section = sections[i];
 

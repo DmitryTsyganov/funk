@@ -45,6 +45,7 @@ public class Language
     public string tip2;
     public string tip3;
     public string tip4;
+    public string tip5;
     public string hint;
 
     //shop
