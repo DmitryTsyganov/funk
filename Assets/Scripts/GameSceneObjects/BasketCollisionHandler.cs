@@ -38,6 +38,7 @@ public class BasketCollisionHandler : MonoBehaviour
 
             if (level.IsCompleted() && level.IsActive())
             {
+                HintButton.PlayHintAnimation = false;
                 level.Deactivate();
                 CompletedScreen.getInstanse().SetActive(true);
                

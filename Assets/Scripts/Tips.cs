@@ -16,7 +16,8 @@ public class Tips : MonoBehaviour {
     public GameObject [] tipTexts;
     public GameObject [] tapTexts;
 
-    public static bool DidPressButton = false;
+    public static bool DidPressHintButton = false;
+    public static bool DidPressThanksButton = false;
 
     void Awake()
     {
@@ -49,7 +50,8 @@ public class Tips : MonoBehaviour {
         while (true)
         {
 
-            if (Input.anyKey && i != 4 || firstIteration || DidPressButton && i == 4)
+            if (Input.anyKey && i != 4 && i != 5 || firstIteration ||
+                DidPressHintButton && i == 4|| DidPressThanksButton && i == 5)
             {
                 firstIteration = false;
 
@@ -66,21 +68,24 @@ public class Tips : MonoBehaviour {
 
                 tips_obj[i].SetActive(true);
 
-                Debug.Log("tip text " + type.GetField("tip" + (i + 1))
-                              .GetValue(LanguageManager.getLanguage()));
-                Debug.Log("tip1 " + LanguageManager.getLanguage().tip1);
+//                Debug.Log("tip text " + type.GetField("tip" + (i + 1))
+//                              .GetValue(LanguageManager.getLanguage()));
+//                Debug.Log("tip1 " + LanguageManager.getLanguage().tip1);
 
                 //bad practice
-                LanguageManager.setText(tipTexts[i], type.GetField("tip" + (i + 1)).GetValue(LanguageManager.getLanguage()).ToString());
-                LanguageManager.setText(tapTexts[i], LanguageManager.getLanguage().tap_to_continue);
+                if (i != 5)
+                {
+                    LanguageManager.setText(tipTexts[i], type.GetField("tip" + (i + 1)).GetValue(LanguageManager.getLanguage()).ToString());
+                    LanguageManager.setText(tapTexts[i], LanguageManager.getLanguage().tap_to_continue);
+                }
 
                 ++i;
 
-                if (i != 4) yield return new WaitForSeconds(4);
+                if (i != 4 && i != 5) yield return new WaitForSeconds(4);
 
                 Debug.Log("Waiting is over\n");
 
-                if (i != 4) tips_obj[i - 1].transform.FindChild("TapImage").gameObject.SetActive(true);
+                if (i != 4 && i != 5) tips_obj[i - 1].transform.FindChild("TapImage").gameObject.SetActive(true);
             }
 
             yield return null;
