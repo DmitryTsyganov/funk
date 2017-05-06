@@ -35,7 +35,7 @@ public class HintHandler : InternetDependantHandler {
 
     private void getHint()
     {
-        hintText.text = ScenesParameters.trueFunction;
+        hintText.text = "y=" + ScenesParameters.trueFunction;
         hintWindow.SetActive(true);
         Saver.saveHint();
     }

@@ -17,6 +17,7 @@ public class HintButton : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+	    PlayHintAnimation = true;
 	    if (!(Saver.isLevelCompletedWithStars() || Saver.isLevelComplete(ScenesParameters.CurrentLevel)) &&
 	        !(ScenesParameters.Section == "linear" && ScenesParameters.CurrentLevel == 1))
 	    {
