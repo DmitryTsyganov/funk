@@ -51,7 +51,7 @@ public class HintButton : MonoBehaviour
         while (PlayHintAnimation)
         {
             HintAnimator.SetBool(TriggerName, !HintAnimator.GetBool(TriggerName));
-            yield return new WaitForSeconds(30);
+            yield return new WaitForSeconds(60);
         }
     }
 }
