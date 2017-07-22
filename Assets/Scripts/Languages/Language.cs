@@ -39,7 +39,7 @@ public class Language
     public string run;
     public string completed;
     public string stars;
-    public string buy_stars_prompt;
+    public string buy_hint;
     public string tap_to_continue;
     public string tip1;
     public string tip2;
@@ -145,8 +145,8 @@ public class LanguageXml
     public string completed;
     [XmlElement("stars")]
     public string stars;
-    [XmlElement("buy_stars_prompt")]
-    public string buy_stars_prompt;
+    [XmlElement("buy_hint")]
+    public string buy_hint;
     [XmlElement("tap_to_continue")]
     public string tap_to_continue;
     [XmlElement("tip1")]

@@ -45,7 +45,7 @@ public class LanguageCreatorMeta : MonoBehaviour
     {
         var _language = new Language();
         _language.back = "Back";
-        _language.buy_stars_prompt = "Would you like to spend to 10 stars for a hint?";
+        _language.buy_hint = "Buy a hint for {0} stars";
         _language.choose_ball = "Tap to choose a ball";
         _language.completed = "Completed!";
         _language.developer = "nochgames presents";
@@ -90,7 +90,7 @@ public class LanguageCreatorMeta : MonoBehaviour
     {
         var _language = new Language();
         _language.back = "Назад";
-        _language.buy_stars_prompt = "Would you like to spend to 10 stars for a hint?";
+        _language.buy_hint = "Buy a hint for {0} stars";
         _language.choose_ball = "Tap to choose a ball";
         _language.completed = "Completed!";
         _language.developer = "nochgames presents";

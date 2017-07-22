@@ -5,27 +5,24 @@ using UnityEngine.UI;
 
 public class BuyStarsPropmptSetUp : MonoBehaviour {
 
-    public Button Yes;
-    public Button AddStar;
+    public Button BuyButton;
     public GameObject watchAdForFreeText;
-    public GameObject watchAdButton;
+    public GameObject BackText;
+    public GameObject BuyButtonText;
 
     // Use this for initialization
     void Start () {
-        LanguageManager.setText("PromptText", String.Format(LanguageManager.getLanguage().buy_stars_prompt, Shop.hintPrice));
-        LanguageManager.setText("BackButtonText", LanguageManager.getLanguage().back);
+        LanguageManager.setText(BackText, LanguageManager.getLanguage().back);
         
-        LanguageManager.setText("WatchAdButtonText", LanguageManager.getLanguage().get_for_free);
-
-        //watchAdButton.SetActive(false);
+        LanguageManager.setText(watchAdForFreeText, LanguageManager.getLanguage().get_for_free);
     }
 
     void OnEnable()
     {
         if (Shop.CanBuyHint())
         {
-            Yes.gameObject.SetActive(true);
-            LanguageManager.setText("BuyButtonText", LanguageManager.getLanguage().buy);
+            BuyButton.gameObject.SetActive(true);
+            LanguageManager.setText(BuyButtonText, String.Format(LanguageManager.getLanguage().buy_hint, Shop.hintPrice));
         }
     }
 
