@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Analytics;
 
-public class BallMachine : MonoBehaviour {
+public class BallMachine : InternetDependantHandler {
 
     public BallShop BallShop;
     public GameObject AnimationContainerStatic;
@@ -24,6 +25,7 @@ public class BallMachine : MonoBehaviour {
         {
             setLanguage();
         }
+        DoStart();
     }
 
     void Awake()
@@ -31,6 +33,7 @@ public class BallMachine : MonoBehaviour {
         rendererStatic = AnimationContainerStatic.GetComponent<SpriteRenderer>();
         animator = AnimationContainerStatic.GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+        OnClick += delegate(object sender, EventArgs args) { ActivateBallMachine(); };
     }
  
 	// Use this for initialization
