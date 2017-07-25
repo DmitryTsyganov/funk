@@ -146,7 +146,7 @@ public class BallShop : MonoBehaviour
 
     public bool CanBuyCheapestBall()
     {
-        return ballsToSell[cheapestBallIndex].price < Shop.StarScore;
+        return ballsToSell[cheapestBallIndex].price <= Shop.StarScore;
     }
 
     public GameObject GetCheapestBall()
