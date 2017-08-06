@@ -47,7 +47,8 @@ public class levelElement : MonoBehaviour {
 
             GetComponent<Image>().sprite = Lock;
 	        infa.gameObject.SetActive(false);
-	    }
+	        Destroy(GetComponent<Button>());
+        }
         
 	}
 
