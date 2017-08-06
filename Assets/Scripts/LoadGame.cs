@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadGame : MonoBehaviour {
-
-    public GameObject loadingImage;
+public class LoadGame : MonoBehaviour
+{
     public AudioSource ButtonAudio;
 
     private const int GameIndex = 3;
@@ -24,12 +23,12 @@ public class LoadGame : MonoBehaviour {
 
 	    //print("level to load :" + level);
 	    //print("current level " + currentLevel);
-		if(loadingImage) loadingImage.SetActive(true);
 
         if (level != currentLevel)
             ScenesParameters.PreviousSceneIndex = currentLevel;
 	    //print("previous scene index " + ScenesParameters.PreviousSceneIndex);
-	    SceneManager.LoadScene(level);
+	    TransitionManagerHandler.GetInstance().StartTransition(level);
+        
     }
 	public void Continue(){
 		LoadScene (ScenesParameters.PreviousSceneIndex);
