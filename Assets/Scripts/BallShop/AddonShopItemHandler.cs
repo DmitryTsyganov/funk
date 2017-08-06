@@ -37,6 +37,7 @@ public class AddonShopItemHandler : BasicShopItem
         else {
             if (Shop.BuyForPrice(Name, price))
             {
+                if(!Saver.sawFirstBall()) Saver.dontShowFirstBall();
                 ballShop.updateStarsCountText();
                 setBoughtState();
                 BallParametrs.addAddonName(Name);

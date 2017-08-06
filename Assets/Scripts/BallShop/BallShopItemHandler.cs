@@ -41,6 +41,7 @@ public class BallShopItemHandler : BasicShopItem
                         {"name", Name}});
                 ballShop.updateStarsCountText();
                 setBoughtState();
+                if(!Saver.sawFirstBall()) Saver.dontShowFirstBall();
                 BallParametrs.setBall(Name);
                 BallShop.CountBallsToBuy();
             }
