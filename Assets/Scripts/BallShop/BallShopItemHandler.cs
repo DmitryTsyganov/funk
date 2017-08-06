@@ -21,17 +21,22 @@ public class BallShopItemHandler : BasicShopItem
         updateBallItemActiveState();
     }
 
+    private void SetCurrentBall()
+    {
+        if (ballShop.currentBall != null)
+        {
+            ballShop.currentBall.setNotSelectedState();
+        }
+        ballShop.currentBall = this;
+        setSelectedState();
+        BallParametrs.setBall(Name);
+    }
+    
     public void Click()
     {
         if (isBought())
         {
-            if (ballShop.currentBall != null)
-            {
-                ballShop.currentBall.setNotSelectedState();
-            }
-            ballShop.currentBall = this;
-            setSelectedState();
-            BallParametrs.setBall(Name);
+            SetCurrentBall();
         }
         else {
             if (Shop.BuyForPrice(Name, price))
@@ -42,7 +47,7 @@ public class BallShopItemHandler : BasicShopItem
                 ballShop.updateStarsCountText();
                 setBoughtState();
                 if(!Saver.sawFirstBall()) Saver.dontShowFirstBall();
-                BallParametrs.setBall(Name);
+                SetCurrentBall();
                 BallShop.CountBallsToBuy();
             }
             else
