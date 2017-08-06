@@ -47,7 +47,7 @@ public class TransitionManagerHandler : MonoBehaviour
 		var index = Transitions.Count != 0 ? Mathf.RoundToInt((Transitions.Count - 1) * Random.value) : 0;
 		_currentTransition = Transitions[index];
 		_currentTransition.Close();
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.6f);
 		SceneManager.sceneLoaded += SetCanOpen;
 		SceneManager.LoadSceneAsync(level);
 		Open();
