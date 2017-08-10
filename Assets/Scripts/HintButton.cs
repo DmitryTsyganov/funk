@@ -18,10 +18,9 @@ public class HintButton : MonoBehaviour
 	void Start ()
 	{
 	    PlayHintAnimation = true;
-	    if (!(Saver.isLevelCompletedWithStars() || Saver.isLevelComplete(ScenesParameters.CurrentLevel)) &&
+	    if (Saver.isHintBought() != 1 && !(Saver.isLevelCompletedWithStars() || Saver.isLevelComplete(ScenesParameters.CurrentLevel)) &&
 	        !(ScenesParameters.Section == "linear" && ScenesParameters.CurrentLevel == 1))
 	    {
-	        print("started hint coroutine");
 	        StartCoroutine(RemidndAboutHint());
 	    }
 	}
@@ -50,6 +49,10 @@ public class HintButton : MonoBehaviour
         yield return new WaitForSeconds(45);
         while (PlayHintAnimation)
         {
+	        if (Saver.isHintBought() == 1)
+	        {
+		        yield break;
+	        }
             HintAnimator.SetBool(TriggerName, !HintAnimator.GetBool(TriggerName));
             yield return new WaitForSeconds(60);
         }
