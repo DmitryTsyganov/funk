@@ -70,6 +70,6 @@ public class BallShopItemHandler : BasicShopItem
         ballImage.sprite = renderer.sprite;
         //ballImage.color = BallParametrs.BallName == Name ? Color.white : Color.grey;
         if(PriceText != null)
-            PriceText.color = Shop.StarScore > price ? Color.black : Color.red;
+            PriceText.color = Shop.StarScore >= price ? Color.black : Color.red;
     }
 }
