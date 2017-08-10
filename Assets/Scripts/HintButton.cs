@@ -13,7 +13,7 @@ public class HintButton : MonoBehaviour
     public Animator HintAnimator;
 
     private string TriggerName = "Play";
-
+	
 	// Use this for initialization
 	void Start ()
 	{

@@ -9,8 +9,8 @@ public class CongratilationsScreen : MonoBehaviour
     public GameObject BackText;
     public Image CongratilationsImage;
 
-    private const float ButtonSizeCoefficient = 0.5f;
-    private const float ButtonYCoefficient = 0.58f;
+    private const float ButtonSizeCoefficient = 0.85f;
+    private const float ButtonYCoefficient = 0.57f;
     protected float buttonSizeCoefficient;
     protected float buttonYCoefficient;
 
@@ -39,7 +39,7 @@ public class CongratilationsScreen : MonoBehaviour
         handler.ObjNameText.text = LanguageManager.getLanguageDynamic()[handler.Name].str;
         var size = CongratilationsImage.sprite.bounds.size;
         print("size "+size);
-        button.transform.parent = CongratilationsImage.transform.parent;
+        button.transform.parent = CongratilationsImage.transform;
         var newSize = CongratilationsImage.GetComponent<RectTransform>().sizeDelta * buttonSizeCoefficient;
         print("newsize " + newSize);
         var rect = button.GetComponent<RectTransform>();

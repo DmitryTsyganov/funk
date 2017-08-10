@@ -7,10 +7,6 @@ public class Tips : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject [] tips_obj;
-	[SerializeField]
-	private Text text;
-	[SerializeField]
-	string [] ar;
 
     public GameObject tipsMain;
     public GameObject [] tipTexts;
