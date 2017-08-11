@@ -14,6 +14,11 @@ public class CompletedScripts : MonoBehaviour
         //LanguageManager.setText("StarCountText", "+" + Shop.levelAward + " " + LanguageManager.getLanguage().stars);
     }
 
+    private void OnEnable()
+    {
+        CompletedScreen.dontShowStars();
+    }
+
     public void replay()
     {
         CompletedScreen.getInstanse().SetActive(false);
@@ -22,7 +27,7 @@ public class CompletedScripts : MonoBehaviour
 
     public void continueGame()
     {
-        CompletedScreen.getInstanse().SetActive(false);
+        //CompletedScreen.getInstanse().SetActive(false);
 
         //Debug.Log(ScenesParameters.CurrentLevel + 1);
         //Debug.Log(ScenesParameters.LevelsNumber);

@@ -25,10 +25,17 @@ public class CompletedScreen : MonoBehaviour {
         showStarIfDidGet("StarLittleImage", 1, starCount);
     }
 
+    public static void dontShowStars()
+    {
+        var gotStars = Completed.transform.FindChild("Canvas_Completed").FindChild(
+            "Image_Completed").FindChild("GotStars").gameObject;
+        gotStars.SetActive(false);
+    }
+    
     public static void showCollectedStarsQuantity(int award)
     {
         var gotStars = Completed.transform.FindChild("Canvas_Completed").FindChild(
-                                    "Image_Completed").FindChild("GotStars").gameObject;
+            "Image_Completed").FindChild("GotStars").gameObject;
 
         gotStars.SetActive(true);
         GameObject.Find("StarCountText").GetComponent<Text>().text =
@@ -37,15 +44,7 @@ public class CompletedScreen : MonoBehaviour {
 
     private static void showStarIfDidGet(string name, int number, int starCount)
     {
-        var starImage = GameObject.Find(name).GetComponent<Image>();
-        if (starCount < number)
-        {
-            starImage.color = Color.black;
-        }
-        else
-        {
-            starImage.color =Color.white;
-        }
-
+        var starImage = GameObject.Find(name).GetComponent<StarHandler>();
+        starImage.SetActive(starCount < number, number);
     }
 }

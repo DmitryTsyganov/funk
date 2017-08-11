@@ -22,7 +22,8 @@ public class PopUpHandler : MonoBehaviour {
 		PromptImage.SetInteger("Open", NoAnimation);
 		PromptImage.SetInteger("Close", Random.Range(0, CloseAnimationsNumber));
 		_doDestroy = doDestroy;
-		StartCoroutine(SetInactive());
+		if (gameObject.activeSelf)
+			StartCoroutine(SetInactive());
 	}
 
 	private IEnumerator SetInactive()
