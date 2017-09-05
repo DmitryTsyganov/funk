@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class RewardedVideoUnityAdsManager : MonoBehaviour
+public class RewardedVideoUnityAdsManager
 {
 
     private static RewardedVideoUnityAdsManager instance = null;
@@ -46,7 +46,7 @@ public class RewardedVideoUnityAdsManager : MonoBehaviour
                 }
                 else
                 {
-                    print("No reward function provided");
+                    Debug.Log("No reward function provided");
                 }
                 break;
             case ShowResult.Skipped:
