@@ -31,8 +31,8 @@ public class SetUpLevels : MonoBehaviour {
 		        if (position < 0.15) position = 0;
 		        if (position > 0.15 && position < 0.5) position *= 0.85f;
 		        if (position > 0.5f) position *= 1.2f;
-		        print($"New position is {position}, current position is" +
-		              $" {LevelScrollRect.verticalNormalizedPosition}");
+		        //print($"New position is {position}, current position is" +
+		        //      $" {LevelScrollRect.verticalNormalizedPosition}");
 		    }
 		}
 	    LevelScrollRect.verticalNormalizedPosition = position;

@@ -38,7 +38,6 @@ public class TransitionManagerHandler : MonoBehaviour
 	
 	void Open()
 	{
-		print("Open");
 		StartCoroutine(TryOpening());
 	}
 

@@ -87,7 +87,6 @@ public class BasketCollisionHandler : MonoBehaviour
                         }
 
                         CompletedScreen.showCollectedStarsQuantity(award);
-                        print("count " + starsCount);
                         CompletedScreen.showStars(starsCount);
                     }
                 }

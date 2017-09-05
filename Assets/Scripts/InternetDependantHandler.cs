@@ -16,7 +16,7 @@ public class InternetDependantHandler : MonoBehaviour
     // Use this for initialization
     protected void DoStart()
     {
-        print("internet dependant handler");
+        //print("internet dependant handler");
         if (Application.internetReachability ==
             NetworkReachability.ReachableViaLocalAreaNetwork)
         {
@@ -36,14 +36,14 @@ public class InternetDependantHandler : MonoBehaviour
 
     private void HandleNoInternet()
     {
-        print("no internet");
+        //print("no internet");
         NoInternetImage.SetActive(true);
         _isActive = false;
     }
 
     private void HandleInternetAvailable()
     {
-        print("internet is available");
+        //print("internet is available");
         NoInternetImage.SetActive(false);
         _isActive = true;
     }

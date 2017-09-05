@@ -51,13 +51,13 @@ public class LoadGame : MonoBehaviour
         if (currentLevel == GameIndex && nextLevel != GameIndex)
         {
             player.PlayMenuTracks();
-            print("Changing music to Menu");
+            //print("Changing music to Menu");
         }
 
         if (currentLevel != GameIndex && nextLevel == GameIndex)
         {
             player.PlayGameTracks();
-            print("Changing music to Game");
+            //print("Changing music to Game");
         }
     }
 }

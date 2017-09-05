@@ -36,7 +36,6 @@ public class StarHandler : MonoBehaviour
 
 	private IEnumerator StarActivation()
 	{
-		print("star activation");
 		StarImage.color = Color.white;
 		yield return new WaitForSeconds(0.4f * _number);
 		StarAnimator.SetBool("Active", true);

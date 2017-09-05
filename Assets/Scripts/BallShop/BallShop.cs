@@ -84,7 +84,7 @@ public class BallShop : MonoBehaviour
             if (LanguageManager.getLanguage() != null)
             {
                 setLanguage();
-                print("Shop language is set");
+                //print("Shop language is set");
             }
         }
     }

@@ -38,10 +38,10 @@ public class CongratilationsScreen : MonoBehaviour
         print(handler.Name);
         handler.ObjNameText.text = LanguageManager.getLanguageDynamic()[handler.Name].str;
         var size = CongratilationsImage.sprite.bounds.size;
-        print("size "+size);
+        //print("size "+size);
         button.transform.parent = CongratilationsImage.transform;
         var newSize = CongratilationsImage.GetComponent<RectTransform>().sizeDelta * buttonSizeCoefficient;
-        print("newsize " + newSize);
+        //print("newsize " + newSize);
         var rect = button.GetComponent<RectTransform>();
         //rect.position = newSize;
         button.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * buttonYCoefficient, 0);
