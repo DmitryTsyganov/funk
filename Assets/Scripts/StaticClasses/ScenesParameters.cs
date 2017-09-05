@@ -4,6 +4,21 @@ using System.Collections.Generic;
 
 public static class ScenesParameters
 {
+    private static int levelsCompletedInSession = 0;
+    public static int LevelCompletedInSession
+    {
+        get
+        {
+            return levelsCompletedInSession;
+        }
+
+        set
+        {
+            if (!(section == "linear" && currentLevel < RewardedVideoUnityAdsManager.MidLevelVideoInterval))
+                levelsCompletedInSession = value;
+        }
+    }
+
     private static Dictionary<string, int> scenesOrder = new Dictionary<string, int>
     {
         {"linear", 0},

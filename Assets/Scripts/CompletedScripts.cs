@@ -34,8 +34,17 @@ public class CompletedScripts : MonoBehaviour
 
         if (ScenesParameters.LevelsNumber > ScenesParameters.CurrentLevel)
         {
-            ScenesParameters.CurrentLevel++;
-            SceneManager.LoadScene(3);
+            ++ScenesParameters.CurrentLevel;
+            if (ScenesParameters.LevelCompletedInSession > 0 && 
+                (ScenesParameters.LevelCompletedInSession + 1) % RewardedVideoUnityAdsManager.MidLevelVideoInterval == 0)
+            {
+                RewardedVideoUnityAdsManager.GetInstance().ShowVideo();
+            }
+            else
+            {
+                ++ScenesParameters.LevelCompletedInSession;
+                SceneManager.LoadScene(3);
+            }
         }
         else if (ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel) { 
 

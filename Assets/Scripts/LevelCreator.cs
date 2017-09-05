@@ -75,11 +75,6 @@ public class LevelCreator : MonoBehaviour {
         button.SetActive(false);
     }
 
-    void Update()
-    {
-
-    }
-
     private void setLanguage()
     {
         LanguageManager.setLanguageIfNotAlready();
