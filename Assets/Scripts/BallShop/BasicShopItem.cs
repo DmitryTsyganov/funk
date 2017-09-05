@@ -14,13 +14,13 @@ public class BasicShopItem : MonoBehaviour {
     public Text ObjNameText;
     public Text PriceText;
 
-    protected SpriteRenderer renderer;
+    protected SpriteRenderer spriteRenderer;
 
     public void basicShopItemStart()
     {
         ballShop = FindObjectOfType<BallShop>();
 
-        renderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         if (!isBought())
         {
             //("not bought");

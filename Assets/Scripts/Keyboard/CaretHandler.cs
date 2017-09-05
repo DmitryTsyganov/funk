@@ -22,7 +22,7 @@ public class CaretHandler : Button
     private Vector2 localCursor;
 
 	// Use this for initialization
-	void Start ()
+	protected override void Start ()
 	{
 	    RealText = GameObject.Find("InputText");
 	    CaretText = GameObject.Find("CaretText");

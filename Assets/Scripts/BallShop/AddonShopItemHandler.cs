@@ -16,7 +16,7 @@ public class AddonShopItemHandler : BasicShopItem
 
     void updateAddonItemActiveState()
     {
-        ballImage.sprite = renderer.sprite;
+        ballImage.sprite = spriteRenderer.sprite;
         ballImage.color = BallParametrs.isAddonActive(Name) ? Color.white : Color.grey;
         PriceText.color = Shop.StarScore >= price ? Color.black : Color.red;
     }

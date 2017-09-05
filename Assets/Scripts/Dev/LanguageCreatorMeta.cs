@@ -137,7 +137,6 @@ public class LanguageCreatorMeta : MonoBehaviour
 
         if (File.Exists(path))
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
             XmlSerializer serializer = new XmlSerializer(typeof(Language));
             var stream = new StreamReader(path, Encoding.GetEncoding(1251));
             Debug.Log(path);

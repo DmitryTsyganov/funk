@@ -67,7 +67,7 @@ public class BallShopItemHandler : BasicShopItem
     protected void updateBallItemActiveState()
     {
         //TODO: find a better way
-        ballImage.sprite = renderer.sprite;
+        ballImage.sprite = spriteRenderer.sprite;
         //ballImage.color = BallParametrs.BallName == Name ? Color.white : Color.grey;
         if(PriceText != null)
             PriceText.color = Shop.StarScore >= price ? Color.black : Color.red;
