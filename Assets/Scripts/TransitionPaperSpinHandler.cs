@@ -5,16 +5,6 @@ using UnityEngine;
 public class TransitionPaperSpinHandler : MonoBehaviour
 {
 	public List<Animator> Papers;
-	
-	// Use this for initialization
-	void Start () {
-		DontDestroyOnLoad(gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void Close()
 	{
