@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CompletedScripts : MonoBehaviour
+public class CompletedScripts : InternetDependantBasic
 {
 
     public static bool ShowRateTheGameScreen = false;
@@ -10,6 +10,7 @@ public class CompletedScripts : MonoBehaviour
 
     public void Start()
     {
+        DoStart();
         LanguageManager.setText("Text_Completed", LanguageManager.getLanguage().completed);
         //LanguageManager.setText("StarCountText", "+" + Shop.levelAward + " " + LanguageManager.getLanguage().stars);
     }
@@ -35,7 +36,7 @@ public class CompletedScripts : MonoBehaviour
         if (ScenesParameters.LevelsNumber > ScenesParameters.CurrentLevel)
         {
             ++ScenesParameters.CurrentLevel;
-            if (ScenesParameters.LevelCompletedInSession > 0 && 
+            if (_isActive && ScenesParameters.LevelCompletedInSession > 0 && 
                 (ScenesParameters.LevelCompletedInSession + 1) % RewardedVideoUnityAdsManager.MidLevelVideoInterval == 0)
             {
                 RewardedVideoUnityAdsManager.GetInstance().ShowVideo();
