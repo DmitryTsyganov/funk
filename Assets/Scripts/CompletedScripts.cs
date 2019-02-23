@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CompletedScripts : InternetDependantBasic
 {
+    public LoadGame loadGame;
 
     public static bool ShowRateTheGameScreen = false;
 
@@ -44,7 +44,7 @@ public class CompletedScripts : InternetDependantBasic
             else
             {
                 ++ScenesParameters.LevelCompletedInSession;
-                SceneManager.LoadScene(3);
+                loadGame.LoadScene(3);
             }
         }
         else if (ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel) { 
@@ -56,7 +56,7 @@ public class CompletedScripts : InternetDependantBasic
                 ShowRateTheGameScreen = false;
             } else
             {
-                SceneManager.LoadScene(1);
+                loadGame.LoadScene(1);
             }
         }
     }
