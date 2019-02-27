@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CloseAnimatedHintHandler : MonoBehaviour {
 
-    public GameObject Parent;
+    public AnimatedHintsHandler Parent;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +18,7 @@ public class CloseAnimatedHintHandler : MonoBehaviour {
 
     public void OnClick()
     {
-        Destroy(Parent);
+	    Parent.StartClosingAnimation();
+        //Destroy(Parent);
     }
 }
