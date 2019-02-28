@@ -27,9 +27,18 @@ public class LoadGame : MonoBehaviour
         if (level != currentLevel)
             ScenesParameters.PreviousSceneIndex = currentLevel;
 	    //print("previous scene index " + ScenesParameters.PreviousSceneIndex);
-	    TransitionManagerHandler.GetInstance().StartTransition(level);
         
+#if UNITY_EDITOR
+        if (ScenesParameters.Devmode)
+                 {
+            SceneManager.LoadScene(level);
+            return;
+        }
+#endif
+        
+        TransitionManagerHandler.GetInstance().StartTransition(level);
     }
+    
 	public void Continue(){
 		LoadScene (ScenesParameters.PreviousSceneIndex);
 	}

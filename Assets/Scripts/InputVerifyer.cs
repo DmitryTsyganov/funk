@@ -22,9 +22,8 @@ public class InputVerifyer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (ScenesParameters.Devmode)
-            return;
-        fakeInputFieldButtonText.text = mainInput.Input.text.Replace(requiredFunctions[0],
+        if (mainInput != null && mainInput.Input.text.Length != 0)
+            fakeInputFieldButtonText.text = mainInput.Input.text.Replace(requiredFunctions[0],
                                 "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
     }
 
@@ -289,10 +288,21 @@ public class InputVerifyer : MonoBehaviour
             }
         }
 
+        #if UNITY_EDITOR
         if (ScenesParameters.Devmode)
+        {
             prevInput = mainInput.Input.text;
-
-        fakeInputFieldButtonText.text = prevInput.Replace(requiredFunctions[0], "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
+        } 
+        #endif
+        if (requiredFunctions.Length > 0 && requiredFunctions[0].Length > 0)
+        {
+            fakeInputFieldButtonText.text = prevInput.Replace(requiredFunctions[0], "<color=#E12F0BFF>" + requiredFunctions[0] + "</color>");
+        }
+        else
+        {
+            fakeInputFieldButtonText.text = prevInput; 
+        }
+            
 
         return isValid;
     }

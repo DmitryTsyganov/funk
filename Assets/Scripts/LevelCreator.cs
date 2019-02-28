@@ -60,13 +60,13 @@ public class LevelCreator : MonoBehaviour {
         #if UNITY_EDITOR
         } else
         {
-            devInterface = Instantiate(devInterface);
-            devInterface.SetActive(true);
             if (ScenesParameters.Section == null)
             {
                 throw new Exception("Entering devmode through GameScreen is obsolete, " +
                                     "use SectionsMenu Instead.");
             }
+            devInterface = Instantiate(devInterface);
+            devInterface.SetActive(true);
         }
         #endif
 
@@ -236,6 +236,12 @@ public class LevelCreator : MonoBehaviour {
 
         //inputFieldCo.text = "<size=30><color=red>" + level.Funk + "</color></size>";
 
+        #if UNITY_EDITOR
+        if (ScenesParameters.Devmode)
+        {
+            defaultFunk = GameObject.Find("DefaultInputField").GetComponent<InputField>().text;
+        }
+        #endif
         inputFieldCo.Input.text = defaultFunk;
         Verifyer.verifyInput();
     }
