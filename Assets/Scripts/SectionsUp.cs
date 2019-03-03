@@ -22,6 +22,16 @@ public class SectionsUp : MonoBehaviour
 
     void Start()
     {
+        #if UNITY_EDITOR
+        if (ScenesParameters.Devmode)
+        {
+            string language = Saver.getPreferedLanguage();
+            if (string.IsNullOrEmpty(language))
+            {
+                LanguageManager.setLanguage("Eng");
+            }
+        }
+        #endif
         setLanguage();
         ActivateButtons();
     }
