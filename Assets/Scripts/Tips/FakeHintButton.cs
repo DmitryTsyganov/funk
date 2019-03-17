@@ -16,7 +16,6 @@ public class FakeHintButton : MonoBehaviour
     public void Click()
     {
         HintButton.onClick.Invoke();
-        Tips.DidPressHintButton = true;
     }
 
 	// Update is called once per frame

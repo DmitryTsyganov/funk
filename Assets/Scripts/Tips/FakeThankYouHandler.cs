@@ -16,7 +16,6 @@ public class FakeThankYouHandler : MonoBehaviour
     public void Click()
     {
         ThanksButton.onClick.Invoke();
-        Tips.DidPressThanksButton = true;
     }
 
 	// Update is called once per frame
