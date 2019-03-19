@@ -16,6 +16,7 @@ public class Saver : MonoBehaviour
     private const char addonsSeparator = ' ';
     private const string soundOn = "sound";
     private const string sectionComplete = "_complete";
+    private const string redPartNotification = "red_part_shown";
 
     private static string getLevelName(int num = -1)
     {
@@ -213,5 +214,15 @@ public class Saver : MonoBehaviour
     public static bool isSectionComplete(string section)
     {
         return PlayerPrefs.GetInt(section + sectionComplete, 0) == 1;
+    }
+
+    public static int redPartNotificationShown()
+    {
+        return PlayerPrefs.GetInt(redPartNotification, 0);
+    }
+
+    public static void showRedPartNotification()
+    {
+        PlayerPrefs.SetInt(redPartNotification, PlayerPrefs.GetInt(redPartNotification, 0) + 1);
     }
 }

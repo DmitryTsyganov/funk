@@ -134,12 +134,12 @@ public class LanguageCreatorMeta : MonoBehaviour
     public static Language readXml(string name)
     {
         string path = Application.persistentDataPath + '/' + name + ".xml";
+        Debug.Log(path);
 
         if (File.Exists(path))
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Language));
             var stream = new StreamReader(path, Encoding.GetEncoding(1251));
-            Debug.Log(path);
             
             //stream.Close();
             return (Language)serializer.Deserialize(stream);

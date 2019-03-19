@@ -13,6 +13,7 @@ public class InputVerifyer : MonoBehaviour
     public Button fakeInputFieldButton;
     public Text fakeInputFieldButtonText;
     public GameObject InvisibleButton;
+    public DeleteRedPartNotification notification;
 
     private string prevInput = null;
     private string[] requiredFunctions = {};
@@ -250,16 +251,17 @@ public class InputVerifyer : MonoBehaviour
             {
                 text = text.Replace("#", "/");
             }
-
+            
             foreach (string function in requiredFunctions)
             {
                 if (text.IndexOf(function, StringComparison.Ordinal) == -1)
                 {
                     isValid = false;
+                    notification.RedPartDeletingAttempt();
                 }
             }
 
-            string clearString = (string) text.Clone();
+            string clearString = text.Clone().ToString();
 
             foreach (string function in requiredFunctions)
             {

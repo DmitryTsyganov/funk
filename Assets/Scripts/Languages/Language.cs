@@ -47,6 +47,7 @@ public class Language
     public string tip4;
     public string tip5;
     public string hint;
+    public string red_part_warning;
 
     //shop
     public string choose_ball;
@@ -159,6 +160,8 @@ public class LanguageXml
     public string tip4;
     [XmlElement("hint")]
     public string hint;
+    [XmlElement("red_part_warning")]
+    public string red_part_warning;
 
     //shop
     [XmlElement("choose_ball")]
