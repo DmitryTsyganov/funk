@@ -48,6 +48,9 @@ public class Language
     public string tip5;
     public string hint;
     public string red_part_warning;
+    public string red_part_warning_joke_1;
+    public string red_part_warning_joke_2;
+    public string red_part_warning_joke_3;
 
     //shop
     public string choose_ball;
@@ -162,6 +165,12 @@ public class LanguageXml
     public string hint;
     [XmlElement("red_part_warning")]
     public string red_part_warning;
+    [XmlElement("red_part_warning_joke_1")]
+    public string red_part_warning_joke_1;
+    [XmlElement("red_part_warning_joke_2")]
+    public string red_part_warning_joke_2;
+    [XmlElement("red_part_warning_joke_3")]
+    public string red_part_warning_joke_3;
 
     //shop
     [XmlElement("choose_ball")]

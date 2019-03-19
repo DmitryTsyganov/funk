@@ -6,14 +6,8 @@ using UnityEngine.UI;
 
 public class DeleteRedPartNotification : MonoBehaviour
 {
-	public GameObject NotificationText;
 	public GameObject Notification;
-	private const int MaxShowTimes = 5;
-	
-	// Use this for initialization
-	void Start () {
-		setLanguage();
-	}
+	public const uint MaxShowTimes = 8;
 
 	public void RedPartDeletingAttempt()
 	{
@@ -22,16 +16,5 @@ public class DeleteRedPartNotification : MonoBehaviour
 		
 		Notification.SetActive(true);
 		Saver.showRedPartNotification();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	void setLanguage()
-	{
-		LanguageManager.setLanguageIfNotAlready();
-		LanguageManager.setText(NotificationText, LanguageManager.getLanguage().red_part_warning);
 	}
 }
