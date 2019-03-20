@@ -166,4 +166,9 @@ public static class ScenesParameters
 			TrueFunction = value;
 		}
 	}
+
+    public static bool isVeryFirstLevel()
+    {
+        return Section == "linear" && CurrentLevel == 1;
+    }
 }

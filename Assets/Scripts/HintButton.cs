@@ -18,8 +18,9 @@ public class HintButton : MonoBehaviour
 	void Start ()
 	{
 	    PlayHintAnimation = true;
-	    if (Saver.isHintBought() != 1 && !(Saver.isLevelCompletedWithStars() || Saver.isLevelComplete(ScenesParameters.CurrentLevel)) &&
-	        !(ScenesParameters.Section == "linear" && ScenesParameters.CurrentLevel == 1))
+	    if (Saver.isHintBought() != 1 && 
+	        !Saver.isLevelCompletedAnyway() &&
+	        !ScenesParameters.isVeryFirstLevel())
 	    {
 	        StartCoroutine(RemidndAboutHint());
 	    }
@@ -32,7 +33,7 @@ public class HintButton : MonoBehaviour
 
     public void onHintButtonClick()
     {
-        if (Saver.isHintBought() != 1)
+        if (Saver.isHintBought() != 1 && !ScenesParameters.isVeryFirstLevel())
         {
             buyHintMenu.SetActive(true);
         }

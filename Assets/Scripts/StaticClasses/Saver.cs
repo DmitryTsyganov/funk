@@ -133,6 +133,11 @@ public class Saver : MonoBehaviour
         return getStarsCollectedOnLevel(num) != -1;
     }
 
+    public static bool isLevelCompletedAnyway()
+    {
+        return isLevelCompletedWithStars() || isLevelComplete(ScenesParameters.CurrentLevel);
+    }
+
     public static int getStarsCollectedOnLevel(int num = -1)
     {
         return PlayerPrefs.GetInt(getLevelCompletedWithStarsName(num), -1);

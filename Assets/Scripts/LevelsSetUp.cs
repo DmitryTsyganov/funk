@@ -8,7 +8,7 @@ public class LevelsSetUp : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        setLanguage();;
+        setLanguage();
     }
 
     void setLanguage()
