@@ -72,6 +72,7 @@ public class Language
     public string name_3;
     public string position_3;
     public string info;
+    public string privacy_policy;
 
     //rate game
     public string yeah;
@@ -207,6 +208,10 @@ public class LanguageXml
     public string name_3;
     [XmlElement("position_3")]
     public string position_3;
+    [XmlElement("info")]
+    public string info;
+    [XmlElement("privacy_policy")]
+    public string privacy_policy;
 
     //rate game
     [XmlElement("yeah")]

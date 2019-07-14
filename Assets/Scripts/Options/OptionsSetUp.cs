@@ -4,6 +4,7 @@ using System.Collections;
 public class OptionsSetUp : MonoBehaviour
 {
 
+    public GameObject PrivacyPolicyButtonText;
     public GameObject DeleteProgressText;
     public GameObject BackButtonText;
     public GameObject Dev1NameText;
@@ -31,5 +32,6 @@ public class OptionsSetUp : MonoBehaviour
         LanguageManager.setText(Dev2PositionText, LanguageManager.getLanguage().position_2);
         LanguageManager.setText(Dev3PositionText, LanguageManager.getLanguage().position_3);
         LanguageManager.setText(InfoText, LanguageManager.getLanguage().info);
+        LanguageManager.setText(PrivacyPolicyButtonText, LanguageManager.getLanguage().privacy_policy);
     }
 }
