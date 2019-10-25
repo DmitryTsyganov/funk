@@ -5,17 +5,16 @@ using UnityEngine.UI;
 public class CompletedScreen : MonoBehaviour {
 
     public GameObject CompletedPrefab;
-    public static GameObject Completed;
+    private static GameObject _completed;
 
     void Start()
     {
-        Completed = CompletedPrefab;
-        Completed = Instantiate(Completed);
-
+        _completed = CompletedPrefab;
+        _completed = Instantiate(_completed);
     }
 
     public static GameObject getInstanse() {
-        return Completed;
+        return _completed;
     }
 
     public static void showStars(int starCount)
@@ -27,15 +26,17 @@ public class CompletedScreen : MonoBehaviour {
 
     public static void dontShowStars()
     {
-        var gotStars = Completed.transform.FindChild("Canvas_Completed").FindChild(
-            "Image_Completed").FindChild("GotStars").gameObject;
+        var gotStars = _completed.transform.FindChild("Canvas_Completed")
+            .FindChild("BackgroundImage").FindChild(
+            "ImageCompleted").FindChild("GotStars").gameObject;
         gotStars.SetActive(false);
     }
     
     public static void showCollectedStarsQuantity(int award)
     {
-        var gotStars = Completed.transform.FindChild("Canvas_Completed").FindChild(
-            "Image_Completed").FindChild("GotStars").gameObject;
+        var gotStars = _completed.transform.FindChild("Canvas_Completed")
+            .FindChild("BackgroundImage").FindChild(
+            "ImageCompleted").FindChild("GotStars").gameObject;
 
         gotStars.SetActive(true);
         GameObject.Find("StarCountText").GetComponent<Text>().text =
