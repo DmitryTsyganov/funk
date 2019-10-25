@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InternetDependantBasic : MonoBehaviour
 {
-    private const string PingAddress = "8.8.8.8";
     private const float CheckPeriodSeconds = 3f;
-    private const float PingTimeout = 2f;
+    private const string ReachabilityUrl = "https://funk-backend.herokuapp.com/check";
+    private const string ExpectedResponse = "available";
 
     protected delegate void InternetStatusHandler();
     protected bool _isActive { get; private set; }
@@ -15,8 +16,8 @@ public class InternetDependantBasic : MonoBehaviour
     {
         _isActive = false;
 
-        InternetAvailable += new InternetStatusHandler(HandleInternetAvailable);
-        NoInternet += new InternetStatusHandler(HandleNoInternet);
+        InternetAvailable += HandleInternetAvailable;
+        NoInternet += HandleNoInternet;
 
         if (Application.internetReachability ==
             NetworkReachability.ReachableViaLocalAreaNetwork)
@@ -36,28 +37,19 @@ public class InternetDependantBasic : MonoBehaviour
     {
         while (true)
         {
-            var ping = new Ping(PingAddress);
-            float timePassed = 0;
-            yield return 0;
-            bool isInternetAvailable = false;
-
-            while (timePassed < PingTimeout)
+            bool isEndpointsReachable = false;
+            bool isInternetAvailable = Application.internetReachability != NetworkReachability.NotReachable;
+            // reachability can be true if connected to Wifi hotspot with no actual internet access
+            if (isInternetAvailable)
             {
-                if (!ping.isDone)
+                using (WWW www = new WWW(ReachabilityUrl))
                 {
-                    timePassed += Time.deltaTime;
-                    yield return 0;
-                }
-                else
-                {
-                    if (ping.time >= 0)
-                    {
-                        isInternetAvailable = true;
-                    }
-                    break;
+                    yield return www;
+                    isEndpointsReachable = www.text == ExpectedResponse;
                 }
             }
-            if (isInternetAvailable)
+            
+            if (isEndpointsReachable)
             {
                 InternetAvailable();
             }

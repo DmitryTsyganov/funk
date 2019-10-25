@@ -10,8 +10,8 @@ public class InternetDependantHandler : InternetDependantBasic
     protected void DoStart()
     {
         base.DoStart();
-        InternetAvailable += new InternetStatusHandler(HandleInternetAvailable);
-        NoInternet += new InternetStatusHandler(HandleNoInternet);
+        InternetAvailable += HandleInternetAvailable;
+        NoInternet += HandleNoInternet;
     }
 
     private void HandleNoInternet()
