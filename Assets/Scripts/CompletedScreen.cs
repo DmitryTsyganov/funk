@@ -2,50 +2,31 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CompletedScreen : MonoBehaviour {
+public class CompletedScreen : MonoBehaviour
+{
+    public StarHandler StarBigImage;
+    public StarHandler StarMiddleImage;
+    public StarHandler StarLittleImage;
 
-    public GameObject CompletedPrefab;
-    private static GameObject _completed;
+    public GameObject GotStars;
 
-    void Start()
+    public Text StarCountText;
+
+    public void ShowStars(int starCount)
     {
-        _completed = CompletedPrefab;
-        _completed = Instantiate(_completed);
+        StarBigImage.SetActive(starCount < 3, 3);
+        StarMiddleImage.SetActive(starCount < 2, 2);
+        StarLittleImage.SetActive(starCount < 1, 1);
     }
 
-    public static GameObject getInstanse() {
-        return _completed;
-    }
-
-    public static void showStars(int starCount)
+    public void DontShowStars()
     {
-        showStarIfDidGet("StarBigImage", 3, starCount);
-        showStarIfDidGet("StarMiddleImage", 2, starCount);
-        showStarIfDidGet("StarLittleImage", 1, starCount);
-    }
-
-    public static void dontShowStars()
-    {
-        var gotStars = _completed.transform.FindChild("Canvas_Completed")
-            .FindChild("BackgroundImage").FindChild(
-            "ImageCompleted").FindChild("GotStars").gameObject;
-        gotStars.SetActive(false);
+        GotStars.SetActive(false);
     }
     
-    public static void showCollectedStarsQuantity(int award)
+    public void ShowCollectedStarsQuantity(int award)
     {
-        var gotStars = _completed.transform.FindChild("Canvas_Completed")
-            .FindChild("BackgroundImage").FindChild(
-            "ImageCompleted").FindChild("GotStars").gameObject;
-
-        gotStars.SetActive(true);
-        GameObject.Find("StarCountText").GetComponent<Text>().text =
-                            "+ " + award + " " + LanguageManager.getLanguage().stars;
-    }
-
-    private static void showStarIfDidGet(string name, int number, int starCount)
-    {
-        var starImage = GameObject.Find(name).GetComponent<StarHandler>();
-        starImage.SetActive(starCount < number, number);
+        GotStars.SetActive(true);
+        StarCountText.text = "+ " + award + " " + LanguageManager.getLanguage().stars;
     }
 }

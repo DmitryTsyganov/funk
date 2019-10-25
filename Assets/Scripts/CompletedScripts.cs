@@ -8,6 +8,13 @@ public class CompletedScripts : InternetDependantBasic
 
     public GameObject RateTheGameScreen;
 
+    private CompletedScreen _completedScreen;
+
+    private void Awake()
+    {
+        _completedScreen = GameObject.Find("Level").GetComponentInChildren<CompletedScreen>(true);
+    }
+
     public void Start()
     {
         DoStart();
@@ -17,12 +24,12 @@ public class CompletedScripts : InternetDependantBasic
 
     private void OnEnable()
     {
-        CompletedScreen.dontShowStars();
+        _completedScreen.DontShowStars();
     }
 
     public void replay()
     {
-        CompletedScreen.getInstanse().SetActive(false);
+        _completedScreen.gameObject.SetActive(false);
         //SceneManager.LoadScene(3);
     }
 

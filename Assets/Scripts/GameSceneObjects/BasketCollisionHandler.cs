@@ -7,11 +7,14 @@ using UnityEngine.UI;
 public class BasketCollisionHandler : MonoBehaviour
 
 {
-    private LevelCreator level;
+    private LevelCreator _levelCreator;
+    private CompletedScreen _completedScreen;
 
     void Awake()
     {
-        level = GameObject.Find("Level").GetComponent<LevelCreator>();
+        var level = GameObject.Find("Level");
+        _completedScreen = level.GetComponentInChildren<CompletedScreen>(true);
+        _levelCreator = level.GetComponent<LevelCreator>();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -33,14 +36,14 @@ public class BasketCollisionHandler : MonoBehaviour
         {
             //print("Level complete");
             
-            level.hitBasket(gameObject.transform.parent.gameObject);
-            var starsCount = level.getHitStarsCount();
+            _levelCreator.hitBasket(gameObject.transform.parent.gameObject);
+            var starsCount = _levelCreator.getHitStarsCount();
 
-            if (level.IsCompleted() && level.IsActive())
+            if (_levelCreator.IsCompleted() && _levelCreator.IsActive())
             {
                 HintButton.PlayHintAnimation = false;
-                level.Deactivate();
-                CompletedScreen.getInstanse().SetActive(true);
+                _levelCreator.Deactivate();
+                _completedScreen.gameObject.SetActive(true);
                
                 if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) &&
                     ScenesParameters.LevelsNumber == ScenesParameters.CurrentLevel && !Saver.isSectionComplete(ScenesParameters.Section))
@@ -65,7 +68,7 @@ public class BasketCollisionHandler : MonoBehaviour
                     Analytics.CustomEvent(AnalyticsParameters.LevelComplete +
                                           (ScenesParameters.CurrentLevel + ScenesParameters.ScenesOrder[ScenesParameters.Section] * 20));
 
-                    CompletedScreen.showCollectedStarsQuantity(award);
+                    _completedScreen.ShowCollectedStarsQuantity(award);
                 }
                 else if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && starsCount != -1)
                 {
@@ -83,11 +86,11 @@ public class BasketCollisionHandler : MonoBehaviour
 
                         if (!Saver.sawFirstBall() && ShopManagerhandler.GetBallShop().CanBuyCheapestBall())
                         {
-                            level.ShowCanBuyBallCanvas();
+                            _levelCreator.ShowCanBuyBallCanvas();
                         }
 
-                        CompletedScreen.showCollectedStarsQuantity(award);
-                        CompletedScreen.showStars(starsCount);
+                        _completedScreen.ShowCollectedStarsQuantity(award);
+                        _completedScreen.ShowStars(starsCount);
                     }
                 }
             }
