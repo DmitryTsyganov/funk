@@ -12,7 +12,8 @@ public class CompletedScripts : InternetDependantBasic
 
     private void Awake()
     {
-        _completedScreen = GameObject.Find("Level").GetComponentInChildren<CompletedScreen>(true);
+        _completedScreen = GameObject.Find("GameMechanicsInputs")
+            .GetComponentInChildren<CompletedScreen>(true);
     }
 
     public void Start()

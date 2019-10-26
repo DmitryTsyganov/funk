@@ -12,9 +12,9 @@ public class BasketCollisionHandler : MonoBehaviour
 
     void Awake()
     {
-        var level = GameObject.Find("Level");
-        _completedScreen = level.GetComponentInChildren<CompletedScreen>(true);
-        _levelCreator = level.GetComponent<LevelCreator>();
+        _completedScreen = GameObject.Find("GameMechanicsInputs")
+            .GetComponentInChildren<CompletedScreen>(true);
+        _levelCreator = GameObject.Find("Level").GetComponent<LevelCreator>();
     }
 
     void OnCollisionEnter2D(Collision2D col)
