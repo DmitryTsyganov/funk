@@ -26,7 +26,9 @@ public class BallShop : MonoBehaviour
     public List<Item> additionalFeatures = new List<Item>();
     public int BallsToBuy;
     public BallShopItemHandler currentBall;
-
+                                    
+    public delegate void OnSuccess();
+    
     private BallShopItemHandler[] ballButtonHandlers;
     private BallShopItemHandler[] effectButtonHandlers;
     private GameObject[] ballButtons;
@@ -159,9 +161,20 @@ public class BallShop : MonoBehaviour
         starsCountText.text = Shop.StarScore.ToString();
     }
 
-    public void watchAdForStars()
+    public void watchAdForStars(OnSuccess callback = null)
     {
-        RewardedVideoUnityAdsManager.GetInstance().ShowRewardedAd(addStars);
+        if (callback != null)
+        {
+            RewardedVideoUnityAdsManager.GetInstance().ShowRewardedAd(() =>
+            {
+                addStars();
+                callback();
+            });
+        }
+        else
+        {
+            RewardedVideoUnityAdsManager.GetInstance().ShowRewardedAd(addStars);
+        }
     }
 
     public void getRandomBallForFree()

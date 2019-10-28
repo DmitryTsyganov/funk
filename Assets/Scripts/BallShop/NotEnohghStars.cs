@@ -26,11 +26,6 @@ public class NotEnohghStars : MonoBehaviour
         //if (RewardedVideoUnityAdsManager.GetInstance().isAdReady()) watchAdButton.SetActive(true);
     }
 
-    public void Back()
-    {
-        Destroy(gameObject);
-    }
-
     private void setLanguage()
     {
         LanguageManager.setLanguageIfNotAlready();

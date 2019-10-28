@@ -6,10 +6,11 @@ using UnityEngine.Analytics;
 
 public class WatchAdHandler : InternetDependantHandler
 {
-
     public GameObject WatchAdText;
     public GameObject BackText;
 
+	public PopUpHandler WatchAdCanvas;
+	
 	// Use this for initialization
 	void Start ()
 	{
@@ -27,7 +28,10 @@ public class WatchAdHandler : InternetDependantHandler
     {
         Analytics.CustomEvent(AnalyticsParameters.AdWatchedInShop);
         var ballshop = GameObject.Find("ShopCanvas").GetComponent<BallShop>();
-        ballshop.watchAdForStars();
+        ballshop.watchAdForStars(() =>
+        {
+	        WatchAdCanvas.Close(true);
+        });
         //Destroy(gameObject);
     }
 

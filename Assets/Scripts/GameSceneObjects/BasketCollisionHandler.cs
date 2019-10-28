@@ -91,9 +91,9 @@ public class BasketCollisionHandler : MonoBehaviour
                         _completedScreen.ShowCollectedStarsQuantity(award);
                         _completedScreen.ShowStars(starsCount, false);
                         
-                    } else if (previousStarsCount == starsCount)
+                    } else
                     {
-                        _completedScreen.ShowStars(starsCount, true);
+                        _completedScreen.ShowStars(previousStarsCount, true);
                         _completedScreen.DisableText();
                     }
                 }
