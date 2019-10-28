@@ -12,21 +12,27 @@ public class CompletedScreen : MonoBehaviour
 
     public Text StarCountText;
 
-    public void ShowStars(int starCount)
+    public void ShowStars(int starCount, bool immediate)
     {
-        StarBigImage.SetActive(starCount < 3, 3);
-        StarMiddleImage.SetActive(starCount < 2, 2);
-        StarLittleImage.SetActive(starCount < 1, 1);
+        if(!GotStars.activeSelf)
+            GotStars.SetActive(true);
+        StarBigImage.SetActive(starCount >= 3, 3, immediate);
+        StarMiddleImage.SetActive(starCount >= 2, 2, immediate);
+        StarLittleImage.SetActive(starCount >= 1, 1, immediate);
     }
 
-    public void DontShowStars()
+    public void DisableText()
     {
-        GotStars.SetActive(false);
+        StarCountText.enabled = false;
     }
     
     public void ShowCollectedStarsQuantity(int award)
     {
-        GotStars.SetActive(true);
+        if (!GotStars.activeSelf)
+            GotStars.SetActive(true);
+        if (!StarCountText.enabled)
+            StarCountText.enabled = true;
+            
         StarCountText.text = "+ " + award + " " + LanguageManager.getLanguage().stars;
     }
 }

@@ -23,11 +23,6 @@ public class CompletedScripts : InternetDependantBasic
         //LanguageManager.setText("StarCountText", "+" + Shop.levelAward + " " + LanguageManager.getLanguage().stars);
     }
 
-    private void OnEnable()
-    {
-        _completedScreen.DontShowStars();
-    }
-
     public void replay()
     {
         _completedScreen.gameObject.SetActive(false);

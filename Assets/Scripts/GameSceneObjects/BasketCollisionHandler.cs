@@ -73,7 +73,6 @@ public class BasketCollisionHandler : MonoBehaviour
                 else if (!Saver.isLevelComplete(ScenesParameters.CurrentLevel) && starsCount != -1)
                 {
                     var previousStarsCount = Saver.getStarsCollectedOnLevel();
-
                     if (previousStarsCount < starsCount)
                     {
                         Saver.saveCompletedLevelWithStars(starsCount);
@@ -90,7 +89,12 @@ public class BasketCollisionHandler : MonoBehaviour
                         }
 
                         _completedScreen.ShowCollectedStarsQuantity(award);
-                        _completedScreen.ShowStars(starsCount);
+                        _completedScreen.ShowStars(starsCount, false);
+                        
+                    } else if (previousStarsCount == starsCount)
+                    {
+                        _completedScreen.ShowStars(starsCount, true);
+                        _completedScreen.DisableText();
                     }
                 }
             }

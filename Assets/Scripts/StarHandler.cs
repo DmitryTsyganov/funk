@@ -21,16 +21,20 @@ public class StarHandler : MonoBehaviour
 		
 	}
 
-	public void SetActive(bool value, int number)
+	public void SetActive(bool value, int number, bool immediate)
 	{
 		_number = 4 - number;
 		if (!value)
 		{
-			StartCoroutine(StarActivation());
+			StarImage.color = Color.black;
+		}
+		else if (immediate)
+		{
+			StarImage.color = Color.white;
 		}
 		else
 		{
-			StarImage.color = Color.black;
+			StartCoroutine(StarActivation());
 		}
 	}
 

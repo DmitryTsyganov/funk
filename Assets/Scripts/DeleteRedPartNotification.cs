@@ -13,7 +13,7 @@ public class DeleteRedPartNotification : MonoBehaviour
 	{
 		if (Notification.activeSelf || Saver.redPartNotificationShown() >= MaxShowTimes)
 			return;
-		
+	
 		Notification.SetActive(true);
 		Saver.showRedPartNotification();
 	}
