@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class GameSetUp : MonoBehaviour {
 
-    public Camera mainCam = new Camera();
-
     public BoxCollider2D topWall/* = new BoxCollider2D()*/;
     public BoxCollider2D bottomWall /*= new BoxCollider2D()*/;
     public BoxCollider2D leftWall /*= new BoxCollider2D()*/;
@@ -15,7 +13,9 @@ public class GameSetUp : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        var mainCam = Camera.main;
         topWall.size = new Vector2(mainCam.ScreenToWorldPoint(new Vector3(Screen.width * 2f, 0f, 0f)).x, wallThickness);
         topWall.offset = new Vector2(0f, mainCam.ScreenToWorldPoint(new Vector3(Screen.width * 2f, 0f, 0f)).y * -1 + wallThickness / 2);
 
@@ -27,18 +27,6 @@ public class GameSetUp : MonoBehaviour {
 
         leftWall.size = new Vector2(1f, mainCam.ScreenToWorldPoint(new Vector3(0f, Screen.height * 2f, 0f)).y);
         leftWall.offset =  new Vector2(mainCam.ScreenToWorldPoint(new Vector3(0f, Screen.height * 2f, 0f)).x + wallThickness / 2 * -1, 0f);
-
-        //tests
-
-        //var parser = new XMLParser();
-
-        //parser.makeLevelTest();
-
-        //var level = (Level)parser.parse("test.xml");
-
-        //Debug.Log(level.ball.x);
-        //Debug.Log(level.basket.x);
-        //Debug.Log(level.ObsticleTriangle.x);
     }
 	
 	// Update is called once per frame
